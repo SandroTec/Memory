@@ -4,4 +4,5 @@ li {
     cursor: pointer;
     @include mx.flex-center;
     @include mx.text-left;
+    padding: 10px 0;
 }

@@ -36,6 +36,7 @@ li {
   justify-content: center;
   display: flex;
   justify-content: flex-start !important;
+  padding: 10px 0;
 }
 
 .start-page {

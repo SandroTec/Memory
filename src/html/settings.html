@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>game settings</title>
     <link rel="stylesheet" href="../../dist/css/main.css">
+    <script defer src="../../dist/script.js"></script>
 </head>
 <body>
     
@@ -20,9 +21,9 @@
                     <h3>Game themes</h3>
                 </div>
                 <ul>
-                    <li>Code vibes theme <img src="../assets/img/settings_page/choosing_line.png" alt="choose indecator/ yellow arrow" class=" choose-indecator"></li>
-                    <li>Gaming theme <img src="../assets/img/settings_page/choosing_line.png" alt="choose indecator/ yellow arrow" class="d-none choose-indecator"></li>
-                    <li>DA Projects theme <img src="../assets/img/settings_page/choosing_line.png" alt="choose indecator/ yellow arrow" class="d-none choose-indecator"></li>
+                    <li data-theme="code">Code vibes theme <img src="../assets/img/settings_page/choosing_line.png" alt="choose indicator/ yellow arrow" class="choose-indicator"></li>
+                    <li data-theme="gaming">Gaming theme <img src="../assets/img/settings_page/choosing_line.png" alt="choose indicator/ yellow arrow" class="d-none choose-indicator"></li>
+                    <li data-theme="da">DA Projects theme <img src="../assets/img/settings_page/choosing_line.png" alt="choose indicator/ yellow arrow" class="d-none choose-indicator"></li>
                 </ul>
             </div>
             <div class="_player-c">
@@ -31,8 +32,8 @@
                     <h3>Choose player</h3>
                 </div>
                 <ul>
-                    <li>Blue <img src="../assets/img/settings_page/choosing_line.png" alt="choose indecator/ yellow arrow" class="d-none choose-indecator"></li>
-                    <li>Orange <img src="../assets/img/settings_page/choosing_line.png" alt="choose indecator/ yellow arrow" class="d-none choose-indecator"></li>
+                    <li data-player="blue">Blue <img src="../assets/img/settings_page/choosing_line.png" alt="choose indicator/ yellow arrow" class="d-none choose-indicator"></li>
+                    <li data-player="orange">Orange <img src="../assets/img/settings_page/choosing_line.png" alt="choose indicator/ yellow arrow" class="d-none choose-indicator"></li>
                 </ul>
             </div>
             <div class="_board-size-c">
@@ -41,9 +42,9 @@
                     <h3>Board size</h3>
                 </div>
                 <ul>
-                    <li>16 cards <img src="../assets/img/settings_page/choosing_line.png" alt="choose indecator/ yellow arrow" class="d-none choose-indecator"></li>
-                    <li>24 cards <img src="../assets/img/settings_page/choosing_line.png" alt="choose indecator/ yellow arrow" class="d-none choose-indecator"></li>
-                    <li>36 cards <img src="../assets/img/settings_page/choosing_line.png" alt="choose indecator/ yellow arrow" class="d-none choose-indecator"></li>
+                    <li data-cards="16">16 cards <img src="../assets/img/settings_page/choosing_line.png" alt="choose indicator/ yellow arrow" class="d-none choose-indicator"></li>
+                    <li data-cards="24">24 cards <img src="../assets/img/settings_page/choosing_line.png" alt="choose indicator/ yellow arrow" class="d-none choose-indicator"></li>
+                    <li data-cards="36">36 cards <img src="../assets/img/settings_page/choosing_line.png" alt="choose indicator/ yellow arrow" class="d-none choose-indicator"></li>
                 </ul>
             </div>
         </div>
