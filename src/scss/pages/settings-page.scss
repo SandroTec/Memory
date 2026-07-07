@@ -9,3 +9,13 @@
     justify-content: space-evenly;
     align-items: center;
 }
+
+.choosing-headline {
+    @include mx.flex-center;
+    @include mx.text-left;
+    margin-left: -30px;
+}
+
+h2 {
+    font-size: 54px;
+}

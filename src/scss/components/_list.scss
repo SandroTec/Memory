@@ -2,4 +2,6 @@
 
 li {
     cursor: pointer;
+    @include mx.flex-center;
+    @include mx.text-left;
 }
