@@ -8,8 +8,6 @@ const gameSettings = {
     cards: "16"
 };
 
-console.log("script geladen");
-
 
 const themeContainer = document.querySelector<HTMLDivElement>("._themes-c");
 const themeOptions = document.querySelectorAll<HTMLLIElement>("[data-theme]");
@@ -20,16 +18,18 @@ const playerOptions = document.querySelectorAll<HTMLLIElement>("[data-player]");
 const cardContainer = document.querySelector<HTMLDivElement>("._board-size-c");
 const cardOptions = document.querySelectorAll<HTMLLIElement>("[data-cards]");
 
-themeOptions.forEach((themeOption) => {
+const themeImg = document.querySelector<HTMLImageElement>("#themeImage");
 
+
+
+themeOptions.forEach((themeOption) => {
     themeOption.addEventListener("click", () => {
-        console.log("geklickt");
         const selectedTheme = themeOption.dataset.theme;
 
         if (!selectedTheme || !themeContainer) return;
-
         gameSettings.theme = selectedTheme;
 
+        updateThemeImage()
         const chosenIndicator =
             themeOption.querySelector<HTMLImageElement>(".choose-indicator");
         console.log(chosenIndicator);
@@ -42,7 +42,6 @@ themeOptions.forEach((themeOption) => {
 playerOptions.forEach((playerOption) => {
 
     playerOption.addEventListener("click", () => {
-        console.log("geklickt");
         const selectedPlayer = playerOption.dataset.player;
 
         if (!selectedPlayer || !playerContainer) return;
@@ -51,7 +50,6 @@ playerOptions.forEach((playerOption) => {
 
         const chosenIndicator =
             playerOption.querySelector<HTMLImageElement>(".choose-indicator");
-            console.log(chosenIndicator);
         if (chosenIndicator) {
             updateIndicator(chosenIndicator, playerContainer);
         }
@@ -61,7 +59,6 @@ playerOptions.forEach((playerOption) => {
 cardOptions.forEach((cardOption) => {
 
     cardOption.addEventListener("click", () => {
-        console.log("geklickt");
         const selectedCards = cardOption.dataset.cards;
 
         if (!selectedCards || !cardContainer) return;
@@ -70,7 +67,6 @@ cardOptions.forEach((cardOption) => {
 
         const chosenIndicator =
             cardOption.querySelector<HTMLImageElement>(".choose-indicator");
-        console.log(chosenIndicator);
         if (chosenIndicator) {
             updateIndicator(chosenIndicator, cardContainer);
         }
@@ -91,4 +87,25 @@ function updateIndicator(
     });
 
     chosenIndicator.classList.remove("d-none");
+}
+
+function updateThemeImage() {
+    if (!themeImg) return;
+    switch (gameSettings.theme) {
+            case "gaming":
+                themeImg.src = "../../src/assets/img/settings_page/Theme Visual_Gaming.png";
+                break;
+
+            case "da":
+                themeImg.src = "../../src/assets/img/settings_page/Theme Visual_DA.png";
+                break
+
+            case "code":
+                themeImg.src = "../../src/assets/img/settings_page/Theme Visual_Code.png";
+                break
+
+            default:
+                themeImg.src = "../../src/assets/img/settings_page/Theme Visual_Code.png";
+                break;
+        }
 }
