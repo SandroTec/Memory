@@ -1,0 +1,8 @@
+@use '../abstract/mixins' as mx;
+
+
+$breakpoints: (
+    zero: 0px,
+    sm: 480px,
+    m: 768px
+);

@@ -1,0 +1,14 @@
+@use '../abstract/mixins' as mx;
+
+.btn {
+    @include mx.flex-center;
+    cursor: pointer;
+    &_start {
+        font-size: 40px;
+        font-weight: bold;
+        background: rgb(240, 234, 110);
+        width: 344px;
+        height: 100px;
+        gap: 25px;
+    }
+}

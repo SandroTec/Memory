@@ -5,7 +5,14 @@
     justify-content: center;
 }
 
-@mixin fd-coloum {
+@mixin fd-column {
     display: flex;
     flex-direction: column;
+}
+
+@mixin text-left {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: center;
 }

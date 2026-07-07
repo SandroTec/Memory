@@ -1,0 +1,33 @@
+@use '../abstract/mixins' as mx;
+
+body {
+    height: 100vh;
+    background: rgb(47, 49, 49);
+    @include mx.flex-center;
+}
+
+.center-container {
+    height: 100%;
+    width: 80%;
+    color: rgb(255, 255, 255);
+    gap: 40px;
+    @include mx.flex-center;
+    @include mx.fd-column;
+    &_txt-container {
+        @include mx.text-left;
+    }
+}
+
+.phrase {
+    font-size: 48px;
+}
+
+.headline {
+    font-size: 140px;
+}
+
+.design-img {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
