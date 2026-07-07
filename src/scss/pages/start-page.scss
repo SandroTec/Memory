@@ -1,6 +1,6 @@
 @use '../abstract/mixins' as mx;
 
-body {
+.start-page {
     height: 100vh;
     background: rgb(47, 49, 49);
     @include mx.flex-center;
