@@ -1,6 +1,8 @@
-function startSettings() {
+const startButton = document.querySelector<HTMLButtonElement>("#startButton");
+
+startButton?.addEventListener("click", () => {
     window.location.href = "./html/settings.html";
-}
+});
 
 const gameSettings = {
     theme: "code",
@@ -118,12 +120,20 @@ function updateThemeImage() {
         }
 }
 
-function startGame() {
-    window.location.href = "./game.html";
+function saveGameSettings() {
+    sessionStorage.setItem(
+        "gameSettings",
+        JSON.stringify(gameSettings)
+    );
 }
 
-let currentPlayer = gameSettings.player;
-     
-const gameBG = document.querySelector(".game-bg")!;
+const gameStartButton = document.querySelector<HTMLButtonElement>("#startGame");
 
-gameBG.classList.add(`theme-${gameSettings.theme}`);
+gameStartButton?.addEventListener("click", () => {
+    saveGameSettings();
+    window.location.href = "./game.html";
+});
+
+
+
+export {};

@@ -1,7 +1,7 @@
-"use strict";
-function startSettings() {
+const startButton = document.querySelector("#startButton");
+startButton?.addEventListener("click", () => {
     window.location.href = "./html/settings.html";
-}
+});
 const gameSettings = {
     theme: "code",
     player: "blue",
@@ -90,9 +90,12 @@ function updateThemeImage() {
             break;
     }
 }
-function startGame() {
-    window.location.href = "./game.html";
+function saveGameSettings() {
+    sessionStorage.setItem("gameSettings", JSON.stringify(gameSettings));
 }
-let currentPlayer = gameSettings.player;
-const gameBG = document.querySelector(".game-bg");
-gameBG.classList.add(`theme-${gameSettings.theme}`);
+const gameStartButton = document.querySelector("#startGame");
+gameStartButton?.addEventListener("click", () => {
+    saveGameSettings();
+    window.location.href = "./game.html";
+});
+export {};
