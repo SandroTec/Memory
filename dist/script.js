@@ -93,3 +93,6 @@ function updateThemeImage() {
 function startGame() {
     window.location.href = "./game.html";
 }
+let currentPlayer = gameSettings.player;
+const gameBG = document.querySelector(".game-bg");
+gameBG.classList.add(`theme-${gameSettings.theme}`);

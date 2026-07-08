@@ -43,6 +43,9 @@ p {
   width: 126px;
   height: 53px;
 }
+.btn_transparent {
+  background: transparent;
+}
 
 li {
   cursor: pointer;
