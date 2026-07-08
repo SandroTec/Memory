@@ -1,0 +1,9 @@
+@use '../abstract/mixins' as mx;
+
+header {
+    @include mx.flex-center;
+    justify-content: space-evenly !important;
+}
+.game-bg {
+    background: rgb(48, 49, 49);
+}

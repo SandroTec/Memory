@@ -105,6 +105,17 @@ h2 {
   font-size: 54px;
 }
 
+header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-content: space-evenly !important;
+}
+
+.game-bg {
+  background: rgb(48, 49, 49);
+}
+
 body {
   height: 100vh;
 }
