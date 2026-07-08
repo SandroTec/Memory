@@ -25,6 +25,7 @@ themeOptions.forEach((themeOption) => {
         if (!themeD)
             return;
         themeD.textContent = selectedTheme;
+        themeD.textContent = themeD.textContent.toUpperCase();
         gameSettings.theme = selectedTheme;
         updateThemeImage();
         const chosenIndicator = themeOption.querySelector(".choose-indicator");
@@ -41,6 +42,7 @@ playerOptions.forEach((playerOption) => {
         if (!playerD)
             return;
         playerD.textContent = selectedPlayer;
+        playerD.textContent = playerD.textContent.toLocaleUpperCase();
         gameSettings.player = selectedPlayer;
         const chosenIndicator = playerOption.querySelector(".choose-indicator");
         if (chosenIndicator) {
@@ -55,7 +57,7 @@ cardOptions.forEach((cardOption) => {
             return;
         if (!boardD)
             return;
-        boardD.textContent = selectedCards + " " + "cards";
+        boardD.textContent = selectedCards + " " + "CARDS";
         gameSettings.cards = selectedCards;
         const chosenIndicator = cardOption.querySelector(".choose-indicator");
         if (chosenIndicator) {
