@@ -6,18 +6,6 @@
     @include mx.flex-center;
 }
 
-.center-container {
-    height: 100%;
-    width: 80%;
-    color: rgb(255, 255, 255);
-    gap: 40px;
-    @include mx.flex-center;
-    @include mx.fd-column;
-    &_txt-container {
-        @include mx.text-left;
-    }
-}
-
 .phrase {
     font-size: 48px;
 }
