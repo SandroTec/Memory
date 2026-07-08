@@ -1,0 +1,6 @@
+@use '../abstract/mixins' as mx;
+
+.game-info-container {
+    @include mx.flex-center;
+    font-size: 24px;
+}

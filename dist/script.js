@@ -14,15 +14,20 @@ const playerOptions = document.querySelectorAll("[data-player]");
 const cardContainer = document.querySelector("._board-size-c");
 const cardOptions = document.querySelectorAll("[data-cards]");
 const themeImg = document.querySelector("#themeImage");
+const themeD = document.querySelector("#themeDisplay");
+const playerD = document.querySelector("#playerDisplay");
+const boardD = document.querySelector("#boardDisplay");
 themeOptions.forEach((themeOption) => {
     themeOption.addEventListener("click", () => {
         const selectedTheme = themeOption.dataset.theme;
         if (!selectedTheme || !themeContainer)
             return;
+        if (!themeD)
+            return;
+        themeD.textContent = selectedTheme;
         gameSettings.theme = selectedTheme;
         updateThemeImage();
         const chosenIndicator = themeOption.querySelector(".choose-indicator");
-        console.log(chosenIndicator);
         if (chosenIndicator) {
             updateIndicator(chosenIndicator, themeContainer);
         }
@@ -33,6 +38,9 @@ playerOptions.forEach((playerOption) => {
         const selectedPlayer = playerOption.dataset.player;
         if (!selectedPlayer || !playerContainer)
             return;
+        if (!playerD)
+            return;
+        playerD.textContent = selectedPlayer;
         gameSettings.player = selectedPlayer;
         const chosenIndicator = playerOption.querySelector(".choose-indicator");
         if (chosenIndicator) {
@@ -45,6 +53,9 @@ cardOptions.forEach((cardOption) => {
         const selectedCards = cardOption.dataset.cards;
         if (!selectedCards || !cardContainer)
             return;
+        if (!boardD)
+            return;
+        boardD.textContent = selectedCards + " " + "cards";
         gameSettings.cards = selectedCards;
         const chosenIndicator = cardOption.querySelector(".choose-indicator");
         if (chosenIndicator) {
@@ -76,4 +87,7 @@ function updateThemeImage() {
             themeImg.src = "../../src/assets/img/settings_page/Theme Visual_Code.png";
             break;
     }
+}
+function startGame() {
+    window.location.href = "./game.html";
 }

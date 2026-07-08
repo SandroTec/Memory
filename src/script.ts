@@ -20,19 +20,23 @@ const cardOptions = document.querySelectorAll<HTMLLIElement>("[data-cards]");
 
 const themeImg = document.querySelector<HTMLImageElement>("#themeImage");
 
-
+const themeD = document.querySelector<HTMLParagraphElement>("#themeDisplay")
+const playerD = document.querySelector("#playerDisplay")
+const boardD = document.querySelector("#boardDisplay")
 
 themeOptions.forEach((themeOption) => {
     themeOption.addEventListener("click", () => {
         const selectedTheme = themeOption.dataset.theme;
 
         if (!selectedTheme || !themeContainer) return;
+        if (!themeD) return
+        themeD.textContent = selectedTheme;
         gameSettings.theme = selectedTheme;
-
         updateThemeImage()
         const chosenIndicator =
             themeOption.querySelector<HTMLImageElement>(".choose-indicator");
-        console.log(chosenIndicator);
+        
+        
         if (chosenIndicator) {
             updateIndicator(chosenIndicator, themeContainer);
         }
@@ -45,7 +49,8 @@ playerOptions.forEach((playerOption) => {
         const selectedPlayer = playerOption.dataset.player;
 
         if (!selectedPlayer || !playerContainer) return;
-
+        if (!playerD) return
+        playerD.textContent = selectedPlayer;
         gameSettings.player = selectedPlayer;
 
         const chosenIndicator =
@@ -62,7 +67,8 @@ cardOptions.forEach((cardOption) => {
         const selectedCards = cardOption.dataset.cards;
 
         if (!selectedCards || !cardContainer) return;
-
+        if (!boardD) return
+        boardD.textContent = selectedCards+ " " + "cards";
         gameSettings.cards = selectedCards;
 
         const chosenIndicator =
@@ -108,4 +114,8 @@ function updateThemeImage() {
                 themeImg.src = "../../src/assets/img/settings_page/Theme Visual_Code.png";
                 break;
         }
+}
+
+function startGame() {
+    window.location.href = "./game.html";
 }
