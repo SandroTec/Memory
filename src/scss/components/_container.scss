@@ -3,11 +3,10 @@
 .container {
     @include mx.flex-center;
     font-size: 24px;
+
     &_gap {
         gap: 40px;
     }
-
-
 
    &_center {
         height: 100%;
@@ -15,7 +14,7 @@
         color: rgb(255, 255, 255);
         gap: 40px;
         @include mx.fd-column;
-        &_txt-container {
+        &_txt {
             @include mx.text-left;
         }
     }
@@ -27,6 +26,13 @@
         justify-content: space-evenly;
         align-items: center;
     }
+
+    &_padding-bg-c {
+        padding: 20px;
+        background-color: rgb(246, 246, 246);
+    }
+
+    
 }
 
 .choosing-container {
