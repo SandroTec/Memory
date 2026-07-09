@@ -161,6 +161,10 @@ header {
   background: rgb(48, 49, 49);
 }
 
+#playGround {
+  display: grid;
+}
+
 body {
   height: 100vh;
 }
