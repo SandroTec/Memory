@@ -29,4 +29,51 @@ if (gameBody) {
     gameBody.classList.add(`theme-${gameSettings.theme}`);
 }
 
+
+// functions needed for memory:
+function placeCards() {
+    //inital function to add the cards to the board
+    //by using cards from GameSettings
+}
+
+function shuffleCards() {
+    //mix card pairs with an simple math.randome algo, 
+}
+
+function determinePlayer() {
+    //inital first player by using GameSettings player
+}
+
+function handleCardClick(card) {
+    //-> turn card
+}
+
+function turnCard(card) {
+    //turn the card by changeing to the actuall image 
+}
+
+function hideCards() {
+    //turns cards back when no pair found
+}
+
+function compareCards() {
+    //compares first safed card  id to the second card id
+    //cards need an id to compare them by that
+}
+
+function handlePair() {
+    //pairs++ if compareCards is true
+    //player does not change by returning back 
+    //a boolean(false) 
+}
+
+function changePlayer() {
+    //change current player when no pair is found
+}
+
+function checkGameOver() {
+    //checks how many cards left
+    //ends game when no cards left
+}
+
 export {};
