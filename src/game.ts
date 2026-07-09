@@ -56,6 +56,30 @@ const codeImages = [
     "../../src/assets/img/game_page/code-theme/sql_card.png",
 ];
 
+const gamingImages = [
+    "../../src/assets/img/game_page/gaming-theme/ass_card",
+    "../../src/assets/img/game_page/gaming-theme/banana_card",
+    "../../src/assets/img/game_page/gaming-theme/controller_card",
+    "../../src/assets/img/game_page/gaming-theme/circle_card",
+    "../../src/assets/img/game_page/gaming-theme/dice_card",
+    "../../src/assets/img/game_page/gaming-theme/game_boy_card",
+    "../../src/assets/img/game_page/gaming-theme/level_up_card",
+    "../../src/assets/img/game_page/gaming-theme/mario_card",
+    "../../src/assets/img/game_page/gaming-theme/minecraft_card",
+    "../../src/assets/img/game_page/gaming-theme/pacman_card",
+    "../../src/assets/img/game_page/gaming-theme/pacman2_card",
+    "../../src/assets/img/game_page/gaming-theme/play_card",
+    "../../src/assets/img/game_page/gaming-theme/puzzle_card",
+    "../../src/assets/img/game_page/gaming-theme/rectangle_card",
+    "../../src/assets/img/game_page/gaming-theme/snake_card",
+    "../../src/assets/img/game_page/gaming-theme/square_card",
+    "../../src/assets/img/game_page/gaming-theme/star_card",
+    "../../src/assets/img/game_page/gaming-theme/triangle_card",
+]
+
+const daImages = [
+    "../../src/assets/img/game_page/gaming-theme/pacman_card",
+]
 
 const themeImages: Record<Theme, string[]> = {
     code: codeImages,
