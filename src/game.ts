@@ -1,6 +1,8 @@
 type Theme = "code" | "gaming" | "da";
 
-type Player = "blue" | "orange"
+type Player = "blue" | "orange";
+
+type ExitBtn = "default" | "hover";
 
 type GameSettings = {
     theme: Theme;
@@ -44,6 +46,14 @@ const codePlayerIcons = {
     orange: codePlayerIconO
 }
 
+const codeExitDefaultBtn = "../../src/assets/img/game_page/code-theme/header/exit_game_default.png";
+const codeExitHoverBtn = "../../src/assets/img/game_page/code-theme/header/exit_game_hover.png";
+
+const codeExitBtns = {
+    default: codeExitDefaultBtn,
+    hover: codeExitHoverBtn
+}
+
 const codeImages = [
     "../../src/assets/img/game_page/code-theme/main/card/html_card.png",
     "../../src/assets/img/game_page/code-theme/main/card/css_card.png",
@@ -75,6 +85,14 @@ const gamingPlayerIconO = "../../src/assets/img/game_page/gaming-theme/header/ch
 const gamingPlayerIcons = {
     blue: gamingPlayerIconB,
     orange: gamingPlayerIconO
+}
+
+const gamingExitDefaultBtn = "../../src/assets/img/game_page/code-theme/header/exit_game_default.png";
+const gamingExitHoverBtn = "../../src/assets/img/game_page/code-theme/header/exit_game_hover.png";
+
+const gamingExitBtns = {
+    default: gamingExitDefaultBtn,
+    hover: gamingExitHoverBtn
 }
 
 
@@ -110,6 +128,14 @@ const daPlayerIconO = "../../src/assets/img/game_page/da-theme/header/chess_pawn
 const daPlayerIcons = {
     blue: daPlayerIconB,
     orange: daPlayerIconO
+}
+
+const daExitDefaultBtn = "../../src/assets/img/game_page/code-theme/header/exit_game_default.png";
+const daExitHoverBtn = "../../src/assets/img/game_page/code-theme/header/exit_game_hover.png";
+
+const daExitBtns = {
+    default: daExitDefaultBtn,
+    hover: daExitHoverBtn
 }
 
 const daImages = [
@@ -229,6 +255,8 @@ function updateCurrentPlayerDisplay() {
 
 function handleCardClick() {
     //-> turn card
+
+    turnCard();
 }
 
 function turnCard() {
@@ -265,11 +293,20 @@ function checkGameOver() {
 const scoreIconO = document.querySelector<HTMLImageElement>("#scorePlayerIconO");
 const scoreIconB = document.querySelector<HTMLImageElement>("#scorePlayerIconB");
 
-function initaliseHeader() {
+function initaliseScoreBoard() {
     const scoreIcons = playerIcons[gameSettings.theme]
     if(!scoreIconB || !scoreIconO) return;
     scoreIconB.src = scoreIcons.blue;
     scoreIconO.src = scoreIcons.orange;
+}
+
+function initaliseExitButton() {
+    const exitBtn = 
+}
+
+function initaliseHeader() {
+    initaliseScoreBoard();
+    initaliseExitButton();
 }
 
 function init() {
