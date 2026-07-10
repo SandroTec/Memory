@@ -25,7 +25,7 @@ const gameSettings = loadGameSettings();
 let currentPlayer = gameSettings.player;
 
 const gameBody = document.querySelector<HTMLBodyElement>("#gameBody");
-const playGround = document.querySelector<HTMLDivElement>("#playGround");
+const playGround = document.querySelector<HTMLDivElement>("#playGround")!;
 
 if (gameBody) {
     gameBody.classList.add(`theme-${gameSettings.theme}`);
@@ -33,7 +33,7 @@ if (gameBody) {
 
 
 //code-theme images:
-const codeCardBack = "../../src/assets/img/game_page/code-theme/main/cards/basic_card_back.png" 
+const codeCardBack = "../../src/assets/img/game_page/code-theme/main/card/basic_card_back.png" 
 
 const codeImages = [
     "../../src/assets/img/game_page/code-theme/main/card/html_card.png",
@@ -58,6 +58,9 @@ const codeImages = [
 
 //gaming-theme images:
 
+const gamingCardBack = "../../src/assets/img/game_page/gaming-theme/main/card/basic_card_back.png";
+
+
 const gamingImages = [
     "../../src/assets/img/game_page/gaming-theme/main/card/ass_card",
     "../../src/assets/img/game_page/gaming-theme/main/card/banana_card",
@@ -80,6 +83,8 @@ const gamingImages = [
 ]
 
 //DA-theme images:
+
+const daCardBack = "../../src/assets/img/game_page/da-theme/main/card/basic_card_back.png";
 
 const daImages = [
     "../../src/assets/img/game_page/da-theme/main/card/basket_card",
@@ -108,11 +113,19 @@ const themeImages: Record<Theme, string[]> = {
     da: daImages
 };
 
+const cardBacks: Record<Theme, string> = {
+    code: codeCardBack,
+    gaming: gamingCardBack,
+    da: daCardBack
+};
+
 
 // functions needed for memory:
 
 // get the number of needed pairs for game
 const currentThemeImages = themeImages[gameSettings.theme];
+const currentCardBack = cardBacks[gameSettings.theme];
+
 function getImages(): string[] {
     const pairAmount = Number(gameSettings.cards)/2;
     const selectedImages:string[] = [];
@@ -123,45 +136,56 @@ function getImages(): string[] {
     return selectedImages;
 }
 
-function createCard() {
-    return `
-        <div class="card">
-            
-            ...
-        </div>
-    `;
+function createPairs():string[] {
+    const selectedImages = getImages();
+    const pairedImages:string[] = [];
+
+    selectedImages.forEach(image => {
+        pairedImages.push(image, image);
+    });
+    return pairedImages;
+}
+
+function shuffleCards():string[] {
+    const gamePairs:string[] = createPairs();
+    
+    for (let i = gamePairs.length-1; i > 0; i--) {
+        const randomeIndex = Math.floor(Math.random() * (i+1));
+
+        [gamePairs[i], gamePairs[randomeIndex]] = 
+        [gamePairs[randomeIndex], gamePairs[i]];
+    }
+    return gamePairs;
 }
 
 function placeCards() {
     //inital function to add the cards to the board
     //by using cards from GameSettings
-    switch (gameSettings.cards) {
-        case "24":
-            createCard(card);
-            break;
-        case "36":
-            
-            break;
-    
-        default:
+    const cards = shuffleCards();
 
-            break;
-    }
+    cards.forEach((image) => {
+        playGround.innerHTML += createCard(image)
+    })
 }
 
-function shuffleCards() {
-    //mix card pairs with an simple math.randome algo, 
+function createCard(image:string):string {
+    return `
+        <div class="card">
+            <img class="card d-none" src="${image}" alt="game card">
+            <img class="card " src="${currentCardBack}" alt="game card">
+        </div>
+    `;
 }
 
 function determinePlayer() {
     //inital first player by using GameSettings player
 }
 
-function handleCardClick(card) {
+function handleCardClick() {
     //-> turn card
 }
 
-function turnCard(card) {
+function turnCard() {
     //turn the card by changeing to the actuall image 
 }
 
@@ -190,4 +214,10 @@ function checkGameOver() {
 }
 
 
+function init() {
+    placeCards();
+}
+
+
+init();
 export {};

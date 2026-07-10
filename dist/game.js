@@ -16,33 +16,81 @@ const playGround = document.querySelector("#playGround");
 if (gameBody) {
     gameBody.classList.add(`theme-${gameSettings.theme}`);
 }
-const codeCardBack = "../../src/assets/img/game_page/code-theme/main/cards/basic_card_back.png";
+const codeCardBack = "../../src/assets/img/game_page/code-theme/main/card/basic_card_back.png";
 const codeImages = [
-    "../../src/assets/img/game_page/code-theme/html_card.png",
-    "../../src/assets/img/game_page/code-theme/css_card.png",
-    "../../src/assets/img/game_page/code-theme/typescript_card.png",
-    "../../src/assets/img/game_page/code-theme/javascript_card.png",
-    "../../src/assets/img/game_page/code-theme/angular_card.png",
-    "../../src/assets/img/game_page/code-theme/bootstrap_card.png",
-    "../../src/assets/img/game_page/code-theme/console_card.png",
-    "../../src/assets/img/game_page/code-theme/django_card.png",
-    "../../src/assets/img/game_page/code-theme/git_card.png",
-    "../../src/assets/img/game_page/code-theme/git_hub_card.png",
-    "../../src/assets/img/game_page/code-theme/firebase_card.png",
-    "../../src/assets/img/game_page/code-theme/node_card.png",
-    "../../src/assets/img/game_page/code-theme/python_card.png",
-    "../../src/assets/img/game_page/code-theme/react_card.png",
-    "../../src/assets/img/game_page/code-theme/sass_card.png",
-    "../../src/assets/img/game_page/code-theme/vs_code_card.png",
-    "../../src/assets/img/game_page/code-theme/vueJS_card.png",
-    "../../src/assets/img/game_page/code-theme/sql_card.png",
+    "../../src/assets/img/game_page/code-theme/main/card/html_card.png",
+    "../../src/assets/img/game_page/code-theme/main/card/css_card.png",
+    "../../src/assets/img/game_page/code-theme/main/card/typescript_card.png",
+    "../../src/assets/img/game_page/code-theme/main/card/javascript_card.png",
+    "../../src/assets/img/game_page/code-theme/main/card/angular_card.png",
+    "../../src/assets/img/game_page/code-theme/main/card/bootstrap_card.png",
+    "../../src/assets/img/game_page/code-theme/main/card/console_card.png",
+    "../../src/assets/img/game_page/code-theme/main/card/django_card.png",
+    "../../src/assets/img/game_page/code-theme/main/card/git_card.png",
+    "../../src/assets/img/game_page/code-theme/main/card/git_hub_card.png",
+    "../../src/assets/img/game_page/code-theme/main/card/firebase_card.png",
+    "../../src/assets/img/game_page/code-theme/main/card/node_card.png",
+    "../../src/assets/img/game_page/code-theme/main/card/python_card.png",
+    "../../src/assets/img/game_page/code-theme/main/card/react_card.png",
+    "../../src/assets/img/game_page/code-theme/main/card/sass_card.png",
+    "../../src/assets/img/game_page/code-theme/main/card/vs_code_card.png",
+    "../../src/assets/img/game_page/code-theme/main/card/vueJS_card.png",
+    "../../src/assets/img/game_page/code-theme/main/card/sql_card.png",
+];
+const gamingCardBack = "../../src/assets/img/game_page/gaming-theme/main/card/basic_card_back.png";
+const gamingImages = [
+    "../../src/assets/img/game_page/gaming-theme/main/card/ass_card",
+    "../../src/assets/img/game_page/gaming-theme/main/card/banana_card",
+    "../../src/assets/img/game_page/gaming-theme/main/card/controller_card",
+    "../../src/assets/img/game_page/gaming-theme/main/card/circle_card",
+    "../../src/assets/img/game_page/gaming-theme/main/card/dice_card",
+    "../../src/assets/img/game_page/gaming-theme/main/card/game_boy_card",
+    "../../src/assets/img/game_page/gaming-theme/main/card/level_up_card",
+    "../../src/assets/img/game_page/gaming-theme/main/card/mario_card",
+    "../../src/assets/img/game_page/gaming-theme/main/card/minecraft_card",
+    "../../src/assets/img/game_page/gaming-theme/main/card/pacman_card",
+    "../../src/assets/img/game_page/gaming-theme/main/card/pacman2_card",
+    "../../src/assets/img/game_page/gaming-theme/main/card/play_card",
+    "../../src/assets/img/game_page/gaming-theme/main/card/puzzle_card",
+    "../../src/assets/img/game_page/gaming-theme/main/card/symbol_card",
+    "../../src/assets/img/game_page/gaming-theme/main/card/snake_card",
+    "../../src/assets/img/game_page/gaming-theme/main/card/square_card",
+    "../../src/assets/img/game_page/gaming-theme/main/card/star_card",
+    "../../src/assets/img/game_page/gaming-theme/main/card/triangle_card",
+];
+const daCardBack = "../../src/assets/img/game_page/da-theme/main/card/basic_card_back.png";
+const daImages = [
+    "../../src/assets/img/game_page/da-theme/main/card/basket_card",
+    "../../src/assets/img/game_page/da-theme/main/card/chef_card",
+    "../../src/assets/img/game_page/da-theme/main/card/code_a_cuisine_card",
+    "../../src/assets/img/game_page/da-theme/main/card/curtansie_card",
+    "../../src/assets/img/game_page/da-theme/main/card/daBubble_card",
+    "../../src/assets/img/game_page/da-theme/main/card/egg_card",
+    "../../src/assets/img/game_page/da-theme/main/card/flower_card",
+    "../../src/assets/img/game_page/da-theme/main/card/green_symbol_card",
+    "../../src/assets/img/game_page/da-theme/main/card/join_logo_card",
+    "../../src/assets/img/game_page/da-theme/main/card/poke_ball_card",
+    "../../src/assets/img/game_page/da-theme/main/card/poll_app_card",
+    "../../src/assets/img/game_page/da-theme/main/card/pollo_loco_card",
+    "../../src/assets/img/game_page/da-theme/main/card/sakura_ramen_card",
+    "../../src/assets/img/game_page/da-theme/main/card/sharky_card",
+    "../../src/assets/img/game_page/da-theme/main/card/smiley_card",
+    "../../src/assets/img/game_page/da-theme/main/card/soup_card",
+    "../../src/assets/img/game_page/da-theme/main/card/tic_tac_toe_card",
+    "../../src/assets/img/game_page/da-theme/main/card/violet_symbol_card",
 ];
 const themeImages = {
     code: codeImages,
     gaming: gamingImages,
     da: daImages
 };
+const cardBacks = {
+    code: codeCardBack,
+    gaming: gamingCardBack,
+    da: daCardBack
+};
 const currentThemeImages = themeImages[gameSettings.theme];
+const currentCardBack = cardBacks[gameSettings.theme];
 function getImages() {
     const pairAmount = Number(gameSettings.cards) / 2;
     const selectedImages = [];
@@ -51,32 +99,42 @@ function getImages() {
     }
     return selectedImages;
 }
-function createCard() {
+function createPairs() {
+    const selectedImages = getImages();
+    const pairedImages = [];
+    selectedImages.forEach(image => {
+        pairedImages.push(image, image);
+    });
+    return pairedImages;
+}
+function shuffleCards() {
+    const gamePairs = createPairs();
+    for (let i = gamePairs.length - 1; i > 0; i--) {
+        const randomeIndex = Math.floor(Math.random() * (i + 1));
+        [gamePairs[i], gamePairs[randomeIndex]] =
+            [gamePairs[randomeIndex], gamePairs[i]];
+    }
+    return gamePairs;
+}
+function placeCards() {
+    const cards = shuffleCards();
+    cards.forEach((image) => {
+        playGround.innerHTML += createCard(image);
+    });
+}
+function createCard(image) {
     return `
         <div class="card">
-            
-            ...
+            <img class="card d-none" src="${image}" alt="game card">
+            <img class="card " src="${currentCardBack}" alt="game card">
         </div>
     `;
 }
-function placeCards() {
-    switch (gameSettings.cards) {
-        case "24":
-            createCard(card);
-            break;
-        case "36":
-            break;
-        default:
-            break;
-    }
-}
-function shuffleCards() {
-}
 function determinePlayer() {
 }
-function handleCardClick(card) {
+function handleCardClick() {
 }
-function turnCard(card) {
+function turnCard() {
 }
 function hideCards() {
 }
@@ -88,4 +146,8 @@ function changePlayer() {
 }
 function checkGameOver() {
 }
+function init() {
+    placeCards();
+}
+init();
 export {};
