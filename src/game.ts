@@ -56,6 +56,8 @@ const codeImages = [
     "../../src/assets/img/game_page/code-theme/main/card/sql_card.png",
 ];
 
+//gaming-theme images:
+
 const gamingImages = [
     "../../src/assets/img/game_page/gaming-theme/main/card/ass_card",
     "../../src/assets/img/game_page/gaming-theme/main/card/banana_card",
@@ -70,15 +72,34 @@ const gamingImages = [
     "../../src/assets/img/game_page/gaming-theme/main/card/pacman2_card",
     "../../src/assets/img/game_page/gaming-theme/main/card/play_card",
     "../../src/assets/img/game_page/gaming-theme/main/card/puzzle_card",
-    "../../src/assets/img/game_page/gaming-theme/main/card/rectangle_card",
+    "../../src/assets/img/game_page/gaming-theme/main/card/symbol_card",
     "../../src/assets/img/game_page/gaming-theme/main/card/snake_card",
     "../../src/assets/img/game_page/gaming-theme/main/card/square_card",
     "../../src/assets/img/game_page/gaming-theme/main/card/star_card",
     "../../src/assets/img/game_page/gaming-theme/main/card/triangle_card",
 ]
 
+//DA-theme images:
+
 const daImages = [
-    "../../src/assets/img/game_page/gaming-theme/main/card/pacman_card",
+    "../../src/assets/img/game_page/da-theme/main/card/basket_card",
+    "../../src/assets/img/game_page/da-theme/main/card/chef_card",
+    "../../src/assets/img/game_page/da-theme/main/card/code_a_cuisine_card",
+    "../../src/assets/img/game_page/da-theme/main/card/curtansie_card",
+    "../../src/assets/img/game_page/da-theme/main/card/daBubble_card",
+    "../../src/assets/img/game_page/da-theme/main/card/egg_card",
+    "../../src/assets/img/game_page/da-theme/main/card/flower_card",
+    "../../src/assets/img/game_page/da-theme/main/card/green_symbol_card",
+    "../../src/assets/img/game_page/da-theme/main/card/join_logo_card",
+    "../../src/assets/img/game_page/da-theme/main/card/poke_ball_card",
+    "../../src/assets/img/game_page/da-theme/main/card/poll_app_card",
+    "../../src/assets/img/game_page/da-theme/main/card/pollo_loco_card",
+    "../../src/assets/img/game_page/da-theme/main/card/sakura_ramen_card",
+    "../../src/assets/img/game_page/da-theme/main/card/sharky_card",
+    "../../src/assets/img/game_page/da-theme/main/card/smiley_card",
+    "../../src/assets/img/game_page/da-theme/main/card/soup_card",
+    "../../src/assets/img/game_page/da-theme/main/card/tic_tac_toe_card",
+    "../../src/assets/img/game_page/da-theme/main/card/violet_symbol_card",
 ]
 
 const themeImages: Record<Theme, string[]> = {
