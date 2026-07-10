@@ -10,13 +10,18 @@ function loadGameSettings() {
     };
 }
 const gameSettings = loadGameSettings();
-let currentPlayer = gameSettings.player;
 const gameBody = document.querySelector("#gameBody");
 const playGround = document.querySelector("#playGround");
 if (gameBody) {
     gameBody.classList.add(`theme-${gameSettings.theme}`);
 }
 const codeCardBack = "../../src/assets/img/game_page/code-theme/main/card/basic_card_back.png";
+const codePlayerIconB = "../../src/assets/img/game_page/code-theme/header/player_label_blue.png";
+const codePlayerIconO = "../../src/assets/img/game_page/code-theme/header/player_label_orange.png";
+const codePlayerIcons = {
+    blue: codePlayerIconB,
+    orange: codePlayerIconO
+};
 const codeImages = [
     "../../src/assets/img/game_page/code-theme/main/card/html_card.png",
     "../../src/assets/img/game_page/code-theme/main/card/css_card.png",
@@ -38,6 +43,12 @@ const codeImages = [
     "../../src/assets/img/game_page/code-theme/main/card/sql_card.png",
 ];
 const gamingCardBack = "../../src/assets/img/game_page/gaming-theme/main/card/basic_card_back.png";
+const gamingPlayerIconB = "../../src/assets/img/game_page/gaming-theme/header/chess_pawn_blue.png";
+const gamingPlayerIconO = "../../src/assets/img/game_page/gaming-theme/header/chess_pawn_orange.png";
+const gamingPlayerIcons = {
+    blue: gamingPlayerIconB,
+    orange: gamingPlayerIconO
+};
 const gamingImages = [
     "../../src/assets/img/game_page/gaming-theme/main/card/ass_card",
     "../../src/assets/img/game_page/gaming-theme/main/card/banana_card",
@@ -59,6 +70,12 @@ const gamingImages = [
     "../../src/assets/img/game_page/gaming-theme/main/card/triangle_card",
 ];
 const daCardBack = "../../src/assets/img/game_page/da-theme/main/card/basic_card_back.png";
+const daPlayerIconB = "../../src/assets/img/game_page/da-theme/header/chess_pawn_blue.png";
+const daPlayerIconO = "../../src/assets/img/game_page/da-theme/header/chess_pawn_orange.png";
+const daPlayerIcons = {
+    blue: daPlayerIconB,
+    orange: daPlayerIconO
+};
 const daImages = [
     "../../src/assets/img/game_page/da-theme/main/card/basket_card",
     "../../src/assets/img/game_page/da-theme/main/card/chef_card",
@@ -89,6 +106,12 @@ const cardBacks = {
     gaming: gamingCardBack,
     da: daCardBack
 };
+const playerIcons = {
+    code: codePlayerIcons,
+    gaming: gamingPlayerIcons,
+    da: daPlayerIcons
+};
+let currentPlayer;
 const currentThemeImages = themeImages[gameSettings.theme];
 const currentCardBack = cardBacks[gameSettings.theme];
 function getImages() {
@@ -130,7 +153,15 @@ function createCard(image) {
         </div>
     `;
 }
+const currentPlayerDisplay = document.querySelector("#currentPlayerDisplay");
 function determinePlayer() {
+    currentPlayer = gameSettings.player;
+    updateCurrentPlayerDisplay();
+}
+function updateCurrentPlayerDisplay() {
+    const icon = playerIcons[gameSettings.theme][currentPlayer];
+    currentPlayerDisplay.innerHTML = `Current Player:    
+       <img src="${icon}" alt="player icon">`;
 }
 function handleCardClick() {
 }
@@ -143,11 +174,28 @@ function compareCards() {
 function handlePair() {
 }
 function changePlayer() {
+    if (currentPlayer == "orange") {
+        currentPlayer = "blue";
+    }
+    else
+        currentPlayer = "orange";
+    return currentPlayer;
 }
 function checkGameOver() {
 }
+const scoreIconO = document.querySelector("#scorePlayerIconO");
+const scoreIconB = document.querySelector("#scorePlayerIconB");
+function initaliseHeader() {
+    const scoreIcons = playerIcons[gameSettings.theme];
+    if (!scoreIconB || !scoreIconO)
+        return;
+    scoreIconB.src = scoreIcons.blue;
+    scoreIconO.src = scoreIcons.orange;
+}
 function init() {
+    initaliseHeader();
     placeCards();
+    determinePlayer();
 }
 init();
 export {};

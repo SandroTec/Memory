@@ -1,8 +1,10 @@
 type Theme = "code" | "gaming" | "da";
 
+type Player = "blue" | "orange"
+
 type GameSettings = {
     theme: Theme;
-    player: string;
+    player: Player;
     cards: string;
 };
 
@@ -22,7 +24,6 @@ function loadGameSettings(): GameSettings {
 
 const gameSettings = loadGameSettings();
 
-let currentPlayer = gameSettings.player;
 
 const gameBody = document.querySelector<HTMLBodyElement>("#gameBody");
 const playGround = document.querySelector<HTMLDivElement>("#playGround")!;
@@ -33,7 +34,15 @@ if (gameBody) {
 
 
 //code-theme images:
-const codeCardBack = "../../src/assets/img/game_page/code-theme/main/card/basic_card_back.png" 
+const codeCardBack = "../../src/assets/img/game_page/code-theme/main/card/basic_card_back.png";
+
+const codePlayerIconB = "../../src/assets/img/game_page/code-theme/header/player_label_blue.png";
+const codePlayerIconO = "../../src/assets/img/game_page/code-theme/header/player_label_orange.png";
+
+const codePlayerIcons = {
+    blue: codePlayerIconB,
+    orange: codePlayerIconO
+}
 
 const codeImages = [
     "../../src/assets/img/game_page/code-theme/main/card/html_card.png",
@@ -60,6 +69,14 @@ const codeImages = [
 
 const gamingCardBack = "../../src/assets/img/game_page/gaming-theme/main/card/basic_card_back.png";
 
+const gamingPlayerIconB = "../../src/assets/img/game_page/gaming-theme/header/chess_pawn_blue.png";
+const gamingPlayerIconO = "../../src/assets/img/game_page/gaming-theme/header/chess_pawn_orange.png";
+
+const gamingPlayerIcons = {
+    blue: gamingPlayerIconB,
+    orange: gamingPlayerIconO
+}
+
 
 const gamingImages = [
     "../../src/assets/img/game_page/gaming-theme/main/card/ass_card",
@@ -85,6 +102,15 @@ const gamingImages = [
 //DA-theme images:
 
 const daCardBack = "../../src/assets/img/game_page/da-theme/main/card/basic_card_back.png";
+
+
+const daPlayerIconB = "../../src/assets/img/game_page/da-theme/header/chess_pawn_blue.png";
+const daPlayerIconO = "../../src/assets/img/game_page/da-theme/header/chess_pawn_orange.png";
+
+const daPlayerIcons = {
+    blue: daPlayerIconB,
+    orange: daPlayerIconO
+}
 
 const daImages = [
     "../../src/assets/img/game_page/da-theme/main/card/basket_card",
@@ -119,13 +145,20 @@ const cardBacks: Record<Theme, string> = {
     da: daCardBack
 };
 
+const playerIcons = {
+    code: codePlayerIcons,
+    gaming: gamingPlayerIcons,
+    da: daPlayerIcons
+};
+
+let currentPlayer: Player;
+
 
 // functions needed for memory:
 
 // get the number of needed pairs for game
 const currentThemeImages = themeImages[gameSettings.theme];
 const currentCardBack = cardBacks[gameSettings.theme];
-
 function getImages(): string[] {
     const pairAmount = Number(gameSettings.cards)/2;
     const selectedImages:string[] = [];
@@ -148,10 +181,11 @@ function createPairs():string[] {
 
 function shuffleCards():string[] {
     const gamePairs:string[] = createPairs();
-    
+    //loop from last item to the first 
+    // and swap them with a randome item from the array
     for (let i = gamePairs.length-1; i > 0; i--) {
         const randomeIndex = Math.floor(Math.random() * (i+1));
-
+        //Fischer-Yates Shuffle
         [gamePairs[i], gamePairs[randomeIndex]] = 
         [gamePairs[randomeIndex], gamePairs[i]];
     }
@@ -177,8 +211,20 @@ function createCard(image:string):string {
     `;
 }
 
+
+const currentPlayerDisplay = document.querySelector("#currentPlayerDisplay")!;
 function determinePlayer() {
     //inital first player by using GameSettings player
+    currentPlayer = gameSettings.player;
+    updateCurrentPlayerDisplay();
+}
+
+function updateCurrentPlayerDisplay() {
+    const icon = playerIcons[gameSettings.theme][currentPlayer];
+       currentPlayerDisplay.innerHTML = `Current Player:    
+       <img src="${icon}" alt="player icon">`;
+    
+    
 }
 
 function handleCardClick() {
@@ -204,8 +250,11 @@ function handlePair() {
     //a boolean(false) 
 }
 
-function changePlayer() {
-    //change current player when no pair is found
+function changePlayer():Player {
+    if (currentPlayer == "orange") {
+        currentPlayer = "blue";
+    } else currentPlayer = "orange";
+    return currentPlayer;
 }
 
 function checkGameOver() {
@@ -213,9 +262,20 @@ function checkGameOver() {
     //ends game when no cards left
 }
 
+const scoreIconO = document.querySelector<HTMLImageElement>("#scorePlayerIconO");
+const scoreIconB = document.querySelector<HTMLImageElement>("#scorePlayerIconB");
+
+function initaliseHeader() {
+    const scoreIcons = playerIcons[gameSettings.theme]
+    if(!scoreIconB || !scoreIconO) return;
+    scoreIconB.src = scoreIcons.blue;
+    scoreIconO.src = scoreIcons.orange;
+}
 
 function init() {
+    initaliseHeader();
     placeCards();
+    determinePlayer();
 }
 
 
