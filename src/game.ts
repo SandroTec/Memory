@@ -4,6 +4,15 @@ type Player = "blue" | "orange";
 
 type ExitBtn = "default" | "hover";
 
+type Card =  {
+    id : number,
+    pairId : number,
+    imgSrc : string,
+    isFlipped : boolean,
+    isFound : boolean,
+
+}
+
 type GameSettings = {
     theme: Theme;
     player: Player;
@@ -189,8 +198,11 @@ const exitButtons = {
 // functions needed for memory:
 
 // get the number of needed pairs for game
+
 const currentThemeImages = themeImages[gameSettings.theme];
 const currentCardBack = cardBacks[gameSettings.theme];
+
+
 function getImages(): string[] {
     const pairAmount = Number(gameSettings.cards)/2;
     const selectedImages:string[] = [];
@@ -245,6 +257,7 @@ function createCard(image:string):string {
 
 
 const currentPlayerDisplay = document.querySelector("#currentPlayerDisplay")!;
+
 function determinePlayer() {
     //inital first player by using GameSettings player
     currentPlayer = gameSettings.player;
@@ -257,27 +270,56 @@ function updateCurrentPlayerDisplay() {
        <img src="${icon}" alt="player icon">`;
 }
 
-function handleCardClick() {
-    //-> turn card
+let firstSelectedCard:Card | null = null;
 
-    turnCard();
+function handleCardClick(card:Card) {
+    //is card found? -> return
+    //is card flipped? -> return
+    if (card.isFound || card.isFlipped) return
+    //turn card animation
+    turnCard(card);
+
+    //first flipped card? 
+    if (firstSelectedCard == null) {
+        firstSelectedCard = card;
+        return;
+    } 
+    if (compareCards(card, firstSelectedCard)) {
+        handlePair(card, firstSelectedCard)
+    } else {
+        hideCards(card, firstSelectedCard);
+        changePlayer();
+    }
+    
+    firstSelectedCard = null;
+    
 }
 
-function turnCard() {
+function turnCard(card:Card) {
     //turn the card by changeing to the actuall image 
+    card.isFlipped = true;
+    card.imgSrc = "";
 }
 
-function hideCards() {
+
+
+function compareCards(card:Card, cardToCompare:Card) {
+    //compares first safed card  id to the second card pairId
+    if (card.pairId == cardToCompare.pairId) {
+        return true;
+    } else return false;
+}
+
+
+function hideCards(card:Card, firstSelectedCard:Card) {
     //turns cards back when no pair found
 }
 
-function compareCards() {
-    //compares first safed card  id to the second card id
-    //cards need an id to compare them by that
-}
 
-function handlePair() {
+function handlePair(card:Card, firstSelectedCard:Card) {
     //pairs++ if compareCards is true
+    card.isFound = true;
+    firstSelectedCard.isFound = true
     //player does not change by returning back 
     //a boolean(false) 
 }
