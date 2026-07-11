@@ -147,11 +147,28 @@ function getImages() {
 }
 function createPairs() {
     const selectedImages = getImages();
-    const pairedImages = [];
+    const pairedCards = [];
+    let id = 0;
+    let pairId = 0;
     selectedImages.forEach(image => {
-        pairedImages.push(image, image);
+        const firstCard = {
+            id: id++,
+            pairId: pairId,
+            imgSrc: image,
+            isFlipped: false,
+            isFound: false
+        };
+        pairedCards.push(firstCard);
+        const secondCard = {
+            id: id++,
+            pairId: pairId++,
+            imgSrc: image,
+            isFlipped: false,
+            isFound: false
+        };
+        pairedCards.push(secondCard);
     });
-    return pairedImages;
+    return pairedCards;
 }
 function shuffleCards() {
     const gamePairs = createPairs();
@@ -164,14 +181,14 @@ function shuffleCards() {
 }
 function placeCards() {
     const cards = shuffleCards();
-    cards.forEach((image) => {
-        playGround.innerHTML += createCard(image);
+    cards.forEach((card) => {
+        playGround.innerHTML += createCard(card);
     });
 }
-function createCard(image) {
+function createCard(card) {
     return `
-        <div class="card">
-            <img class="card d-none" src="${image}" alt="game card">
+        <div class="card" onclick="handleCardClick(${card})">
+            <img class="card d-none" src="${card.imgSrc}" alt="game card">
             <img class="card " src="${currentCardBack}" alt="game card">
         </div>
     `;
@@ -223,7 +240,12 @@ function hideCards(card, firstSelectedCard) {
     firstSelectedCard.isFlipped = false;
     return;
 }
+const playerPairs = {
+    blue: 0,
+    orange: 0
+};
 function handlePair(card, firstSelectedCard) {
+    playerPairs[currentPlayer]++;
     card.isFound = true;
     firstSelectedCard.isFound = true;
     return;
@@ -238,11 +260,12 @@ function changePlayer() {
 }
 function checkGameOver() {
     const possiblePairs = Number(gameSettings.cards) / 2;
-    if (possiblePairs != 0) {
-        return true;
+    const pairsLeft = possiblePairs - (playerPairs.blue + playerPairs.orange);
+    if (pairsLeft != 0) {
+        return false;
     }
     else
-        return false;
+        return true;
 }
 const scoreIconO = document.querySelector("#scorePlayerIconO");
 const scoreIconB = document.querySelector("#scorePlayerIconB");

@@ -213,18 +213,40 @@ function getImages(): string[] {
     return selectedImages;
 }
 
-function createPairs():string[] {
+function createPairs():Card[] {
     const selectedImages = getImages();
-    const pairedImages:string[] = [];
-
+    const pairedCards:Card[] = [];
+    let id = 0;
+    let pairId = 0;
     selectedImages.forEach(image => {
-        pairedImages.push(image, image);
+        
+        const firstCard:Card = {
+            id: id++,
+            pairId: pairId,
+            imgSrc: image,
+            isFlipped: false,
+            isFound: false
+        }
+
+        pairedCards.push(firstCard);
+        
+
+        const secondCard:Card = {
+            id: id++,
+            pairId: pairId++,
+            imgSrc: image,
+            isFlipped: false,
+            isFound: false
+        }
+
+        pairedCards.push(secondCard);
+        
     });
-    return pairedImages;
+    return pairedCards;
 }
 
-function shuffleCards():string[] {
-    const gamePairs:string[] = createPairs();
+function shuffleCards():Card[] {
+    const gamePairs:Card[] = createPairs();
     //loop from last item to the first 
     // and swap them with a randome item from the array
     for (let i = gamePairs.length-1; i > 0; i--) {
@@ -241,20 +263,20 @@ function placeCards() {
     //by using cards from GameSettings
     const cards = shuffleCards();
 
-    cards.forEach((image) => {
-        playGround.innerHTML += createCard(image)
+    cards.forEach((card) => {
+        playGround.innerHTML += createCard(card)
+       
     })
 }
 
-function createCard(image:string):string {
+function createCard(card:Card):string {
     return `
-        <div class="card">
-            <img class="card d-none" src="${image}" alt="game card">
+        <div class="card" onclick="handleCardClick(${card})">
+            <img class="card d-none" src="${card.imgSrc}" alt="game card">
             <img class="card " src="${currentCardBack}" alt="game card">
         </div>
     `;
 }
-
 
 const currentPlayerDisplay = document.querySelector("#currentPlayerDisplay")!;
 
@@ -269,6 +291,8 @@ function updateCurrentPlayerDisplay() {
        currentPlayerDisplay.innerHTML = `Current Player:    
        <img src="${icon}" alt="player icon">`;
 }
+
+
 
 let firstSelectedCard:Card | null = null;
 
@@ -321,9 +345,14 @@ function hideCards(card:Card, firstSelectedCard:Card) {
     return;
 }
 
+const playerPairs:Record<Player, number> = {
+    blue: 0,
+    orange: 0
+}
 
 function handlePair(card:Card, firstSelectedCard:Card) {
     //pairs++ if compareCards is true
+    playerPairs[currentPlayer]++;
     card.isFound = true;
     firstSelectedCard.isFound = true
     return;
@@ -339,8 +368,9 @@ function changePlayer():Player {
 
 function checkGameOver() {
     const possiblePairs = Number(gameSettings.cards)/2;
-    if (possiblePairs != 0) {return true}
-    else return false;
+    const pairsLeft = possiblePairs - (playerPairs.blue + playerPairs.orange)
+    if (pairsLeft != 0) {return false}
+    else return true;
 }
 
 const scoreIconO = document.querySelector<HTMLImageElement>("#scorePlayerIconO");
