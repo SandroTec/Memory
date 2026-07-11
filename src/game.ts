@@ -87,8 +87,8 @@ const gamingPlayerIcons = {
     orange: gamingPlayerIconO
 }
 
-const gamingExitDefaultBtn = "../../src/assets/img/game_page/code-theme/header/exit_game_default.png";
-const gamingExitHoverBtn = "../../src/assets/img/game_page/code-theme/header/exit_game_hover.png";
+const gamingExitDefaultBtn = "../../src/assets/img/game_page/gaming-theme/header/exit_game_default.png";
+const gamingExitHoverBtn = "../../src/assets/img/game_page/gaming-theme/header/exit_game_hover.png";
 
 const gamingExitBtns = {
     default: gamingExitDefaultBtn,
@@ -130,8 +130,8 @@ const daPlayerIcons = {
     orange: daPlayerIconO
 }
 
-const daExitDefaultBtn = "../../src/assets/img/game_page/code-theme/header/exit_game_default.png";
-const daExitHoverBtn = "../../src/assets/img/game_page/code-theme/header/exit_game_hover.png";
+const daExitDefaultBtn = "../../src/assets/img/game_page/da-theme/header/exit_game_default.png";
+const daExitHoverBtn = "../../src/assets/img/game_page/da-theme/header/exit_game_hover.png";
 
 const daExitBtns = {
     default: daExitDefaultBtn,
@@ -178,6 +178,12 @@ const playerIcons = {
 };
 
 let currentPlayer: Player;
+
+const exitButtons = {
+    code: codeExitBtns,
+    gaming: gamingExitBtns,
+    da: daExitBtns
+};
 
 
 // functions needed for memory:
@@ -249,8 +255,6 @@ function updateCurrentPlayerDisplay() {
     const icon = playerIcons[gameSettings.theme][currentPlayer];
        currentPlayerDisplay.innerHTML = `Current Player:    
        <img src="${icon}" alt="player icon">`;
-    
-    
 }
 
 function handleCardClick() {
@@ -300,8 +304,29 @@ function initaliseScoreBoard() {
     scoreIconO.src = scoreIcons.orange;
 }
 
+const exitGameBtnImage = document.querySelector<HTMLImageElement>("#exitBtnImage");
+
+const exitGameBtn = document.querySelector<HTMLButtonElement>("#exitBtn");
+
 function initaliseExitButton() {
-    const exitBtn = 
+    const exitBtn = exitButtons[gameSettings.theme]
+    if (!exitGameBtnImage || !exitGameBtn) return;
+    exitGameBtnImage.src = exitBtn.default;
+    exitGameBtn.addEventListener("mouseenter", () => {
+        exitGameBtnImage.src = exitBtn.hover;
+    })
+    exitGameBtn.addEventListener("mouseleave", () => {
+        exitGameBtnImage.src = exitBtn.default;
+    })
+}
+
+exitGameBtn?.addEventListener("click", () => {
+    endGame();
+})
+
+
+function endGame() {
+    //function to end the game and go back to settings.
 }
 
 function initaliseHeader() {
