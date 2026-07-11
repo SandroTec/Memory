@@ -230,6 +230,12 @@ function initaliseExitButton() {
         exitGameBtnImage.src = exitBtn.default;
     });
 }
+exitGameBtn?.addEventListener("click", () => {
+    endGame();
+});
+function endGame() {
+    window.location.href = "./settings.html";
+}
 function initaliseHeader() {
     initaliseScoreBoard();
     initaliseExitButton();
