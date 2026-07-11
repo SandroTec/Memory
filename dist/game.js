@@ -186,16 +186,40 @@ function updateCurrentPlayerDisplay() {
     currentPlayerDisplay.innerHTML = `Current Player:    
        <img src="${icon}" alt="player icon">`;
 }
-function handleCardClick() {
-    turnCard();
+let firstSelectedCard = null;
+function handleCardClick(card) {
+    if (card.isFound || card.isFlipped)
+        return;
+    turnCard(card);
+    if (firstSelectedCard == null) {
+        firstSelectedCard = card;
+        return;
+    }
+    if (compareCards(card, firstSelectedCard)) {
+        handlePair(card, firstSelectedCard);
+    }
+    else {
+        hideCards(card, firstSelectedCard);
+        changePlayer();
+    }
+    firstSelectedCard = null;
 }
-function turnCard() {
+function turnCard(card) {
+    card.isFlipped = true;
+    card.imgSrc = "";
 }
-function hideCards() {
+function compareCards(card, cardToCompare) {
+    if (card.pairId == cardToCompare.pairId) {
+        return true;
+    }
+    else
+        return false;
 }
-function compareCards() {
+function hideCards(card, firstSelectedCard) {
 }
-function handlePair() {
+function handlePair(card, firstSelectedCard) {
+    card.isFound = true;
+    firstSelectedCard.isFound = true;
 }
 function changePlayer() {
     if (currentPlayer == "orange") {
