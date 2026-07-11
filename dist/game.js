@@ -202,6 +202,9 @@ function handleCardClick(card) {
         hideCards(card, firstSelectedCard);
         changePlayer();
     }
+    if (checkGameOver()) {
+        determineWinner();
+    }
     firstSelectedCard = null;
 }
 function turnCard(card) {
@@ -234,6 +237,12 @@ function changePlayer() {
     return currentPlayer;
 }
 function checkGameOver() {
+    const possiblePairs = Number(gameSettings.cards) / 2;
+    if (possiblePairs != 0) {
+        return true;
+    }
+    else
+        return false;
 }
 const scoreIconO = document.querySelector("#scorePlayerIconO");
 const scoreIconB = document.querySelector("#scorePlayerIconB");
@@ -263,6 +272,8 @@ exitGameBtn?.addEventListener("click", () => {
 });
 function endGame() {
     window.location.href = "./settings.html";
+}
+function determineWinner() {
 }
 function initaliseHeader() {
     initaliseScoreBoard();

@@ -290,6 +290,9 @@ function handleCardClick(card:Card) {
         hideCards(card, firstSelectedCard);
         changePlayer();
     }
+    if (checkGameOver()) {
+        determineWinner();
+    }
     
     firstSelectedCard = null;
     
@@ -323,8 +326,6 @@ function handlePair(card:Card, firstSelectedCard:Card) {
     //pairs++ if compareCards is true
     card.isFound = true;
     firstSelectedCard.isFound = true
-    //player does not change by returning back 
-    //a boolean(false) 
     return;
 }
 
@@ -335,9 +336,11 @@ function changePlayer():Player {
     return currentPlayer;
 }
 
+
 function checkGameOver() {
-    //checks how many cards left
-    //ends game when no cards left
+    const possiblePairs = Number(gameSettings.cards)/2;
+    if (possiblePairs != 0) {return true}
+    else return false;
 }
 
 const scoreIconO = document.querySelector<HTMLImageElement>("#scorePlayerIconO");
@@ -374,6 +377,10 @@ exitGameBtn?.addEventListener("click", () => {
 function endGame() {
     //function to end the game and go back to settings.
     window.location.href = "./settings.html";
+}
+
+function determineWinner() {
+
 }
 
 function initaliseHeader() {
