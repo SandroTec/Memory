@@ -313,6 +313,9 @@ function compareCards(card:Card, cardToCompare:Card) {
 
 function hideCards(card:Card, firstSelectedCard:Card) {
     //turns cards back when no pair found
+    card.isFlipped = false;
+    firstSelectedCard.isFlipped = false
+    return;
 }
 
 
@@ -322,6 +325,7 @@ function handlePair(card:Card, firstSelectedCard:Card) {
     firstSelectedCard.isFound = true
     //player does not change by returning back 
     //a boolean(false) 
+    return;
 }
 
 function changePlayer():Player {

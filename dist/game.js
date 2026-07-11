@@ -216,10 +216,14 @@ function compareCards(card, cardToCompare) {
         return false;
 }
 function hideCards(card, firstSelectedCard) {
+    card.isFlipped = false;
+    firstSelectedCard.isFlipped = false;
+    return;
 }
 function handlePair(card, firstSelectedCard) {
     card.isFound = true;
     firstSelectedCard.isFound = true;
+    return;
 }
 function changePlayer() {
     if (currentPlayer == "orange") {
