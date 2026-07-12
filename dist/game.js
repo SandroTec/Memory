@@ -255,11 +255,10 @@ async function compareCards(card, cardToCompare) {
     const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
     cardsSelected = true;
     if (card.pairId == cardToCompare.pairId) {
-        await delay(2000);
         return true;
     }
     else {
-        await delay(2000);
+        await delay(1000);
         return false;
     }
 }
@@ -281,11 +280,17 @@ const playerPairs = {
     blue: 0,
     orange: 0
 };
+let scoreDisplayB = document.querySelector("#scoreDisplayB");
+let scoreDisplayO = document.querySelector("#scoreDisplayO");
 function handlePair(card, firstSelectedCard) {
     playerPairs[currentPlayer]++;
     card.isFound = true;
     firstSelectedCard.isFound = true;
     cardsSelected = false;
+    if (!scoreDisplayB || !scoreDisplayO)
+        return;
+    scoreDisplayB.textContent = `${playerPairs.blue}`;
+    scoreDisplayO.textContent = `${playerPairs.orange}`;
     return;
 }
 function changePlayer() {
@@ -336,6 +341,17 @@ function endGame() {
     window.location.href = "./settings.html";
 }
 function determineWinner() {
+    if (playerPairs.blue > playerPairs.orange) {
+        loadEndscreen("blue");
+    }
+    else if (playerPairs.blue < playerPairs.orange) {
+        loadEndscreen("orange");
+    }
+    else {
+        loadEndscreen("draw");
+    }
+}
+function loadEndscreen(winningScore) {
 }
 function initaliseHeader() {
     initaliseScoreBoard();

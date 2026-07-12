@@ -357,10 +357,9 @@ async function compareCards(card:Card, cardToCompare:Card):Promise<boolean> {
     //compares first safed card  id to the second card pairId
     cardsSelected = true;
     if (card.pairId == cardToCompare.pairId) {
-        await delay(2000);
         return true;
     } else {
-        await delay(2000);
+        await delay(1000);
         return false;
     }
 }
@@ -386,6 +385,8 @@ const playerPairs:Record<Player, number> = {
     blue: 0,
     orange: 0
 }
+let scoreDisplayB = document.querySelector("#scoreDisplayB");
+let scoreDisplayO = document.querySelector("#scoreDisplayO");
 
 function handlePair(card:Card, firstSelectedCard:Card) {
     //pairs++ if compareCards is true
@@ -393,6 +394,9 @@ function handlePair(card:Card, firstSelectedCard:Card) {
     card.isFound = true;
     firstSelectedCard.isFound = true
     cardsSelected = false;
+    if (!scoreDisplayB || !scoreDisplayO) return
+    scoreDisplayB.textContent = `${playerPairs.blue}`;
+    scoreDisplayO.textContent = `${playerPairs.orange}`;
     return;
 }
 
@@ -414,6 +418,7 @@ function checkGameOver() {
 
 const scoreIconO = document.querySelector<HTMLImageElement>("#scorePlayerIconO");
 const scoreIconB = document.querySelector<HTMLImageElement>("#scorePlayerIconB");
+
 
 function initaliseScoreBoard() {
     const scoreIcons = playerIcons[gameSettings.theme]
@@ -449,7 +454,21 @@ function endGame() {
 }
 
 function determineWinner() {
+    if (playerPairs.blue > playerPairs.orange) {
+        //blue wins
+        loadEndscreen("blue");
+    } else if (playerPairs.blue < playerPairs.orange) {
+        //orange wins
+        loadEndscreen("orange");
+    } else {
+        //draw
+        loadEndscreen("draw");
+    }
+}
 
+function loadEndscreen(winningScore) {
+    //load endscreen
+    
 }
 
 function initaliseHeader() {
