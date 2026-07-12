@@ -181,17 +181,34 @@ function shuffleCards() {
 }
 function placeCards() {
     const cards = shuffleCards();
+    let htmlBuffer = "";
     cards.forEach((card) => {
-        playGround.innerHTML += createCard(card);
+        htmlBuffer += createCard(card);
     });
+    playGround.innerHTML = htmlBuffer;
+    initCardEventListeners();
 }
 function createCard(card) {
+    const cardJson = JSON.stringify(card);
     return `
-        <div class="card" onclick="handleCardClick(${card})">
+        <div class="card" data-card-id="${card.id}" data-card-object='${cardJson}'>
             <img class="card d-none" src="${card.imgSrc}" alt="game card">
             <img class="card " src="${currentCardBack}" alt="game card">
         </div>
     `;
+}
+function initCardEventListeners() {
+    const cardElements = document.querySelectorAll("[data-card-id]");
+    cardElements.forEach(cardElement => {
+        cardElement.addEventListener("click", () => {
+            console.log("Card geklickt");
+            const cardJson = cardElement.getAttribute("data-card-object");
+            if (cardJson) {
+                const cardById = JSON.parse(cardJson);
+                handleCardClick(cardById);
+            }
+        });
+    });
 }
 const currentPlayerDisplay = document.querySelector("#currentPlayerDisplay");
 function determinePlayer() {
@@ -205,6 +222,7 @@ function updateCurrentPlayerDisplay() {
 }
 let firstSelectedCard = null;
 function handleCardClick(card) {
+    console.log("card clicked");
     if (card.isFound || card.isFlipped)
         return;
     turnCard(card);

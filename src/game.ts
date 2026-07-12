@@ -259,23 +259,40 @@ function shuffleCards():Card[] {
 }
 
 function placeCards() {
-    //inital function to add the cards to the board
-    //by using cards from GameSettings
     const cards = shuffleCards();
+    let htmlBuffer = "";
 
     cards.forEach((card) => {
-        playGround.innerHTML += createCard(card)
-       
-    })
-}
+        htmlBuffer += createCard(card);
+    });
+    
+    playGround.innerHTML = htmlBuffer;
 
+    initCardEventListeners();
+}
 function createCard(card:Card):string {
+    const cardJson = JSON.stringify(card);
     return `
-        <div class="card" onclick="handleCardClick(${card})">
+        <div class="card" data-card-id="${card.id}" data-card-object='${cardJson}'>
             <img class="card d-none" src="${card.imgSrc}" alt="game card">
             <img class="card " src="${currentCardBack}" alt="game card">
         </div>
     `;
+}
+
+function initCardEventListeners() {
+    const cardElements = document.querySelectorAll<HTMLDivElement>("[data-card-id]");
+    
+    cardElements.forEach(cardElement => {
+        cardElement.addEventListener("click", () => {
+            
+            const cardJson = cardElement.getAttribute("data-card-object");
+            if (cardJson) {
+                const cardById = JSON.parse(cardJson) as Card;
+                handleCardClick(cardById);
+            }
+        });
+    });
 }
 
 const currentPlayerDisplay = document.querySelector("#currentPlayerDisplay")!;
