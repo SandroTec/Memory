@@ -192,8 +192,8 @@ function createCard(card) {
     const cardJson = JSON.stringify(card);
     return `
         <div class="card" data-card-id="${card.id}" data-card-object='${cardJson}'>
-            <img class="card d-none" src="${card.imgSrc}" alt="game card">
-            <img class="card " src="${currentCardBack}" alt="game card">
+            <img class="card d-none" id="card${card.id}" src="${card.imgSrc}" alt="game card">
+            <img class="card" id="cardBack${card.id}" src="${currentCardBack}" alt="game card">
         </div>
     `;
 }
@@ -201,7 +201,6 @@ function initCardEventListeners() {
     const cardElements = document.querySelectorAll("[data-card-id]");
     cardElements.forEach(cardElement => {
         cardElement.addEventListener("click", () => {
-            console.log("Card geklickt");
             const cardJson = cardElement.getAttribute("data-card-object");
             if (cardJson) {
                 const cardById = JSON.parse(cardJson);
@@ -222,7 +221,6 @@ function updateCurrentPlayerDisplay() {
 }
 let firstSelectedCard = null;
 function handleCardClick(card) {
-    console.log("card clicked");
     if (card.isFound || card.isFlipped)
         return;
     turnCard(card);
@@ -244,7 +242,10 @@ function handleCardClick(card) {
 }
 function turnCard(card) {
     card.isFlipped = true;
-    card.imgSrc = "";
+    const flippedCard = document.querySelector("#card" + card.id);
+    const cardBack = document.querySelector("#cardBack" + card.id);
+    cardBack?.classList.add("d-none");
+    flippedCard?.classList.remove("d-none");
 }
 function compareCards(card, cardToCompare) {
     if (card.pairId == cardToCompare.pairId) {

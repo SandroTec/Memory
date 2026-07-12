@@ -274,8 +274,8 @@ function createCard(card:Card):string {
     const cardJson = JSON.stringify(card);
     return `
         <div class="card" data-card-id="${card.id}" data-card-object='${cardJson}'>
-            <img class="card d-none" src="${card.imgSrc}" alt="game card">
-            <img class="card " src="${currentCardBack}" alt="game card">
+            <img class="card d-none" id="card${card.id}" src="${card.imgSrc}" alt="game card">
+            <img class="card" id="cardBack${card.id}" src="${currentCardBack}" alt="game card">
         </div>
     `;
 }
@@ -342,7 +342,10 @@ function handleCardClick(card:Card) {
 function turnCard(card:Card) {
     //turn the card by changeing to the actuall image 
     card.isFlipped = true;
-    card.imgSrc = "";
+    const flippedCard = document.querySelector("#card" + card.id);
+    const cardBack = document.querySelector("#cardBack" + card.id);
+    cardBack?.classList.add("d-none");
+    flippedCard?.classList.remove("d-none");
 }
 
 
