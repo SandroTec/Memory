@@ -312,11 +312,12 @@ function updateCurrentPlayerDisplay() {
 
 
 let firstSelectedCard:Card | null = null;
-
-function handleCardClick(card:Card) {
+let cardsSelected:boolean = false;
+async function handleCardClick(card:Card) {
     //is card found? -> return
     //is card flipped? -> return
     if (card.isFound || card.isFlipped) return
+    if (cardsSelected) return
     //turn card animation
     turnCard(card);
 
@@ -325,7 +326,8 @@ function handleCardClick(card:Card) {
         firstSelectedCard = card;
         return;
     } 
-    if (compareCards(card, firstSelectedCard)) {
+    const isMatch = await compareCards(card, firstSelectedCard);
+    if (isMatch) {
         handlePair(card, firstSelectedCard)
     } else {
         hideCards(card, firstSelectedCard);
@@ -350,16 +352,31 @@ function turnCard(card:Card) {
 
 
 
-function compareCards(card:Card, cardToCompare:Card) {
+async function compareCards(card:Card, cardToCompare:Card):Promise<boolean> {
+    const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
     //compares first safed card  id to the second card pairId
+    cardsSelected = true;
     if (card.pairId == cardToCompare.pairId) {
+        await delay(2000);
         return true;
-    } else return false;
+    } else {
+        await delay(2000);
+        return false;
+    }
 }
 
 
 function hideCards(card:Card, firstSelectedCard:Card) {
     //turns cards back when no pair found
+    const firstFlippedCard = document.querySelector("#card" + firstSelectedCard.id);
+    const firstCardBack = document.querySelector("#cardBack" + firstSelectedCard.id);
+    firstCardBack?.classList.remove("d-none");
+    firstFlippedCard?.classList.add("d-none");
+    card.isFlipped = false;
+    const flippedCard = document.querySelector("#card" + card.id);
+    const cardBack = document.querySelector("#cardBack" + card.id);
+    cardBack?.classList.remove("d-none");
+    flippedCard?.classList.add("d-none");
     card.isFlipped = false;
     firstSelectedCard.isFlipped = false
     return;
@@ -375,14 +392,16 @@ function handlePair(card:Card, firstSelectedCard:Card) {
     playerPairs[currentPlayer]++;
     card.isFound = true;
     firstSelectedCard.isFound = true
+    cardsSelected = false;
     return;
 }
 
-function changePlayer():Player {
+function changePlayer() {
+    cardsSelected = false;
     if (currentPlayer == "orange") {
         currentPlayer = "blue";
     } else currentPlayer = "orange";
-    return currentPlayer;
+    updateCurrentPlayerDisplay();
 }
 
 

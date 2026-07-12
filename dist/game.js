@@ -220,15 +220,19 @@ function updateCurrentPlayerDisplay() {
        <img src="${icon}" alt="player icon">`;
 }
 let firstSelectedCard = null;
-function handleCardClick(card) {
+let cardsSelected = false;
+async function handleCardClick(card) {
     if (card.isFound || card.isFlipped)
+        return;
+    if (cardsSelected)
         return;
     turnCard(card);
     if (firstSelectedCard == null) {
         firstSelectedCard = card;
         return;
     }
-    if (compareCards(card, firstSelectedCard)) {
+    const isMatch = await compareCards(card, firstSelectedCard);
+    if (isMatch) {
         handlePair(card, firstSelectedCard);
     }
     else {
@@ -247,14 +251,28 @@ function turnCard(card) {
     cardBack?.classList.add("d-none");
     flippedCard?.classList.remove("d-none");
 }
-function compareCards(card, cardToCompare) {
+async function compareCards(card, cardToCompare) {
+    const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+    cardsSelected = true;
     if (card.pairId == cardToCompare.pairId) {
+        await delay(2000);
         return true;
     }
-    else
+    else {
+        await delay(2000);
         return false;
+    }
 }
 function hideCards(card, firstSelectedCard) {
+    const firstFlippedCard = document.querySelector("#card" + firstSelectedCard.id);
+    const firstCardBack = document.querySelector("#cardBack" + firstSelectedCard.id);
+    firstCardBack?.classList.remove("d-none");
+    firstFlippedCard?.classList.add("d-none");
+    card.isFlipped = false;
+    const flippedCard = document.querySelector("#card" + card.id);
+    const cardBack = document.querySelector("#cardBack" + card.id);
+    cardBack?.classList.remove("d-none");
+    flippedCard?.classList.add("d-none");
     card.isFlipped = false;
     firstSelectedCard.isFlipped = false;
     return;
@@ -267,15 +285,17 @@ function handlePair(card, firstSelectedCard) {
     playerPairs[currentPlayer]++;
     card.isFound = true;
     firstSelectedCard.isFound = true;
+    cardsSelected = false;
     return;
 }
 function changePlayer() {
+    cardsSelected = false;
     if (currentPlayer == "orange") {
         currentPlayer = "blue";
     }
     else
         currentPlayer = "orange";
-    return currentPlayer;
+    updateCurrentPlayerDisplay();
 }
 function checkGameOver() {
     const possiblePairs = Number(gameSettings.cards) / 2;
