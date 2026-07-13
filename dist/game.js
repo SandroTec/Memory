@@ -192,8 +192,8 @@ function createCard(card) {
     const cardJson = JSON.stringify(card);
     return `
         <div class="card" data-card-id="${card.id}" data-card-object='${cardJson}'>
-            <img class="card d-none" id="card${card.id}" src="${card.imgSrc}" alt="game card">
-            <img class="card" id="cardBack${card.id}" src="${currentCardBack}" alt="game card">
+            <img class="card_img d-none" id="card${card.id}" src="${card.imgSrc}" alt="game card">
+            <img class="card_img" id="cardBack${card.id}" src="${currentCardBack}" alt="game card">
         </div>
     `;
 }
@@ -222,15 +222,21 @@ function updateCurrentPlayerDisplay() {
 let firstSelectedCard = null;
 let cardsSelected = false;
 async function handleCardClick(card) {
-    if (card.isFound || card.isFlipped)
+    if (card.isFlipped)
+        return;
+    if (card.isFound)
         return;
     if (cardsSelected)
         return;
     turnCard(card);
     if (firstSelectedCard == null) {
         firstSelectedCard = card;
+        const firstFlippedCard = document.querySelector(`[data-card-id="${card.id}"]`);
+        firstFlippedCard.style.cursor = "not-allowed";
         return;
     }
+    if (firstSelectedCard.id == card.id)
+        return;
     const isMatch = await compareCards(card, firstSelectedCard);
     if (isMatch) {
         handlePair(card, firstSelectedCard);
@@ -283,6 +289,8 @@ const playerPairs = {
 let scoreDisplayB = document.querySelector("#scoreDisplayB");
 let scoreDisplayO = document.querySelector("#scoreDisplayO");
 function handlePair(card, firstSelectedCard) {
+    const cardElement = document.querySelector(`[data-card-id="${card.id}"]`);
+    const firstCardElement = document.querySelector(`[data-card-id="${firstSelectedCard.id}"]`);
     playerPairs[currentPlayer]++;
     card.isFound = true;
     firstSelectedCard.isFound = true;
@@ -291,6 +299,12 @@ function handlePair(card, firstSelectedCard) {
         return;
     scoreDisplayB.textContent = `${playerPairs.blue}`;
     scoreDisplayO.textContent = `${playerPairs.orange}`;
+    if (!cardElement || !firstCardElement)
+        return;
+    cardElement.setAttribute("data-card-object", JSON.stringify(card));
+    cardElement.style.cursor = "not-allowed";
+    firstCardElement.setAttribute("data-card-object", JSON.stringify(firstSelectedCard));
+    firstCardElement.style.cursor = "not-allowed";
     return;
 }
 function changePlayer() {

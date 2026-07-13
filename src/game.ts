@@ -274,8 +274,8 @@ function createCard(card:Card):string {
     const cardJson = JSON.stringify(card);
     return `
         <div class="card" data-card-id="${card.id}" data-card-object='${cardJson}'>
-            <img class="card d-none" id="card${card.id}" src="${card.imgSrc}" alt="game card">
-            <img class="card" id="cardBack${card.id}" src="${currentCardBack}" alt="game card">
+            <img class="card_img d-none" id="card${card.id}" src="${card.imgSrc}" alt="game card">
+            <img class="card_img" id="cardBack${card.id}" src="${currentCardBack}" alt="game card">
         </div>
     `;
 }
@@ -290,6 +290,7 @@ function initCardEventListeners() {
             if (cardJson) {
                 const cardById = JSON.parse(cardJson) as Card;
                 handleCardClick(cardById);
+                
             }
         });
     });
@@ -313,19 +314,24 @@ function updateCurrentPlayerDisplay() {
 
 let firstSelectedCard:Card | null = null;
 let cardsSelected:boolean = false;
+
 async function handleCardClick(card:Card) {
     //is card found? -> return
     //is card flipped? -> return
-    if (card.isFound || card.isFlipped) return
-    if (cardsSelected) return
+    if (card.isFlipped) return;
+    if (card.isFound) return;
+    if (cardsSelected) return;
     //turn card animation
     turnCard(card);
 
     //first flipped card? 
     if (firstSelectedCard == null) {
         firstSelectedCard = card;
+        const firstFlippedCard = document.querySelector<HTMLDivElement>(`[data-card-id="${card.id}"]`)!;
+        firstFlippedCard.style.cursor = "not-allowed";
         return;
     } 
+    if (firstSelectedCard.id == card.id) return;
     const isMatch = await compareCards(card, firstSelectedCard);
     if (isMatch) {
         handlePair(card, firstSelectedCard)
@@ -389,14 +395,21 @@ let scoreDisplayB = document.querySelector("#scoreDisplayB");
 let scoreDisplayO = document.querySelector("#scoreDisplayO");
 
 function handlePair(card:Card, firstSelectedCard:Card) {
+    const cardElement = document.querySelector<HTMLDivElement>(`[data-card-id="${card.id}"]`);
+    const firstCardElement = document.querySelector<HTMLDivElement>(`[data-card-id="${firstSelectedCard.id}"]`);
     //pairs++ if compareCards is true
     playerPairs[currentPlayer]++;
     card.isFound = true;
-    firstSelectedCard.isFound = true
+    firstSelectedCard.isFound = true;
     cardsSelected = false;
     if (!scoreDisplayB || !scoreDisplayO) return
     scoreDisplayB.textContent = `${playerPairs.blue}`;
     scoreDisplayO.textContent = `${playerPairs.orange}`;
+    if (!cardElement || !firstCardElement) return
+    cardElement.setAttribute("data-card-object", JSON.stringify(card));
+    cardElement.style.cursor = "not-allowed";
+    firstCardElement.setAttribute("data-card-object", JSON.stringify(firstSelectedCard));
+    firstCardElement.style.cursor = "not-allowed";
     return;
 }
 
