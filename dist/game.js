@@ -356,16 +356,24 @@ function endGame() {
 }
 function determineWinner() {
     if (playerPairs.blue > playerPairs.orange) {
-        loadEndscreen("blue");
+        loadEndscreen("blue", playerPairs.blue, playerPairs.orange);
     }
     else if (playerPairs.blue < playerPairs.orange) {
-        loadEndscreen("orange");
+        loadEndscreen("orange", playerPairs.blue, playerPairs.orange);
     }
     else {
-        loadEndscreen("draw");
+        loadEndscreen("draw", playerPairs.blue, playerPairs.orange);
     }
 }
-function loadEndscreen(winningScore) {
+function saveGameWinner(gameWinner, scoreB, scoreO) {
+    sessionStorage.setItem("winning player:", JSON.stringify(gameWinner));
+    sessionStorage.setItem("blue score:", JSON.stringify(scoreB));
+    sessionStorage.setItem("orange score:", JSON.stringify(scoreO));
+    sessionStorage.setItem("theme:", JSON.stringify(gameSettings.theme));
+}
+function loadEndscreen(winner, scoreB, scoreO) {
+    saveGameWinner(winner, scoreB, scoreO);
+    window.location.href = "./endscreen.html";
 }
 function initaliseHeader() {
     initaliseScoreBoard();
