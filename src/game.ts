@@ -483,6 +483,9 @@ function saveGameWinner(gameWinner:string, scoreB:number, scoreO:number) {
     sessionStorage.setItem("blue score:" , JSON.stringify(scoreB));
     sessionStorage.setItem("orange score:" , JSON.stringify(scoreO));
     sessionStorage.setItem("theme:", JSON.stringify(gameSettings.theme));
+    sessionStorage.setItem("playerIconBlue:", JSON.stringify(playerIcons[gameSettings.theme].blue));
+    sessionStorage.setItem("playerIconOrange:", JSON.stringify(playerIcons[gameSettings.theme].orange));
+
 }
 
 
