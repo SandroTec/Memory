@@ -1,8 +1,24 @@
 const startButton = document.querySelector<HTMLButtonElement>("#startButton");
 
+const controllerImage = document.querySelector<HTMLImageElement>("#controllerImage");
+const blackArrow = document.querySelector<HTMLImageElement>("#blackArrow");
+
 startButton?.addEventListener("click", () => {
     window.location.href = "./html/settings.html";
 });
+
+startButton?.addEventListener("mouseenter", () => {
+    if (!controllerImage || !blackArrow || !startButton) return;
+    controllerImage.style.rotate = "-16deg";
+    blackArrow.style.height = "30px";
+    startButton.style.transform  =  "scale(1.2, 1.2)";
+})
+startButton?.addEventListener("mouseleave", () => {
+    if (!controllerImage || !blackArrow || !startButton) return;
+    controllerImage.style.rotate = "0deg";
+    blackArrow.style.height = "20px"
+    startButton.style.transform  =  "scale(1, 1)";
+})
 
 const gameSettings = {
     theme: "code",

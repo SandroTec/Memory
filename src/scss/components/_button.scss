@@ -11,6 +11,11 @@
         width: 344px;
         height: 100px;
         gap: 25px;
+        animation: ease-in-out;
+        &_arrow {
+            width: 50px;
+            height: 20px;
+        }
     }
     &_game-start {
         font-size: 20px;

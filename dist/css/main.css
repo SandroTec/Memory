@@ -46,6 +46,11 @@ p {
   width: 344px;
   height: 100px;
   gap: 25px;
+  animation: ease-in-out;
+}
+.btn_start_arrow {
+  width: 50px;
+  height: 20px;
 }
 .btn_game-start {
   font-size: 20px;
