@@ -51,7 +51,7 @@ themeOptions.forEach((themeOption) => {
         themeD.textContent = selectedTheme;
         themeD.textContent = themeD.textContent.toUpperCase()
         gameSettings.theme = selectedTheme;
-        updateThemeImage()
+        updateThemeImage(selectedTheme)
         const chosenIndicator =
             themeOption.querySelector<HTMLImageElement>(".choose-indicator");
         
@@ -59,6 +59,26 @@ themeOptions.forEach((themeOption) => {
         if (chosenIndicator) {
             updateIndicator(chosenIndicator, themeContainer);
         }
+    });
+});
+
+themeOptions.forEach((themeOption) => {
+    themeOption.addEventListener("mouseenter", () => {
+        const selectedTheme = themeOption.dataset.theme;
+
+        if (!selectedTheme || !themeContainer) return;;
+        updateThemeImage(selectedTheme)
+
+    });
+});
+
+themeOptions.forEach((themeOption) => {
+    themeOption.addEventListener("mouseleave", () => {
+        const selectedTheme = gameSettings.theme;
+
+        if (!selectedTheme || !themeContainer) return;;
+        updateThemeImage(selectedTheme)
+
     });
 });
 
@@ -115,9 +135,9 @@ function updateIndicator(
     chosenIndicator.classList.remove("d-none");
 }
 
-function updateThemeImage() {
+function updateThemeImage(selectedTheme:string) {
     if (!themeImg) return;
-    switch (gameSettings.theme) {
+    switch (selectedTheme) {
             case "gaming":
                 themeImg.src = "../../src/assets/img/settings_page/Theme Visual_Gaming.png";
                 break;
@@ -145,11 +165,19 @@ function saveGameSettings() {
 
 const gameStartButton = document.querySelector<HTMLButtonElement>("#startGame");
 
+
 gameStartButton?.addEventListener("click", () => {
     saveGameSettings();
     window.location.href = "./game.html";
 });
 
-
+gameStartButton?.addEventListener("mouseenter", () => {
+    if (!gameStartButton) return
+    gameStartButton.style.transform =  "scale(1.2, 1.2)"
+});
+gameStartButton?.addEventListener("mouseleave", () => {
+    if (!gameStartButton) return
+    gameStartButton.style.transform =  "scale(1, 1)"
+});
 
 export {};
