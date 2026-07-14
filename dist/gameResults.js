@@ -10,6 +10,7 @@ const scoreIconO = document.querySelector("#scoreIconO");
 const scoreIconB = document.querySelector("#scoreIconB");
 let endScoreDisplayB = document.querySelector("#endScoreDisplayB");
 let endScoreDisplayO = document.querySelector("#endScoreDisplayO");
+const winnerDisplay = document.querySelector("#winnerDisplay");
 if (endscreenBody) {
     endscreenBody.classList.add(`theme-${theme}`);
 }
@@ -25,8 +26,14 @@ function initaliseScores() {
     endScoreDisplayB.textContent = `${scoreB}`;
     endScoreDisplayO.textContent = `${scoreO}`;
 }
+function initaliseWinner() {
+    if (!winnerDisplay || !winner)
+        return;
+    winnerDisplay.innerHTML = winner;
+}
 function init() {
     initaliseScoreBoard();
     initaliseScores();
+    initaliseWinner();
 }
 init();
