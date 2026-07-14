@@ -442,6 +442,9 @@ function initaliseScoreBoard() {
 const exitGameBtnImage = document.querySelector<HTMLImageElement>("#exitBtnImage");
 
 const exitGameBtn = document.querySelector<HTMLButtonElement>("#exitBtn");
+const exitDialog = document.querySelector<HTMLDialogElement>("#exitDialog");
+const confirmExitBtn = document.querySelector("#confirmExitBtn");
+const cancelExitBtn = document.querySelector("#cancelExitBtn");
 
 function initaliseExitButton() {
     const exitBtn = exitButtons[gameSettings.theme]
@@ -456,9 +459,20 @@ function initaliseExitButton() {
 }
 
 exitGameBtn?.addEventListener("click", () => {
-    endGame();
+    if(!exitDialog) return;
+    exitDialog.showModal();
 })
 
+confirmExitBtn?.addEventListener("click", () => {
+    if(!exitDialog) return;
+    exitDialog.close();
+    endGame()
+})
+
+cancelExitBtn?.addEventListener("click", () => {
+    if(!exitDialog) return;
+    exitDialog.close();
+})
 
 function endGame() {
     //function to end the game and go back to settings.

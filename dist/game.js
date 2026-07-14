@@ -336,6 +336,9 @@ function initaliseScoreBoard() {
 }
 const exitGameBtnImage = document.querySelector("#exitBtnImage");
 const exitGameBtn = document.querySelector("#exitBtn");
+const exitDialog = document.querySelector("#exitDialog");
+const confirmExitBtn = document.querySelector("#confirmExitBtn");
+const cancelExitBtn = document.querySelector("#cancelExitBtn");
 function initaliseExitButton() {
     const exitBtn = exitButtons[gameSettings.theme];
     if (!exitGameBtnImage || !exitGameBtn)
@@ -349,7 +352,20 @@ function initaliseExitButton() {
     });
 }
 exitGameBtn?.addEventListener("click", () => {
+    if (!exitDialog)
+        return;
+    exitDialog.showModal();
+});
+confirmExitBtn?.addEventListener("click", () => {
+    if (!exitDialog)
+        return;
+    exitDialog.close();
     endGame();
+});
+cancelExitBtn?.addEventListener("click", () => {
+    if (!exitDialog)
+        return;
+    exitDialog.close();
 });
 function endGame() {
     window.location.href = "./settings.html";
