@@ -3,6 +3,7 @@
 .btn {
     @include mx.flex-center;
     cursor: pointer;
+    
     &_start {
         font-size: 40px;
         font-weight: bold;
@@ -22,4 +23,10 @@
     &_transparent {
         background: transparent;
     }
+
+    &_exit {
+        width: 200px;
+        height: 74px;
+    }
+    
 }

@@ -57,6 +57,10 @@ p {
 .btn_transparent {
   background: transparent;
 }
+.btn_exit {
+  width: 200px;
+  height: 74px;
+}
 
 li {
   cursor: pointer;
