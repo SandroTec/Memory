@@ -15,6 +15,43 @@ let endScoreDisplayO = document.querySelector<HTMLParagraphElement>("#endScoreDi
 
 let winnerDisplay = document.querySelector("#winnerDisplay");
 
+
+//code-theme:
+const codeFont = "";
+
+const codeWinnerImgB = "";
+
+const codeWinnerImgO = "";
+
+const winnerImagesCode = {
+    blue: codeWinnerImgB,
+    orange: codeWinnerImgO
+} 
+
+//gaming-theme:
+const gamingFont = "";
+
+const gamingWinnerImgB = "";
+
+const gamingWinnerImgO = "";
+
+const winnerImagesGaming = {
+    blue: gamingWinnerImgB,
+    orange: gamingWinnerImgO
+} 
+
+//da-theme:
+const daFont = "";
+
+const daWinnerImgB = "";
+
+const daWinnerImgO = "";
+
+const winnerImagesDa = {
+    blue: daWinnerImgB,
+    orange: daWinnerImgO
+} 
+
 if (endscreenBody) {
     endscreenBody.classList.add(`theme-${theme}`);
 }
