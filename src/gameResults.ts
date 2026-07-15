@@ -19,9 +19,9 @@ let winnerDisplay = document.querySelector("#winnerDisplay");
 //code-theme:
 const codeFont = "";
 
-const codeWinnerImgB = "";
+const codeWinnerImgB = "../../src/assets/img/game_page/code-theme/endscreen/chess_pawn_blue.png";
 
-const codeWinnerImgO = "";
+const codeWinnerImgO = "../../src/assets/img/game_page/code-theme/endscreen/chess_pawn_orange.png";
 
 const winnerImagesCode = {
     blue: codeWinnerImgB,
@@ -31,9 +31,9 @@ const winnerImagesCode = {
 //gaming-theme:
 const gamingFont = "";
 
-const gamingWinnerImgB = "";
+const gamingWinnerImgB = "../../src/assets/img/game_page/gaming-theme/endscreen/winner_icon.png";
 
-const gamingWinnerImgO = "";
+const gamingWinnerImgO = "../../src/assets/img/game_page/gaming-theme/endscreen/winner_icon.png";
 
 const winnerImagesGaming = {
     blue: gamingWinnerImgB,
