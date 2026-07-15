@@ -1,5 +1,5 @@
 "use strict";
-const winner = JSON.parse(sessionStorage.getItem("winningPlayer:") || '""');
+const winner = JSON.parse(sessionStorage.getItem("winning player:") || '""');
 const scoreB = JSON.parse(sessionStorage.getItem("blue score:") || "0");
 const scoreO = JSON.parse(sessionStorage.getItem("orange score:") || "0");
 const theme = JSON.parse(sessionStorage.getItem("theme:") || "code");
@@ -10,7 +10,7 @@ const scoreIconO = document.querySelector("#scoreIconO");
 const scoreIconB = document.querySelector("#scoreIconB");
 let endScoreDisplayB = document.querySelector("#endScoreDisplayB");
 let endScoreDisplayO = document.querySelector("#endScoreDisplayO");
-const winnerDisplay = document.querySelector("#winnerDisplay");
+let winnerDisplay = document.querySelector("#winnerDisplay");
 if (endscreenBody) {
     endscreenBody.classList.add(`theme-${theme}`);
 }
@@ -29,7 +29,7 @@ function initaliseScores() {
 function initaliseWinner() {
     if (!winnerDisplay || !winner)
         return;
-    winnerDisplay.innerHTML = winner;
+    winnerDisplay.textContent = `${winner}`;
 }
 function init() {
     initaliseScoreBoard();
