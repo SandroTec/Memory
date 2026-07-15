@@ -269,12 +269,16 @@ function placeCards() {
 
     initCardEventListeners();
 }
-function createCard(card:Card):string {
+
+function createCard(card: Card): string {
     const cardJson = JSON.stringify(card);
+
     return `
         <div class="card" data-card-id="${card.id}" data-card-object='${cardJson}'>
-            <img class="card_img d-none" id="card${card.id}" src="${card.imgSrc}" alt="game card">
-            <img class="card_img" id="cardBack${card.id}" src="${currentCardBack}" alt="game card">
+            <div class="card_inner">
+                <img class="card_img card_front" src="${card.imgSrc}" alt="game card">
+                <img class="card_img card_back" src="${currentCardBack}" alt="game card">
+            </div>
         </div>
     `;
 }
@@ -346,15 +350,11 @@ async function handleCardClick(card:Card) {
     
 }
 
-function turnCard(card:Card) {
-    //turn the card by changeing to the actuall image 
+function turnCard(card: Card) {
     card.isFlipped = true;
-    const flippedCard = document.querySelector("#card" + card.id);
-    const cardBack = document.querySelector("#cardBack" + card.id);
-    cardBack?.classList.add("d-none");
-    flippedCard?.classList.remove("d-none");
+    const cardElement = document.querySelector(`[data-card-id="${card.id}"]`);
+    cardElement?.classList.add("is-flipped");
 }
-
 
 
 async function compareCards(card:Card, cardToCompare:Card):Promise<boolean> {
@@ -370,19 +370,13 @@ async function compareCards(card:Card, cardToCompare:Card):Promise<boolean> {
 }
 
 
-function hideCards(card:Card, firstSelectedCard:Card) {
-    //turns cards back when no pair found
-    const firstFlippedCard = document.querySelector("#card" + firstSelectedCard.id);
-    const firstCardBack = document.querySelector("#cardBack" + firstSelectedCard.id);
-    firstCardBack?.classList.remove("d-none");
-    firstFlippedCard?.classList.add("d-none");
+function hideCards(card: Card, firstSelectedCard: Card) {
+
+    document.querySelector(`[data-card-id="${card.id}"]`)?.classList.remove("is-flipped");
+    document.querySelector(`[data-card-id="${firstSelectedCard.id}"]`)?.classList.remove("is-flipped");
+
     card.isFlipped = false;
-    const flippedCard = document.querySelector("#card" + card.id);
-    const cardBack = document.querySelector("#cardBack" + card.id);
-    cardBack?.classList.remove("d-none");
-    flippedCard?.classList.add("d-none");
-    card.isFlipped = false;
-    firstSelectedCard.isFlipped = false
+    firstSelectedCard.isFlipped = false;
     return;
 }
 
