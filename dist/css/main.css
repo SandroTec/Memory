@@ -112,8 +112,8 @@ li {
   gap: 40px;
 }
 .container_center {
-  height: 100%;
-  width: 80%;
+  height: auto;
+  width: auto;
   color: rgb(255, 255, 255);
   gap: 40px;
   display: flex;
