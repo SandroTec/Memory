@@ -68,11 +68,12 @@ p {
   width: 344px;
   height: 100px;
   gap: 25px;
-  animation: ease-in-out;
+  transition: transform 0.45s ease;
 }
 .btn_start_arrow {
   width: 50px;
   height: 20px;
+  transition: height 0.45s ease;
 }
 .btn_game-start {
   font-size: 20px;
@@ -81,6 +82,7 @@ p {
   width: 126px;
   height: 53px;
   margin: 0 10px 0 25px;
+  transition: transform 0.45s ease;
 }
 .btn_transparent {
   background: transparent;
@@ -153,6 +155,10 @@ li {
   gap: 40px;
 }
 
+#controllerImage {
+  transition: rotate 0.45s ease;
+}
+
 .start-page {
   height: 100vh;
   background: rgb(47, 49, 49);
@@ -219,7 +225,7 @@ header {
     transform: rotate(3deg);
   }
 }
-[data-card-id]:hover [id^=cardBack]:not(.d-none) {
+.card:hover:not(.is-flipped) .card_inner {
   animation: wiggle 0.45s ease-in-out infinite;
 }
 

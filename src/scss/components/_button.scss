@@ -11,10 +11,11 @@
         width: 344px;
         height: 100px;
         gap: 25px;
-        animation: ease-in-out;
+        transition: transform 0.45s ease;
         &_arrow {
             width: 50px;
             height: 20px;
+            transition: height 0.45s ease;
         }
     }
     &_game-start {
@@ -24,9 +25,8 @@
         width: 126px;
         height: 53px;
         margin: 0 10px 0 25px;
+        transition: transform 0.45s ease;
     }
-
-    
 
     &_transparent {
         background: transparent;

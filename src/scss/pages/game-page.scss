@@ -35,9 +35,6 @@ header {
 }
 
 
-[data-card-id]:hover {
-  
-  [id^="cardBack"]:not(.d-none) {
+.card:hover:not(.is-flipped) .card_inner {
     animation: wiggle 0.45s ease-in-out infinite;
-  }
 }
