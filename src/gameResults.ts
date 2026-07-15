@@ -14,7 +14,7 @@ let endScoreDisplayB = document.querySelector<HTMLParagraphElement>("#endScoreDi
 let endScoreDisplayO = document.querySelector<HTMLParagraphElement>("#endScoreDisplayO");
 
 let winnerDisplay = document.querySelector("#winnerDisplay");
-
+let helpMsg = document.querySelector("#helpMsg");
 
 //code-theme:
 const codeFont = "";
@@ -70,6 +70,12 @@ function initaliseScores() {
 
 function initaliseWinner() {
     if(!winnerDisplay || !winner) return;
+    if(!helpMsg) return;
+    if (winner == "draw") {
+        helpMsg.textContent = "It's a"
+    } else {
+        helpMsg.textContent = "The winner is"
+    }
     
     winnerDisplay.textContent =  `${winner}`;
 }

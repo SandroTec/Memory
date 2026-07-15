@@ -11,6 +11,28 @@ const scoreIconB = document.querySelector("#scoreIconB");
 let endScoreDisplayB = document.querySelector("#endScoreDisplayB");
 let endScoreDisplayO = document.querySelector("#endScoreDisplayO");
 let winnerDisplay = document.querySelector("#winnerDisplay");
+let helpMsg = document.querySelector("#helpMsg");
+const codeFont = "";
+const codeWinnerImgB = "../../src/assets/img/game_page/code-theme/endscreen/chess_pawn_blue.png";
+const codeWinnerImgO = "../../src/assets/img/game_page/code-theme/endscreen/chess_pawn_orange.png";
+const winnerImagesCode = {
+    blue: codeWinnerImgB,
+    orange: codeWinnerImgO
+};
+const gamingFont = "";
+const gamingWinnerImgB = "../../src/assets/img/game_page/gaming-theme/endscreen/winner_icon.png";
+const gamingWinnerImgO = "../../src/assets/img/game_page/gaming-theme/endscreen/winner_icon.png";
+const winnerImagesGaming = {
+    blue: gamingWinnerImgB,
+    orange: gamingWinnerImgO
+};
+const daFont = "";
+const daWinnerImgB = "";
+const daWinnerImgO = "";
+const winnerImagesDa = {
+    blue: daWinnerImgB,
+    orange: daWinnerImgO
+};
 if (endscreenBody) {
     endscreenBody.classList.add(`theme-${theme}`);
 }
@@ -29,6 +51,14 @@ function initaliseScores() {
 function initaliseWinner() {
     if (!winnerDisplay || !winner)
         return;
+    if (!helpMsg)
+        return;
+    if (winner == "draw") {
+        helpMsg.textContent = "It's a";
+    }
+    else {
+        helpMsg.textContent = "The winner is";
+    }
     winnerDisplay.textContent = `${winner}`;
 }
 function init() {
