@@ -85,6 +85,10 @@ const currentWinnerThemeImage = themeImages[theme];
 if (endscreenBody) {
     endscreenBody.classList.add(`theme-${theme}`);
 }
+const scoreDisplayContainer = document.querySelector("#scoreDisplayContainer");
+if (scoreDisplayContainer) {
+    scoreDisplayContainer.classList.add(`score-container-${theme}`);
+}
 
 function initaliseScoreBoard() {
     if(!scoreIconB || !scoreIconO) return;
@@ -95,7 +99,10 @@ function initaliseScoreBoard() {
 function initaliseScores() {
     if( !endScoreDisplayB || !endScoreDisplayO) return;
     endScoreDisplayB.textContent = `${scoreB}`;
+    endScoreDisplayB.classList.add("blue");
     endScoreDisplayO.textContent = `${scoreO}`;
+    endScoreDisplayO.classList.add("orange");
+
 }
 
 function initaliseWinner() {

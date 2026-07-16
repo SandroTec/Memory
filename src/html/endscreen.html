@@ -10,7 +10,7 @@
 </head>
 <body id="gameBody">
     <header>
-        <img id="codeKonfettiImage" class="d-none" src="../../src/assets/img/game_page/code-theme/endscreen/Confetti.png" alt="">
+        <img id="codeKonfettiImage" class="endscreen-show-result d-none" src="../../src/assets/img/game_page/code-theme/endscreen/Confetti.png" alt="">
     </header>
 
    
@@ -18,7 +18,7 @@
     <div class="container container_center">
         <h1>GAME OVER</h1>
         <p>Final score</p>
-        <div class="container">
+        <div id="scoreDisplayContainer" class="container container_score-board">
             <div class="container">
                 <img id="scoreIconB" src="" alt="Blue player icon">
                 <p id="endScoreDisplayB"></p>
@@ -28,10 +28,10 @@
                 <p id="endScoreDisplayO"></p>
             </div>
         </div>
-        <img id="winnerImageDisplay" src="" alt="">
+        <img class="endscreen-show-result" id="winnerImageDisplay" src="" alt="">
     </div>
 
-    <div class="container container_center container_game-result">
+    <div class="container container_center container_game-result endscreen-show-result">
         <h2 id="helpMsg"></h2>
         <h1 id="winnerDisplay"></h1>
         <img id="winnerImage" src="" alt="">

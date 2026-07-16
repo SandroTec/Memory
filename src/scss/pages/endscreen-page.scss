@@ -1,0 +1,31 @@
+@use '../abstract/mixins' as mx;
+
+
+.score-container-code {
+    background: rgb(65, 86, 82);
+}
+
+.score-container-gaming {
+    background: rgb(255, 255, 255);
+}
+
+.score-container-da {
+    background: rgb(255, 255, 255);
+}
+
+
+@keyframes slide-in {
+  from {
+    transform: translateY(250px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.endscreen-show-result:not(.d-none) {
+  animation: slide-in 0.85s ease-out forwards;
+}

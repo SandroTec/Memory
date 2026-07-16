@@ -24,12 +24,10 @@ p {
 
 .orange {
   color: orange;
-  font-size: 68px;
 }
 
 .blue {
-  color: blue;
-  font-size: 68px;
+  color: rgb(43, 177, 255);
 }
 
 .card {
@@ -147,6 +145,10 @@ li {
 .container_game-settings {
   width: 800px;
 }
+.container_score-board {
+  padding: 20px;
+  gap: 20px;
+}
 
 .choosing-container {
   display: flex;
@@ -227,7 +229,6 @@ header {
   background: rgb(48, 49, 49);
 }
 
-/* 1. Die Wackel-Animation definieren */
 @keyframes wiggle {
   0%, 100% {
     transform: rotate(0deg);
@@ -241,6 +242,32 @@ header {
 }
 .card:hover:not(.is-flipped) .card_inner {
   animation: wiggle 0.45s ease-in-out infinite;
+}
+
+.score-container-code {
+  background: rgb(65, 86, 82);
+}
+
+.score-container-gaming {
+  background: rgb(255, 255, 255);
+}
+
+.score-container-da {
+  background: rgb(255, 255, 255);
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateY(250px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+.endscreen-show-result:not(.d-none) {
+  animation: slide-in 0.85s ease-out forwards;
 }
 
 body {
