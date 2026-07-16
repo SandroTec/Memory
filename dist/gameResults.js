@@ -12,6 +12,7 @@ let endScoreDisplayB = document.querySelector("#endScoreDisplayB");
 let endScoreDisplayO = document.querySelector("#endScoreDisplayO");
 let winnerDisplay = document.querySelector("#winnerDisplay");
 let helpMsg = document.querySelector("#helpMsg");
+let winnerImageDisplay = document.querySelector("#winnerImageDisplay");
 const codeFont = "";
 const codeWinnerImgB = "../../src/assets/img/game_page/code-theme/endscreen/chess_pawn_blue.png";
 const codeWinnerImgO = "../../src/assets/img/game_page/code-theme/endscreen/chess_pawn_orange.png";
@@ -67,11 +68,25 @@ function initaliseWinner() {
     }
     winnerDisplay.textContent = `${winner}`;
 }
+const themeImages = {
+    code: winnerImagesCode,
+    gaming: winnerImagesGaming,
+    da: winnerImagesDa
+};
+const currentWinnerThemeImage = themeImages[theme];
+function initaliseWinnerImage() {
+    if (winner == "draw")
+        return;
+    if (!winnerImageDisplay)
+        return;
+    winnerImageDisplay.src = currentWinnerThemeImage[winner];
+}
 async function init() {
     const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
     initaliseScoreBoard();
     initaliseScores();
     await delay(2000);
+    initaliseWinnerImage();
     initaliseWinner();
 }
 init();

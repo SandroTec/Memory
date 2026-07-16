@@ -1,7 +1,10 @@
-const winner = JSON.parse(sessionStorage.getItem("winning player:") || '""');
+type Theme = "code" | "gaming" | "da";
+type Winner = "blue" | "orange" | "draw";
+
+const winner:Winner = JSON.parse(sessionStorage.getItem("winning player:") || '""');
 const scoreB = JSON.parse(sessionStorage.getItem("blue score:") || "0");
 const scoreO= JSON.parse(sessionStorage.getItem("orange score:") || "0");
-const theme = JSON.parse(sessionStorage.getItem("theme:") || "code");
+const theme:Theme = JSON.parse(sessionStorage.getItem("theme:") || "code");
 const playerIconBlue = JSON.parse(sessionStorage.getItem("playerIconBlue:") || '""');
 const playerIconOrange = JSON.parse(sessionStorage.getItem("playerIconOrange:") || '""');
 
@@ -15,6 +18,8 @@ let endScoreDisplayO = document.querySelector<HTMLParagraphElement>("#endScoreDi
 
 let winnerDisplay = document.querySelector("#winnerDisplay");
 let helpMsg = document.querySelector("#helpMsg");
+let winnerImageDisplay = document.querySelector<HTMLImageElement>("#winnerImageDisplay");
+
 
 //code-theme:
 const codeFont = "";
@@ -67,6 +72,7 @@ function initaliseScores() {
     endScoreDisplayB.textContent = `${scoreB}`;
     endScoreDisplayO.textContent = `${scoreO}`;
 }
+
 function initaliseWinner() {
     if(!winnerDisplay || !winner) return;
     if(!helpMsg) return;
@@ -83,11 +89,27 @@ function initaliseWinner() {
     winnerDisplay.textContent =  `${winner}`;
 }
 
+const themeImages = {
+    code: winnerImagesCode,
+    gaming: winnerImagesGaming,
+    da: winnerImagesDa
+};
+
+const currentWinnerThemeImage = themeImages[theme];
+
+
+function initaliseWinnerImage() {
+    if(winner == "draw") return;
+    if(!winnerImageDisplay) return;
+    winnerImageDisplay.src = currentWinnerThemeImage[winner]
+}
+
 async function init() {
     const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
     initaliseScoreBoard();
     initaliseScores();
     await delay(2000);
+    initaliseWinnerImage();
     initaliseWinner();
 }
 
