@@ -13,10 +13,14 @@ let endScoreDisplayO = document.querySelector("#endScoreDisplayO");
 let winnerDisplay = document.querySelector("#winnerDisplay");
 let helpMsg = document.querySelector("#helpMsg");
 let winnerImageDisplay = document.querySelector("#winnerImageDisplay");
+const homeButton = document.querySelector("#homeButton");
+let buttonImage = document.querySelector("#buttonImage");
+const codeKonfettiImage = document.querySelector("#codeKonfettiImage");
 const codeFont = "";
 const codeWinnerImgB = "../../src/assets/img/game_page/code-theme/endscreen/chess_pawn_blue.png";
 const codeDrawImage = "../../src/assets/img/game_page/code-theme/endscreen/draw_icon.png";
 const codeWinnerImgO = "../../src/assets/img/game_page/code-theme/endscreen/chess_pawn_orange.png";
+const codeHomeButtonImage = "../../src/assets/img/game_page/code-theme/endscreen/home_button.png";
 const winnerImagesCode = {
     blue: codeWinnerImgB,
     orange: codeWinnerImgO,
@@ -26,6 +30,7 @@ const gamingFont = "";
 const gamingWinnerImgB = "../../src/assets/img/game_page/gaming-theme/endscreen/winner_icon.png";
 const gamingDrawImage = "../../src/assets/img/game_page/gaming-theme/endscreen/draw_icon.png";
 const gamingWinnerImgO = "../../src/assets/img/game_page/gaming-theme/endscreen/winner_icon.png";
+const gamingHomeButtonImage = "../../src/assets/img/game_page/gaming-theme/endscreen/home_button.png";
 const winnerImagesGaming = {
     blue: gamingWinnerImgB,
     orange: gamingWinnerImgO,
@@ -35,11 +40,18 @@ const daFont = "";
 const daWinnerImgB = "../../src/assets/img/game_page/da-theme/endscreen/chess_pawn_blue.png";
 const daDrawImage = "../../src/assets/img/game_page/da-theme/endscreen/draw_icon.png";
 const daWinnerImgO = "../../src/assets/img/game_page/da-theme/endscreen/chess_pawn_orange.png";
+const daHomeButtonImage = "../../src/assets/img/game_page/da-theme/endscreen/home_button.png";
 const winnerImagesDa = {
     blue: daWinnerImgB,
     orange: daWinnerImgO,
     draw: daDrawImage
 };
+const themeImages = {
+    code: winnerImagesCode,
+    gaming: winnerImagesGaming,
+    da: winnerImagesDa
+};
+const currentWinnerThemeImage = themeImages[theme];
 if (endscreenBody) {
     endscreenBody.classList.add(`theme-${theme}`);
 }
@@ -74,16 +86,38 @@ function initaliseWinner() {
     }
     winnerDisplay.textContent = `${winner}`;
 }
-const themeImages = {
-    code: winnerImagesCode,
-    gaming: winnerImagesGaming,
-    da: winnerImagesDa
-};
-const currentWinnerThemeImage = themeImages[theme];
 function initaliseWinnerImage() {
     if (!winnerImageDisplay)
         return;
     winnerImageDisplay.src = currentWinnerThemeImage[winner];
+    if (theme == "code" && winner != "draw") {
+        codeKonfettiImage?.classList.remove("d-none");
+    }
+}
+function initaliseHomeBtn() {
+    if (!buttonImage)
+        return;
+    switch (theme) {
+        case "code":
+            buttonImage.src = codeHomeButtonImage;
+            break;
+        case "gaming":
+            buttonImage.src = gamingHomeButtonImage;
+            break;
+        case "da":
+            buttonImage.src = daHomeButtonImage;
+            break;
+        default:
+            buttonImage.src = codeHomeButtonImage;
+            break;
+    }
+}
+homeButton?.addEventListener("click", () => {
+    console.log("clicked home btn");
+    endGame();
+});
+function endGame() {
+    window.location.href = "./settings.html";
 }
 async function init() {
     const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
@@ -92,5 +126,6 @@ async function init() {
     await delay(2000);
     initaliseWinnerImage();
     initaliseWinner();
+    initaliseHomeBtn();
 }
 init();
