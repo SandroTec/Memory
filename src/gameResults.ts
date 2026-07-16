@@ -25,36 +25,39 @@ let winnerImageDisplay = document.querySelector<HTMLImageElement>("#winnerImageD
 const codeFont = "";
 
 const codeWinnerImgB = "../../src/assets/img/game_page/code-theme/endscreen/chess_pawn_blue.png";
-
+const codeDrawImage = "../../src/assets/img/game_page/code-theme/endscreen/draw_icon.png";
 const codeWinnerImgO = "../../src/assets/img/game_page/code-theme/endscreen/chess_pawn_orange.png";
 
 const winnerImagesCode = {
     blue: codeWinnerImgB,
-    orange: codeWinnerImgO
+    orange: codeWinnerImgO,
+    draw: codeDrawImage
 } 
 
 //gaming-theme:
 const gamingFont = "";
 
 const gamingWinnerImgB = "../../src/assets/img/game_page/gaming-theme/endscreen/winner_icon.png";
-
+const gamingDrawImage = "../../src/assets/img/game_page/gaming-theme/endscreen/draw_icon.png";
 const gamingWinnerImgO = "../../src/assets/img/game_page/gaming-theme/endscreen/winner_icon.png";
 
 const winnerImagesGaming = {
     blue: gamingWinnerImgB,
-    orange: gamingWinnerImgO
+    orange: gamingWinnerImgO,
+    draw: gamingDrawImage
 } 
 
 //da-theme:
 const daFont = "";
 
 const daWinnerImgB = "../../src/assets/img/game_page/da-theme/endscreen/chess_pawn_blue.png";
-
+const daDrawImage = "../../src/assets/img/game_page/da-theme/endscreen/draw_icon.png";
 const daWinnerImgO = "../../src/assets/img/game_page/da-theme/endscreen/chess_pawn_orange.png";
 
 const winnerImagesDa = {
     blue: daWinnerImgB,
-    orange: daWinnerImgO
+    orange: daWinnerImgO,
+    draw: daDrawImage
 } 
 
 if (endscreenBody) {
@@ -99,7 +102,6 @@ const currentWinnerThemeImage = themeImages[theme];
 
 
 function initaliseWinnerImage() {
-    if(winner == "draw") return;
     if(!winnerImageDisplay) return;
     winnerImageDisplay.src = currentWinnerThemeImage[winner]
 }
