@@ -22,6 +22,16 @@ p {
   padding: 5px;
 }
 
+.orange {
+  color: orange;
+  font-size: 68px;
+}
+
+.blue {
+  color: blue;
+  font-size: 68px;
+}
+
 .card {
   width: 120px;
   height: 120px;
@@ -157,6 +167,10 @@ li {
 
 #controllerImage {
   transition: rotate 0.45s ease;
+}
+
+#codeImage {
+  width: 80%;
 }
 
 .start-page {

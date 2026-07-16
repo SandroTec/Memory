@@ -27,8 +27,8 @@ const winnerImagesGaming = {
     orange: gamingWinnerImgO
 };
 const daFont = "";
-const daWinnerImgB = "";
-const daWinnerImgO = "";
+const daWinnerImgB = "../../src/assets/img/game_page/da-theme/endscreen/chess_pawn_blue.png";
+const daWinnerImgO = "../../src/assets/img/game_page/da-theme/endscreen/chess_pawn_orange.png";
 const winnerImagesDa = {
     blue: daWinnerImgB,
     orange: daWinnerImgO
@@ -54,16 +54,24 @@ function initaliseWinner() {
     if (!helpMsg)
         return;
     if (winner == "draw") {
-        helpMsg.textContent = "It's a";
+        helpMsg.textContent = "it's a";
     }
     else {
-        helpMsg.textContent = "The winner is";
+        helpMsg.textContent = "the winner is";
+    }
+    if (winner == "orange") {
+        winnerDisplay.classList.add("orange");
+    }
+    else if (winner == "blue") {
+        winnerDisplay.classList.add("blue");
     }
     winnerDisplay.textContent = `${winner}`;
 }
-function init() {
+async function init() {
+    const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
     initaliseScoreBoard();
     initaliseScores();
+    await delay(2000);
     initaliseWinner();
 }
 init();
