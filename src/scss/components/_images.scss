@@ -7,3 +7,12 @@
 #codeKonfettiImage {
     width: 80%;
 }
+
+.image-gray {
+  filter: grayscale(100%);
+  transition: filter 0.3s ease;
+
+  &:hover {
+    filter: none;
+  }
+}

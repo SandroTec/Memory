@@ -143,11 +143,31 @@ li {
   background-color: rgb(246, 246, 246);
 }
 .container_game-settings {
-  width: 800px;
+  width: auto;
+}
+@media (max-width: 950px) {
+  .container_game-settings p {
+    font-size: 18px;
+  }
+  .container_game-settings button {
+    font-size: 16px;
+    padding: 4px;
+  }
+}
+@media (max-width: 600px) {
+  .container_game-settings p {
+    font-size: 12px;
+  }
 }
 .container_score-board {
   padding: 20px;
   gap: 20px;
+}
+@media (max-width: 950px) {
+  .container_resp-950px {
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 .choosing-container {
@@ -166,6 +186,11 @@ li {
   align-items: flex-end !important;
   gap: 40px;
 }
+@media (max-width: 950px) {
+  .visability-container {
+    align-items: center !important;
+  }
+}
 
 #controllerImage {
   transition: rotate 0.45s ease;
@@ -173,6 +198,14 @@ li {
 
 #codeKonfettiImage {
   width: 80%;
+}
+
+.image-gray {
+  filter: grayscale(100%);
+  transition: filter 0.3s ease;
+}
+.image-gray:hover {
+  filter: none;
 }
 
 .start-page {

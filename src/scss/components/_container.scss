@@ -33,12 +33,38 @@
     }
 
     &_game-settings {
-        width: 800px;
+        width: auto;
+        @media (max-width: 950px) {
+
+            p {
+                font-size: 18px;
+            }
+
+            button {
+                font-size: 16px;
+                padding: 4px;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            p {
+                font-size: 12px;
+            }
+        }
     }
+        
     
     &_score-board {
         padding: 20px;
         gap: 20px;
+    }
+
+    &_resp-950px {
+        @media (max-width: 950px) {
+            @include mx.fd-column;
+        }
+        
     }
 }
 
@@ -52,7 +78,11 @@
     @include mx.flex-center;
     @include mx.fd-column; 
     align-items: flex-end !important;
-    gap: 40px
+    gap: 40px;
+
+    @media (max-width: 950px) {
+        align-items: center !important;
+    }
 } 
 
 
