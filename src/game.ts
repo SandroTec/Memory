@@ -266,6 +266,9 @@ function placeCards() {
     });
     
     playGround.innerHTML = htmlBuffer;
+    if(gameSettings.cards == "36") {
+        playGround.classList.add("grid6x");
+    } else {playGround.classList.add("grid4x");}
 
     initCardEventListeners();
 }

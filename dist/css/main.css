@@ -283,6 +283,13 @@ body {
   align-items: center;
   justify-content: center;
   display: grid;
+}
+
+.grid6x {
+  grid-template-columns: auto auto auto auto auto auto;
+}
+
+.grid4x {
   grid-template-columns: auto auto auto auto;
 }
 
