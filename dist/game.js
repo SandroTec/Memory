@@ -24,6 +24,8 @@ const codePlayerIcons = {
 };
 const codeExitDefaultBtn = "../../src/assets/img/game_page/code-theme/header/exit_game_default.png";
 const codeExitHoverBtn = "../../src/assets/img/game_page/code-theme/header/exit_game_hover.png";
+const codeBackToGameDefault = "../../src/assets/img/game_page/code-theme/header/back_to_game.png";
+const codeBackToGameHover = "../../src/assets/img/game_page/code-theme/header/back_to_game_hover.png";
 const codeExitBtns = {
     default: codeExitDefaultBtn,
     hover: codeExitHoverBtn
@@ -57,6 +59,8 @@ const gamingPlayerIcons = {
 };
 const gamingExitDefaultBtn = "../../src/assets/img/game_page/gaming-theme/header/exit_game_default.png";
 const gamingExitHoverBtn = "../../src/assets/img/game_page/gaming-theme/header/exit_game_hover.png";
+const gamingBackToGameDefault = "../../src/assets/img/game_page/gaming-theme/header/back_to_game.png";
+const gamingBackToGameHover = "../../src/assets/img/game_page/gaming-theme/header/back_to_game_hover.png";
 const gamingExitBtns = {
     default: gamingExitDefaultBtn,
     hover: gamingExitHoverBtn
@@ -90,6 +94,8 @@ const daPlayerIcons = {
 };
 const daExitDefaultBtn = "../../src/assets/img/game_page/da-theme/header/exit_game_default.png";
 const daExitHoverBtn = "../../src/assets/img/game_page/da-theme/header/exit_game_hover.png";
+const daBackToGameDefault = "../../src/assets/img/game_page/da-theme/header/back_to_game.png";
+const daBackToGameHover = "../../src/assets/img/game_page/da-theme/header/back_to_game_hover.png";
 const daExitBtns = {
     default: daExitDefaultBtn,
     hover: daExitHoverBtn
