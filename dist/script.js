@@ -45,8 +45,10 @@ themeOptions.forEach((themeOption) => {
         gameSettings.theme = selectedTheme;
         updateThemeImage(selectedTheme);
         const chosenIndicator = themeOption.querySelector(".choose-indicator");
-        if (chosenIndicator) {
+        const listIndicator = themeOption.querySelector(".circle-indicator");
+        if (chosenIndicator && listIndicator) {
             updateIndicator(chosenIndicator, themeContainer);
+            updateSecondIndicator(listIndicator, themeContainer);
         }
     });
 });
@@ -79,8 +81,10 @@ playerOptions.forEach((playerOption) => {
         playerD.textContent = playerD.textContent.toLocaleUpperCase();
         gameSettings.player = selectedPlayer;
         const chosenIndicator = playerOption.querySelector(".choose-indicator");
-        if (chosenIndicator) {
+        const listIndicator = playerOption.querySelector(".circle-indicator");
+        if (chosenIndicator && listIndicator) {
             updateIndicator(chosenIndicator, playerContainer);
+            updateSecondIndicator(listIndicator, playerContainer);
         }
     });
 });
@@ -94,8 +98,10 @@ cardOptions.forEach((cardOption) => {
         boardD.textContent = selectedCards + " " + "CARDS";
         gameSettings.cards = selectedCards;
         const chosenIndicator = cardOption.querySelector(".choose-indicator");
-        if (chosenIndicator) {
+        const listIndicator = cardOption.querySelector(".circle-indicator");
+        if (chosenIndicator && listIndicator) {
             updateIndicator(chosenIndicator, cardContainer);
+            updateSecondIndicator(listIndicator, cardContainer);
         }
     });
 });
@@ -105,6 +111,13 @@ function updateIndicator(chosenIndicator, container) {
         indicator.classList.add("d-none");
     });
     chosenIndicator.classList.remove("d-none");
+}
+function updateSecondIndicator(listIndicator, themeContainer) {
+    const indicators = themeContainer.querySelectorAll(".circle-indicator");
+    indicators.forEach((indicator) => {
+        indicator.src = "../../src/assets/img/settings_page/indicator_for_list.png";
+    });
+    listIndicator.src = "../../src/assets/img/settings_page/indicator_circle.png";
 }
 function updateThemeImage(selectedTheme) {
     if (!themeImg)

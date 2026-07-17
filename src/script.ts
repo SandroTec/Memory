@@ -37,10 +37,10 @@ const cardContainer = document.querySelector<HTMLDivElement>("._board-size-c");
 const cardOptions = document.querySelectorAll<HTMLLIElement>("[data-cards]");
 
 const themeImg = document.querySelector<HTMLImageElement>("#themeImage");
+const themeD = document.querySelector<HTMLParagraphElement>("#themeDisplay");
 
-const themeD = document.querySelector<HTMLParagraphElement>("#themeDisplay")
-const playerD = document.querySelector("#playerDisplay")
-const boardD = document.querySelector("#boardDisplay")
+const playerD = document.querySelector("#playerDisplay");
+const boardD = document.querySelector("#boardDisplay");
 
 themeOptions.forEach((themeOption) => {
     themeOption.addEventListener("click", () => {
@@ -54,10 +54,12 @@ themeOptions.forEach((themeOption) => {
         updateThemeImage(selectedTheme)
         const chosenIndicator =
             themeOption.querySelector<HTMLImageElement>(".choose-indicator");
+        const listIndicator =
+            themeOption.querySelector<HTMLImageElement>(".circle-indicator");
         
-        
-        if (chosenIndicator) {
+        if (chosenIndicator && listIndicator) {
             updateIndicator(chosenIndicator, themeContainer);
+            updateSecondIndicator(listIndicator, themeContainer);
         }
     });
 });
@@ -95,8 +97,12 @@ playerOptions.forEach((playerOption) => {
 
         const chosenIndicator =
             playerOption.querySelector<HTMLImageElement>(".choose-indicator");
-        if (chosenIndicator) {
+        const listIndicator =
+            playerOption.querySelector<HTMLImageElement>(".circle-indicator");
+        
+        if (chosenIndicator && listIndicator) {
             updateIndicator(chosenIndicator, playerContainer);
+            updateSecondIndicator(listIndicator, playerContainer);
         }
     });
 });
@@ -113,8 +119,11 @@ cardOptions.forEach((cardOption) => {
 
         const chosenIndicator =
             cardOption.querySelector<HTMLImageElement>(".choose-indicator");
-        if (chosenIndicator) {
+        const listIndicator =
+            cardOption.querySelector<HTMLImageElement>(".circle-indicator");
+        if (chosenIndicator && listIndicator) {
             updateIndicator(chosenIndicator, cardContainer);
+            updateSecondIndicator(listIndicator, cardContainer);
         }
     });
 
@@ -133,6 +142,20 @@ function updateIndicator(
     });
 
     chosenIndicator.classList.remove("d-none");
+}
+
+function updateSecondIndicator(
+    listIndicator:HTMLImageElement, 
+    themeContainer: HTMLDivElement
+) {
+    const indicators =
+        themeContainer.querySelectorAll<HTMLImageElement>(".circle-indicator");
+
+    indicators.forEach((indicator) => {
+        indicator.src = "../../src/assets/img/settings_page/indicator_for_list.png";
+    });
+
+    listIndicator.src = "../../src/assets/img/settings_page/indicator_circle.png";
 }
 
 function updateThemeImage(selectedTheme:string) {
