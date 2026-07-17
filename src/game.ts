@@ -61,10 +61,18 @@ const codeExitHoverBtn = "../../src/assets/img/game_page/code-theme/header/exit_
 const codeBackToGameDefault = "../../src/assets/img/game_page/code-theme/header/back_to_game.png";
 const codeBackToGameHover = "../../src/assets/img/game_page/code-theme/header/back_to_game_hover.png";
 
+const codeEndGame = "../../src/assets/img/game_page/code-theme/header/end_game_button.png";
+
 const codeExitBtns = {
     default: codeExitDefaultBtn,
     hover: codeExitHoverBtn
 }
+
+const codeBackToGameBtns = {
+    default: codeBackToGameDefault,
+    hover: codeBackToGameHover
+}
+
 
 const codeImages = [
     "../../src/assets/img/game_page/code-theme/main/card/html_card.png",
@@ -105,9 +113,17 @@ const gamingExitHoverBtn = "../../src/assets/img/game_page/gaming-theme/header/e
 const gamingBackToGameDefault = "../../src/assets/img/game_page/gaming-theme/header/back_to_game.png";
 const gamingBackToGameHover = "../../src/assets/img/game_page/gaming-theme/header/back_to_game_hover.png";
 
+const gamingEndGame = "../../src/assets/img/game_page/gaming-theme/header/end_game_button.png";
+
+
 const gamingExitBtns = {
     default: gamingExitDefaultBtn,
     hover: gamingExitHoverBtn
+}
+
+const gamingBackToGameBtns = {
+    default: gamingBackToGameDefault,
+    hover: gamingBackToGameHover
 }
 
 const gamingImages = [
@@ -150,9 +166,24 @@ const daExitHoverBtn = "../../src/assets/img/game_page/da-theme/header/exit_game
 const daBackToGameDefault = "../../src/assets/img/game_page/da-theme/header/back_to_game.png";
 const daBackToGameHover = "../../src/assets/img/game_page/da-theme/header/back_to_game_hover.png";
 
+const daEndGame = "../../src/assets/img/game_page/da-theme/header/end_game_button.png";
+const daEndGameHover = "../../src/assets/img/game_page/da-theme/header/end_game_button_hover.png";
+
+
+
 const daExitBtns = {
     default: daExitDefaultBtn,
     hover: daExitHoverBtn
+}
+
+const daBackToGameBtns = {
+    default: daBackToGameDefault,
+    hover: daBackToGameHover
+}
+
+const daEndGameBtns = {
+    default: daEndGame,
+    hover: daEndGameHover
 }
 
 const daImages = [
@@ -201,6 +232,18 @@ const exitButtons = {
     gaming: gamingExitBtns,
     da: daExitBtns
 };
+
+const backToGameButtons = {
+    code: codeBackToGameBtns,
+    gaming: gamingBackToGameBtns,
+    da: daBackToGameBtns
+}
+
+const endGameButtons = {
+    code: codeEndGame,
+    gaming: gamingEndGame,
+    da: daEndGameBtns
+}
 
 
 // functions needed for memory:
@@ -449,11 +492,12 @@ const exitGameBtnImage = document.querySelector<HTMLImageElement>("#exitBtnImage
 
 const exitGameBtn = document.querySelector<HTMLButtonElement>("#exitBtn");
 const exitDialog = document.querySelector<HTMLDialogElement>("#exitDialog");
-const confirmExitBtn = document.querySelector("#confirmExitBtn");
-const cancelExitBtn = document.querySelector("#cancelExitBtn");
+const confirmExitBtn = document.querySelector<HTMLImageElement>("#confirmExitBtn");
+const cancelExitBtn = document.querySelector<HTMLImageElement>("#cancelExitBtn");
 
 function initaliseExitButton() {
-    const exitBtn = exitButtons[gameSettings.theme]
+    const exitBtn = exitButtons[gameSettings.theme];
+    
     if (!exitGameBtnImage || !exitGameBtn) return;
     exitGameBtnImage.src = exitBtn.default;
     exitGameBtn.addEventListener("mouseenter", () => {
@@ -462,6 +506,42 @@ function initaliseExitButton() {
     exitGameBtn.addEventListener("mouseleave", () => {
         exitGameBtnImage.src = exitBtn.default;
     })
+}
+
+function initaliseBackToGameButton() {
+    const backToGameBtn = backToGameButtons[gameSettings.theme];
+    if (!cancelExitBtn) return;
+    cancelExitBtn.src = backToGameBtn.default;
+    cancelExitBtn.addEventListener("mouseenter", () => {
+        cancelExitBtn.src = backToGameBtn.hover;
+    })
+    cancelExitBtn.addEventListener("mouseleave", () => {
+        cancelExitBtn.src = backToGameBtn.default;
+    })
+}
+
+function initaliseEndGameButton() {
+    if (!confirmExitBtn) return;
+    if (gameSettings.theme == "da") {
+        const endGameBtn = endGameButtons[gameSettings.theme];
+
+        confirmExitBtn.src = endGameBtn.default;
+        confirmExitBtn.addEventListener("mouseenter", () => {
+            confirmExitBtn.src = endGameBtn.hover;
+        })
+        confirmExitBtn.addEventListener("mouseleave", () => {
+            confirmExitBtn.src = endGameBtn.default;
+        })
+    }else {
+    const endGameBtn = endGameButtons[gameSettings.theme];
+    
+    confirmExitBtn.src = endGameBtn;
+    confirmExitBtn.addEventListener("mouseenter", () => {
+        confirmExitBtn.classList.add(`bg-color-${gameSettings.theme}`);
+    })
+    confirmExitBtn.addEventListener("mouseleave", () => {
+        confirmExitBtn.classList.remove(`bg-color-${gameSettings.theme}`);
+    })}
 }
 
 exitGameBtn?.addEventListener("click", () => {
@@ -517,6 +597,8 @@ function loadEndscreen(winner:string, scoreB:number, scoreO:number) {
 function initaliseHeader() {
     initaliseScoreBoard();
     initaliseExitButton();
+    initaliseBackToGameButton();
+    initaliseEndGameButton();
 }
 
 function init() {

@@ -262,6 +262,14 @@ header {
   background: rgb(48, 49, 49);
 }
 
+.bg-color-code {
+  background: rgba(43, 177, 255, 0.05);
+}
+
+.bg-color-gaming {
+  background: rgba(172, 15, 15, 0.05);
+}
+
 @keyframes wiggle {
   0%, 100% {
     transform: rotate(0deg);
