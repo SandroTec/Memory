@@ -16,7 +16,6 @@ let winnerImageDisplay = document.querySelector("#winnerImageDisplay");
 const homeButton = document.querySelector("#homeButton");
 let buttonImage = document.querySelector("#buttonImage");
 const codeKonfettiImage = document.querySelector("#codeKonfettiImage");
-const codeFont = "";
 const codeWinnerImgB = "../../src/assets/img/game_page/code-theme/endscreen/chess_pawn_blue.png";
 const codeDrawImage = "../../src/assets/img/game_page/code-theme/endscreen/draw_icon.png";
 const codeWinnerImgO = "../../src/assets/img/game_page/code-theme/endscreen/chess_pawn_orange.png";
@@ -26,7 +25,6 @@ const winnerImagesCode = {
     orange: codeWinnerImgO,
     draw: codeDrawImage
 };
-const gamingFont = "";
 const gamingWinnerImgB = "../../src/assets/img/game_page/gaming-theme/endscreen/winner_icon.png";
 const gamingDrawImage = "../../src/assets/img/game_page/gaming-theme/endscreen/draw_icon.png";
 const gamingWinnerImgO = "../../src/assets/img/game_page/gaming-theme/endscreen/winner_icon.png";
@@ -36,7 +34,6 @@ const winnerImagesGaming = {
     orange: gamingWinnerImgO,
     draw: gamingDrawImage
 };
-const daFont = "";
 const daWinnerImgB = "../../src/assets/img/game_page/da-theme/endscreen/chess_pawn_blue.png";
 const daDrawImage = "../../src/assets/img/game_page/da-theme/endscreen/draw_icon.png";
 const daWinnerImgO = "../../src/assets/img/game_page/da-theme/endscreen/chess_pawn_orange.png";
