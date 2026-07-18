@@ -9,3 +9,33 @@
 h2 {
     font-size: 54px;
 }
+
+#themeDisplay {
+    width: 100px;
+}
+
+#playerDisplay {
+    width: 100px;
+}
+
+@media (max-width: 950px) {
+
+   #themeDisplay {
+    width: 80px;
+    }
+
+    #playerDisplay {
+        width: 80px;
+    }
+}
+
+@media (max-width: 700px) {
+
+    #themeDisplay {
+    width: 60px;
+    }
+
+    #playerDisplay {
+        width: 60px;
+    }
+}

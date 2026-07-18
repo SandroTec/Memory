@@ -1,0 +1,14 @@
+@use '../abstract/mixins' as mx;
+
+dialog {
+    width: 40%;
+    left: 30%;
+
+    &[open] {
+        @include mx.flex-center;
+    }
+
+    button {
+        cursor: pointer;
+    }
+}

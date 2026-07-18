@@ -5,4 +5,5 @@ li {
     @include mx.flex-center;
     @include mx.text-left;
     padding: 10px 0;
+    width: 300px;
 }
