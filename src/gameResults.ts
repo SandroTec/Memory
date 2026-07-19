@@ -86,6 +86,18 @@ if (scoreDisplayContainer) {
     scoreDisplayContainer.classList.add(`score-container-${theme}`);
 }
 
+function initaliseHeadline() {
+    const headlineImage = document.querySelector<HTMLImageElement>("#headlineImage");
+    const headline = document.querySelector("h1");
+    if (theme == "code") {
+        headline?.classList.add("d-none");
+        headlineImage?.classList.remove("d-none");
+    } else {
+        headline?.classList.remove("d-none");
+        headlineImage?.classList.add("d-none");
+    }
+}
+
 function initaliseScoreBoard() {
     if(!scoreIconB || !scoreIconO) return;
     scoreIconB.src = playerIconBlue;
@@ -157,6 +169,7 @@ function endGame() {
 
 async function init() {
     const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+    initaliseHeadline();
     initaliseScoreBoard();
     initaliseScores();
     await delay(2000);

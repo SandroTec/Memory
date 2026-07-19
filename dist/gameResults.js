@@ -57,6 +57,18 @@ const scoreDisplayContainer = document.querySelector("#scoreDisplayContainer");
 if (scoreDisplayContainer) {
     scoreDisplayContainer.classList.add(`score-container-${theme}`);
 }
+function initaliseHeadline() {
+    const headlineImage = document.querySelector("#headlineImage");
+    const headline = document.querySelector("h1");
+    if (theme == "code") {
+        headline?.classList.add("d-none");
+        headlineImage?.classList.remove("d-none");
+    }
+    else {
+        headline?.classList.remove("d-none");
+        headlineImage?.classList.add("d-none");
+    }
+}
 function initaliseScoreBoard() {
     if (!scoreIconB || !scoreIconO)
         return;
@@ -129,6 +141,7 @@ function endGame() {
 }
 async function init() {
     const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+    initaliseHeadline();
     initaliseScoreBoard();
     initaliseScores();
     await delay(2000);

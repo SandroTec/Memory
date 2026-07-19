@@ -33,6 +33,7 @@ p {
     font-weight: 700;
     font-size: 32px;
 
+    
 
 }
 
@@ -42,7 +43,16 @@ p {
     font-weight: 700;
     font-size: 28px;
 
+    div h1 {
+        font-family: Orbitron;
+        font-weight: 900;
+        font-style: Black;
+        font-size: 124px;
+        line-height: 100%;
+        letter-spacing: 7%;
+        color: #ED1B76;
 
+    }
 }
 
 .theme-da {
@@ -51,5 +61,15 @@ p {
     font-weight: 700;
     font-size: 28px;
   
+    div h1 {
+        font-family: Figtree;
+        font-weight: 800;
+        font-style: ExtraBold;
+        font-size: 130px;
+        line-height: 100%;
+        letter-spacing: 0%;
+        text-align: center;
+        color: #FD5B4F;
 
+    }
 }
