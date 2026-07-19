@@ -15,6 +15,7 @@ let helpMsg = document.querySelector("#helpMsg");
 let winnerImageDisplay = document.querySelector("#winnerImageDisplay");
 const homeButton = document.querySelector("#homeButton");
 let buttonImage = document.querySelector("#buttonImage");
+const scoreContainer = document.querySelector("#scoreContainer");
 const codeKonfettiImage = document.querySelector("#codeKonfettiImage");
 const codeWinnerImgB = "../../src/assets/img/game_page/code-theme/endscreen/chess_pawn_blue.png";
 const codeDrawImage = "../../src/assets/img/game_page/code-theme/endscreen/draw_icon.png";
@@ -97,6 +98,11 @@ function initaliseWinnerImage() {
         codeKonfettiImage?.classList.remove("d-none");
     }
 }
+function hideScore() {
+    if (!scoreContainer)
+        return;
+    scoreContainer.classList.add("d-none");
+}
 function initaliseHomeBtn() {
     if (!buttonImage)
         return;
@@ -129,5 +135,6 @@ async function init() {
     initaliseWinnerImage();
     initaliseWinner();
     initaliseHomeBtn();
+    hideScore();
 }
 init();

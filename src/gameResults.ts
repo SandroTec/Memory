@@ -23,6 +23,8 @@ let winnerImageDisplay = document.querySelector<HTMLImageElement>("#winnerImageD
 const homeButton = document.querySelector<HTMLButtonElement>("#homeButton");
 let buttonImage = document.querySelector<HTMLImageElement>("#buttonImage");
 
+const scoreContainer = document.querySelector<HTMLDivElement>("#scoreContainer");
+
 //code-theme:
 const codeKonfettiImage = document.querySelector<HTMLImageElement>("#codeKonfettiImage");
 
@@ -121,6 +123,11 @@ function initaliseWinnerImage() {
     if(theme == "code" && winner != "draw") {codeKonfettiImage?.classList.remove("d-none")}
 }
 
+function hideScore() {
+    if (!scoreContainer) return;
+    scoreContainer.classList.add("d-none");
+}
+
 function initaliseHomeBtn() {
     if (!buttonImage) return;
     switch (theme) {
@@ -156,6 +163,7 @@ async function init() {
     initaliseWinnerImage();
     initaliseWinner();
     initaliseHomeBtn();
+    hideScore();
 }
 
 init();
