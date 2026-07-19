@@ -142,9 +142,7 @@ function updateCurrentPlayerDisplay() {
 let firstSelectedCard = null;
 let cardsSelected = false;
 async function handleCardClick(card) {
-    if (card.isFlipped)
-        return;
-    if (card.isFound)
+    if (card.isFlipped || card.isFound)
         return;
     if (cardsSelected)
         return;

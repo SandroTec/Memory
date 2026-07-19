@@ -36,7 +36,6 @@ type Card =  {
     imgSrc : string,
     isFlipped : boolean,
     isFound : boolean,
-
 }
 
 type GameSettings = {
@@ -60,15 +59,12 @@ function loadGameSettings(): GameSettings {
 }
 
 const gameSettings = loadGameSettings();
-
-
 const gameBody = document.querySelector<HTMLBodyElement>("#gameBody");
 const playGround = document.querySelector<HTMLDivElement>("#playGround")!;
 
 if (gameBody) {
     gameBody.classList.add(`theme-${gameSettings.theme}`);
 }
-
 
 const themeImages: Record<Theme, string[]> = {
     code: codeImages,
@@ -108,12 +104,8 @@ const endGameButtons = {
     da: daEndGameBtns
 }
 
-
-// get the number of needed pairs for game
-
 const currentThemeImages = themeImages[gameSettings.theme];
 const currentCardBack = cardBacks[gameSettings.theme];
-
 
 function getImages(): string[] {
     const pairAmount = Number(gameSettings.cards)/2;
@@ -131,7 +123,6 @@ function createPairs():Card[] {
     let id = 0;
     let pairId = 0;
     selectedImages.forEach(image => {
-        
         const firstCard:Card = {
             id: id++,
             pairId: pairId,
@@ -142,7 +133,6 @@ function createPairs():Card[] {
 
         pairedCards.push(firstCard);
         
-
         const secondCard:Card = {
             id: id++,
             pairId: pairId++,
@@ -152,15 +142,12 @@ function createPairs():Card[] {
         }
 
         pairedCards.push(secondCard);
-        
     });
     return pairedCards;
 }
 
 function shuffleCards():Card[] {
     const gamePairs:Card[] = createPairs();
-    //loop from last item to the first 
-    // and swap them with a randome item from the array
     for (let i = gamePairs.length-1; i > 0; i--) {
         const randomeIndex = Math.floor(Math.random() * (i+1));
         //Fischer-Yates Shuffle
@@ -188,7 +175,6 @@ function placeCards() {
 
 function createCard(card: Card): string {
     const cardJson = JSON.stringify(card);
-
     return `
         <div class="card" data-card-id="${card.id}" data-card-object='${cardJson}'>
             <div class="card_inner">
@@ -209,7 +195,6 @@ function initCardEventListeners() {
             if (cardJson) {
                 const cardById = JSON.parse(cardJson) as Card;
                 handleCardClick(cardById);
-                
             }
         });
     });
@@ -229,21 +214,14 @@ function updateCurrentPlayerDisplay() {
        <img src="${icon}" alt="player icon">`;
 }
 
-
-
 let firstSelectedCard:Card | null = null;
 let cardsSelected:boolean = false;
 
 async function handleCardClick(card:Card) {
-    //is card found? -> return
-    //is card flipped? -> return
-    if (card.isFlipped) return;
-    if (card.isFound) return;
-    if (cardsSelected) return;
-    //turn card animation
-    turnCard(card);
 
-    //first flipped card? 
+    if (card.isFlipped || card.isFound) return;
+    if (cardsSelected) return;
+    turnCard(card);
     if (firstSelectedCard == null) {
         firstSelectedCard = card;
         const firstFlippedCard = document.querySelector<HTMLDivElement>(`[data-card-id="${card.id}"]`)!;
@@ -261,9 +239,7 @@ async function handleCardClick(card:Card) {
     if (checkGameOver()) {
         determineWinner();
     }
-    
-    firstSelectedCard = null;
-    
+    firstSelectedCard = null;    
 }
 
 function turnCard(card: Card) {
@@ -271,7 +247,6 @@ function turnCard(card: Card) {
     const cardElement = document.querySelector(`[data-card-id="${card.id}"]`);
     cardElement?.classList.add("is-flipped");
 }
-
 
 async function compareCards(card:Card, cardToCompare:Card):Promise<boolean> {
     const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
@@ -285,12 +260,9 @@ async function compareCards(card:Card, cardToCompare:Card):Promise<boolean> {
     }
 }
 
-
 function hideCards(card: Card, firstSelectedCard: Card) {
-
     document.querySelector(`[data-card-id="${card.id}"]`)?.classList.remove("is-flipped");
     document.querySelector(`[data-card-id="${firstSelectedCard.id}"]`)?.classList.remove("is-flipped");
-
     card.isFlipped = false;
     firstSelectedCard.isFlipped = false;
     return;
@@ -306,7 +278,6 @@ let scoreDisplayO = document.querySelector("#scoreDisplayO");
 function handlePair(card:Card, firstSelectedCard:Card) {
     const cardElement = document.querySelector<HTMLDivElement>(`[data-card-id="${card.id}"]`);
     const firstCardElement = document.querySelector<HTMLDivElement>(`[data-card-id="${firstSelectedCard.id}"]`);
-    //pairs++ if compareCards is true
     playerPairs[currentPlayer]++;
     card.isFound = true;
     firstSelectedCard.isFound = true;
@@ -330,7 +301,6 @@ function changePlayer() {
     updateCurrentPlayerDisplay();
 }
 
-
 function checkGameOver() {
     const possiblePairs = Number(gameSettings.cards)/2;
     const pairsLeft = possiblePairs - (playerPairs.blue + playerPairs.orange)
@@ -341,7 +311,6 @@ function checkGameOver() {
 const scoreIconO = document.querySelector<HTMLImageElement>("#scorePlayerIconO");
 const scoreIconB = document.querySelector<HTMLImageElement>("#scorePlayerIconB");
 
-
 function initaliseScoreBoard() {
     const scoreIcons = playerIcons[gameSettings.theme]
     if(!scoreIconB || !scoreIconO) return;
@@ -350,7 +319,6 @@ function initaliseScoreBoard() {
 }
 
 const exitGameBtnImage = document.querySelector<HTMLImageElement>("#exitBtnImage");
-
 const exitGameBtn = document.querySelector<HTMLButtonElement>("#exitBtn");
 const exitDialog = document.querySelector<HTMLDialogElement>("#exitDialog");
 const confirmExitBtn = document.querySelector<HTMLImageElement>("#confirmExitBtn");
@@ -395,7 +363,6 @@ function initaliseEndGameButton() {
         })
     }else {
     const endGameBtn = endGameButtons[gameSettings.theme];
-    
     confirmExitBtn.src = endGameBtn;
     confirmExitBtn.addEventListener("mouseenter", () => {
         confirmExitBtn.classList.add(`bg-color-${gameSettings.theme}`);
@@ -422,19 +389,15 @@ cancelExitBtn?.addEventListener("click", () => {
 })
 
 function endGame() {
-    //function to end the game and go back to settings.
     window.location.href = "./settings.html";
 }
 
 function determineWinner() {
     if (playerPairs.blue > playerPairs.orange) {
-        //blue wins
         loadEndscreen("blue", playerPairs.blue, playerPairs.orange);
     } else if (playerPairs.blue < playerPairs.orange) {
-        //orange wins
         loadEndscreen("orange", playerPairs.blue, playerPairs.orange);
     } else {
-        //draw
         loadEndscreen("draw", playerPairs.blue, playerPairs.orange);
     }
 }
@@ -446,11 +409,9 @@ function saveGameWinner(gameWinner:string, scoreB:number, scoreO:number) {
     sessionStorage.setItem("theme:", JSON.stringify(gameSettings.theme));
     sessionStorage.setItem("playerIconBlue:", JSON.stringify(playerIcons[gameSettings.theme].blue));
     sessionStorage.setItem("playerIconOrange:", JSON.stringify(playerIcons[gameSettings.theme].orange));
-
 }
 
 function loadEndscreen(winner:string, scoreB:number, scoreO:number) {
-    //load endscreen
     saveGameWinner(winner, scoreB, scoreO);
     window.location.href = "./endscreen.html";
 }
@@ -467,7 +428,6 @@ function init() {
     placeCards();
     determinePlayer();
 }
-
 
 init();
 export {};
