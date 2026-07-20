@@ -35,6 +35,10 @@
         }
     }
 
+    &_game-result {
+        margin-top: -350px;
+    }
+
     &_game-settings {
         width: 100%;
         @media (max-width: 950px) {
@@ -59,6 +63,7 @@
                 padding: 0;
             }
         }
+
     }
         
     

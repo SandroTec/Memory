@@ -188,6 +188,9 @@ li {
     padding: 5px;
   }
 }
+.container_game-result {
+  margin-top: -350px;
+}
 .container_game-settings {
   width: 100%;
 }
