@@ -1,7 +1,8 @@
+import { CODE_IMAGES, GAMING_IMAGES, DA_IMAGES, CODE_CARD_BACK, GAMING_CARD_BACK, DA_CARD_BACK, CODE_PLAYER_ICONS, GAMING_PLAYER_ICONS, DA_PLAYER_ICONS, CODE_EXIT_BTNS, GAMING_EXIT_BTNS, DA_EXIT_BTNS, CODE_BACK_TO_GAME_BTNS, GAMING_BACK_TO_GAME_BTNS, DA_BACK_TO_GAME_BTNS, CODE_END_GAME, GAMING_END_GAME, DA_END_GAME_BTNS } from "./load-images.js";
 function loadGameSettings() {
-    const storedSettings = sessionStorage.getItem("gameSettings");
-    if (storedSettings) {
-        return JSON.parse(storedSettings);
+    const STORED_SETTINGS = sessionStorage.getItem("gameSettings");
+    if (STORED_SETTINGS) {
+        return JSON.parse(STORED_SETTINGS);
     }
     return {
         theme: "code",
@@ -9,134 +10,134 @@ function loadGameSettings() {
         cards: "16"
     };
 }
-const gameSettings = loadGameSettings();
-const gameBody = document.querySelector("#gameBody");
-const playGround = document.querySelector("#playGround");
-if (gameBody) {
-    gameBody.classList.add(`theme-${gameSettings.theme}`);
+const GAME_SETTINGS = loadGameSettings();
+const GAME_BODY = document.querySelector("#gameBody");
+const PLAY_GROUND = document.querySelector("#playGround");
+if (GAME_BODY) {
+    GAME_BODY.classList.add(`theme-${GAME_SETTINGS.theme}`);
 }
-const themeImages = {
-    code: codeImages,
-    gaming: gamingImages,
-    da: daImages
+const THEME_IMGS = {
+    code: CODE_IMAGES,
+    gaming: GAMING_IMAGES,
+    da: DA_IMAGES
 };
-const cardBacks = {
-    code: codeCardBack,
-    gaming: gamingCardBack,
-    da: daCardBack
+const CARD_BACKS = {
+    code: CODE_CARD_BACK,
+    gaming: GAMING_CARD_BACK,
+    da: DA_CARD_BACK
 };
-const playerIcons = {
-    code: codePlayerIcons,
-    gaming: gamingPlayerIcons,
-    da: daPlayerIcons
+const PLAYER_ICONS = {
+    code: CODE_PLAYER_ICONS,
+    gaming: GAMING_PLAYER_ICONS,
+    da: DA_PLAYER_ICONS
 };
 let currentPlayer;
-const exitButtons = {
-    code: codeExitBtns,
-    gaming: gamingExitBtns,
-    da: daExitBtns
+const EXIT_BTNS = {
+    code: CODE_EXIT_BTNS,
+    gaming: GAMING_EXIT_BTNS,
+    da: DA_EXIT_BTNS
 };
-const backToGameButtons = {
-    code: codeBackToGameBtns,
-    gaming: gamingBackToGameBtns,
-    da: daBackToGameBtns
+const BACK_TO_GAME_BTNS = {
+    code: CODE_BACK_TO_GAME_BTNS,
+    gaming: GAMING_BACK_TO_GAME_BTNS,
+    da: DA_BACK_TO_GAME_BTNS
 };
-const endGameButtons = {
-    code: codeEndGame,
-    gaming: gamingEndGame,
-    da: daEndGameBtns
+const END_GAME_BTNS = {
+    code: CODE_END_GAME,
+    gaming: GAMING_END_GAME,
+    da: DA_END_GAME_BTNS
 };
-const currentThemeImages = themeImages[gameSettings.theme];
-const currentCardBack = cardBacks[gameSettings.theme];
+const CURRENT_THEME_IMGS = THEME_IMGS[GAME_SETTINGS.theme];
+const CURRENT_CARD_BACK = CARD_BACKS[GAME_SETTINGS.theme];
 function getImages() {
-    const pairAmount = Number(gameSettings.cards) / 2;
-    const selectedImages = [];
-    for (let i = 0; i < pairAmount; i++) {
-        selectedImages.push(currentThemeImages[i]);
+    const PAIR_AMOUNT = Number(GAME_SETTINGS.cards) / 2;
+    const SELECTED_IMGS = [];
+    for (let i = 0; i < PAIR_AMOUNT; i++) {
+        SELECTED_IMGS.push(CURRENT_THEME_IMGS[i]);
     }
-    return selectedImages;
+    return SELECTED_IMGS;
 }
 function createPairs() {
-    const selectedImages = getImages();
-    const pairedCards = [];
+    const SELECTED_IMGS = getImages();
+    const PAIRED_CARDS = [];
     let id = 0;
     let pairId = 0;
-    selectedImages.forEach(image => {
-        const firstCard = {
+    SELECTED_IMGS.forEach(image => {
+        const FIRST_CARD = {
             id: id++,
             pairId: pairId,
             imgSrc: image,
             isFlipped: false,
             isFound: false
         };
-        pairedCards.push(firstCard);
-        const secondCard = {
+        PAIRED_CARDS.push(FIRST_CARD);
+        const SECOND_CARD = {
             id: id++,
             pairId: pairId++,
             imgSrc: image,
             isFlipped: false,
             isFound: false
         };
-        pairedCards.push(secondCard);
+        PAIRED_CARDS.push(SECOND_CARD);
     });
-    return pairedCards;
+    return PAIRED_CARDS;
 }
 function shuffleCards() {
-    const gamePairs = createPairs();
-    for (let i = gamePairs.length - 1; i > 0; i--) {
-        const randomeIndex = Math.floor(Math.random() * (i + 1));
-        [gamePairs[i], gamePairs[randomeIndex]] =
-            [gamePairs[randomeIndex], gamePairs[i]];
+    const GAME_PAIRS = createPairs();
+    for (let i = GAME_PAIRS.length - 1; i > 0; i--) {
+        const RANDOME_INDEX = Math.floor(Math.random() * (i + 1));
+        [GAME_PAIRS[i], GAME_PAIRS[RANDOME_INDEX]] =
+            [GAME_PAIRS[RANDOME_INDEX], GAME_PAIRS[i]];
     }
-    return gamePairs;
+    return GAME_PAIRS;
 }
 function placeCards() {
-    const cards = shuffleCards();
+    const CARDS = shuffleCards();
     let htmlBuffer = "";
-    cards.forEach((card) => {
+    CARDS.forEach((card) => {
         htmlBuffer += createCard(card);
     });
-    playGround.innerHTML = htmlBuffer;
-    if (gameSettings.cards == "36") {
-        playGround.classList.add("grid6x");
+    PLAY_GROUND.innerHTML = htmlBuffer;
+    if (GAME_SETTINGS.cards == "36") {
+        PLAY_GROUND.classList.add("grid6x");
     }
     else {
-        playGround.classList.add("grid4x");
+        PLAY_GROUND.classList.add("grid4x");
     }
     initCardEventListeners();
 }
 function createCard(card) {
-    const cardJson = JSON.stringify(card);
+    const CARD_JSON = JSON.stringify(card);
     return `
-        <div class="card" data-card-id="${card.id}" data-card-object='${cardJson}'>
+        <div class="card" data-card-id="${card.id}" data-card-object='${CARD_JSON}'>
             <div class="card_inner">
                 <img class="card_img card_front" src="${card.imgSrc}" alt="game card">
-                <img class="card_img card_back" src="${currentCardBack}" alt="game card">
+                <img class="card_img card_back" src="${CURRENT_CARD_BACK}" alt="game card">
             </div>
         </div>
     `;
 }
 function initCardEventListeners() {
-    const cardElements = document.querySelectorAll("[data-card-id]");
-    cardElements.forEach(cardElement => {
+    const CARD_ELEMENTS = document.querySelectorAll("[data-card-id]");
+    CARD_ELEMENTS.forEach(cardElement => {
         cardElement.addEventListener("click", () => {
-            const cardJson = cardElement.getAttribute("data-card-object");
-            if (cardJson) {
-                const cardById = JSON.parse(cardJson);
-                handleCardClick(cardById);
+            const CARD_JSON = cardElement.getAttribute("data-card-object");
+            if (CARD_JSON) {
+                const CARD_BY_ID = JSON.parse(CARD_JSON);
+                handleCardClick(CARD_BY_ID);
             }
         });
     });
 }
-const currentPlayerDisplay = document.querySelector("#currentPlayerDisplay");
+const CURENT_PLAYER_DISPLAY = document.querySelector("#currentPlayerDisplay");
 function determinePlayer() {
-    currentPlayer = gameSettings.player;
+    currentPlayer = GAME_SETTINGS.player;
     updateCurrentPlayerDisplay();
 }
 function updateCurrentPlayerDisplay() {
-    const icon = playerIcons[gameSettings.theme][currentPlayer];
-    currentPlayerDisplay.innerHTML = `Current Player:    
-       <img src="${icon}" alt="player icon">`;
+    const ICON = PLAYER_ICONS[GAME_SETTINGS.theme][currentPlayer];
+    CURENT_PLAYER_DISPLAY.innerHTML = `Current Player:    
+       <img src="${ICON}" alt="player icon">`;
 }
 let firstSelectedCard = null;
 let cardsSelected = false;
@@ -148,14 +149,14 @@ async function handleCardClick(card) {
     turnCard(card);
     if (firstSelectedCard == null) {
         firstSelectedCard = card;
-        const firstFlippedCard = document.querySelector(`[data-card-id="${card.id}"]`);
-        firstFlippedCard.style.cursor = "not-allowed";
+        const FIRST_FLIPPED_CARD = document.querySelector(`[data-card-id="${card.id}"]`);
+        FIRST_FLIPPED_CARD.style.cursor = "not-allowed";
         return;
     }
     if (firstSelectedCard.id == card.id)
         return;
-    const isMatch = await compareCards(card, firstSelectedCard);
-    if (isMatch) {
+    const IS_MATCH = await compareCards(card, firstSelectedCard);
+    if (IS_MATCH) {
         handlePair(card, firstSelectedCard);
     }
     else {
@@ -169,17 +170,17 @@ async function handleCardClick(card) {
 }
 function turnCard(card) {
     card.isFlipped = true;
-    const cardElement = document.querySelector(`[data-card-id="${card.id}"]`);
-    cardElement?.classList.add("is-flipped");
+    const CARD_ELEMENT = document.querySelector(`[data-card-id="${card.id}"]`);
+    CARD_ELEMENT?.classList.add("is-flipped");
 }
 async function compareCards(card, cardToCompare) {
-    const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+    const DELAY = (ms) => new Promise(resolve => setTimeout(resolve, ms));
     cardsSelected = true;
     if (card.pairId == cardToCompare.pairId) {
         return true;
     }
     else {
-        await delay(1000);
+        await DELAY(1000);
         return false;
     }
 }
@@ -190,29 +191,29 @@ function hideCards(card, firstSelectedCard) {
     firstSelectedCard.isFlipped = false;
     return;
 }
-const playerPairs = {
+const PLAYER_PAIRS = {
     blue: 0,
     orange: 0
 };
 let scoreDisplayB = document.querySelector("#scoreDisplayB");
 let scoreDisplayO = document.querySelector("#scoreDisplayO");
 function handlePair(card, firstSelectedCard) {
-    const cardElement = document.querySelector(`[data-card-id="${card.id}"]`);
-    const firstCardElement = document.querySelector(`[data-card-id="${firstSelectedCard.id}"]`);
-    playerPairs[currentPlayer]++;
+    const CARD_ELEMENT = document.querySelector(`[data-card-id="${card.id}"]`);
+    const FIRST_CARD_ELEMENT = document.querySelector(`[data-card-id="${firstSelectedCard.id}"]`);
+    PLAYER_PAIRS[currentPlayer]++;
     card.isFound = true;
     firstSelectedCard.isFound = true;
     cardsSelected = false;
     if (!scoreDisplayB || !scoreDisplayO)
         return;
-    scoreDisplayB.textContent = `${playerPairs.blue}`;
-    scoreDisplayO.textContent = `${playerPairs.orange}`;
-    if (!cardElement || !firstCardElement)
+    scoreDisplayB.textContent = `${PLAYER_PAIRS.blue}`;
+    scoreDisplayO.textContent = `${PLAYER_PAIRS.orange}`;
+    if (!CARD_ELEMENT || !FIRST_CARD_ELEMENT)
         return;
-    cardElement.setAttribute("data-card-object", JSON.stringify(card));
-    cardElement.style.cursor = "not-allowed";
-    firstCardElement.setAttribute("data-card-object", JSON.stringify(firstSelectedCard));
-    firstCardElement.style.cursor = "not-allowed";
+    CARD_ELEMENT.setAttribute("data-card-object", JSON.stringify(card));
+    CARD_ELEMENT.style.cursor = "not-allowed";
+    FIRST_CARD_ELEMENT.setAttribute("data-card-object", JSON.stringify(firstSelectedCard));
+    FIRST_CARD_ELEMENT.style.cursor = "not-allowed";
     return;
 }
 function changePlayer() {
@@ -225,113 +226,113 @@ function changePlayer() {
     updateCurrentPlayerDisplay();
 }
 function checkGameOver() {
-    const possiblePairs = Number(gameSettings.cards) / 2;
-    const pairsLeft = possiblePairs - (playerPairs.blue + playerPairs.orange);
-    if (pairsLeft != 0) {
+    const POSSIBLE_PAIRS = Number(GAME_SETTINGS.cards) / 2;
+    const PAIRS_LEFT = POSSIBLE_PAIRS - (PLAYER_PAIRS.blue + PLAYER_PAIRS.orange);
+    if (PAIRS_LEFT != 0) {
         return false;
     }
     else
         return true;
 }
-const scoreIconO = document.querySelector("#scorePlayerIconO");
-const scoreIconB = document.querySelector("#scorePlayerIconB");
+const SCORE_ICON_O = document.querySelector("#scorePlayerIconO");
+const SCORE_ICON_B = document.querySelector("#scorePlayerIconB");
 function initaliseScoreBoard() {
-    const scoreIcons = playerIcons[gameSettings.theme];
-    if (!scoreIconB || !scoreIconO)
+    const SCORE_ICONS = PLAYER_ICONS[GAME_SETTINGS.theme];
+    if (!SCORE_ICON_B || !SCORE_ICON_O)
         return;
-    scoreIconB.src = scoreIcons.blue;
-    scoreIconO.src = scoreIcons.orange;
+    SCORE_ICON_B.src = SCORE_ICONS.blue;
+    SCORE_ICON_O.src = SCORE_ICONS.orange;
 }
-const exitGameBtnImage = document.querySelector("#exitBtnImage");
-const exitGameBtn = document.querySelector("#exitBtn");
-const exitDialog = document.querySelector("#exitDialog");
-const confirmExitBtn = document.querySelector("#confirmExitBtn");
-const cancelExitBtn = document.querySelector("#cancelExitBtn");
+const EXIT_GAME_BTN_IMG = document.querySelector("#exitBtnImage");
+const EXIT_GAME_BTN = document.querySelector("#exitBtn");
+const EXIT_DIALOG = document.querySelector("#exitDialog");
+const CONFIRM_EXIT_BTN = document.querySelector("#confirmExitBtn");
+const CANCEL_EXIT_BTN = document.querySelector("#cancelExitBtn");
 function initaliseExitButton() {
-    const exitBtn = exitButtons[gameSettings.theme];
-    if (!exitGameBtnImage || !exitGameBtn)
+    const EXIT_BTN = EXIT_BTNS[GAME_SETTINGS.theme];
+    if (!EXIT_GAME_BTN_IMG || !EXIT_GAME_BTN)
         return;
-    exitGameBtnImage.src = exitBtn.default;
-    exitGameBtn.addEventListener("mouseenter", () => {
-        exitGameBtnImage.src = exitBtn.hover;
+    EXIT_GAME_BTN_IMG.src = EXIT_BTN.default;
+    EXIT_GAME_BTN.addEventListener("mouseenter", () => {
+        EXIT_GAME_BTN_IMG.src = EXIT_BTN.hover;
     });
-    exitGameBtn.addEventListener("mouseleave", () => {
-        exitGameBtnImage.src = exitBtn.default;
+    EXIT_GAME_BTN.addEventListener("mouseleave", () => {
+        EXIT_GAME_BTN_IMG.src = EXIT_BTN.default;
     });
 }
 function initaliseBackToGameButton() {
-    const backToGameBtn = backToGameButtons[gameSettings.theme];
-    if (!cancelExitBtn)
+    const BACK_TO_GAME_BTN = BACK_TO_GAME_BTNS[GAME_SETTINGS.theme];
+    if (!CANCEL_EXIT_BTN)
         return;
-    cancelExitBtn.src = backToGameBtn.default;
-    cancelExitBtn.addEventListener("mouseenter", () => {
-        cancelExitBtn.src = backToGameBtn.hover;
+    CANCEL_EXIT_BTN.src = BACK_TO_GAME_BTN.default;
+    CANCEL_EXIT_BTN.addEventListener("mouseenter", () => {
+        CANCEL_EXIT_BTN.src = BACK_TO_GAME_BTN.hover;
     });
-    cancelExitBtn.addEventListener("mouseleave", () => {
-        cancelExitBtn.src = backToGameBtn.default;
+    CANCEL_EXIT_BTN.addEventListener("mouseleave", () => {
+        CANCEL_EXIT_BTN.src = BACK_TO_GAME_BTN.default;
     });
 }
 function initaliseEndGameButton() {
-    if (!confirmExitBtn)
+    if (!CONFIRM_EXIT_BTN)
         return;
-    if (gameSettings.theme == "da") {
-        const endGameBtn = endGameButtons[gameSettings.theme];
-        confirmExitBtn.src = endGameBtn.default;
-        confirmExitBtn.addEventListener("mouseenter", () => {
-            confirmExitBtn.src = endGameBtn.hover;
+    if (GAME_SETTINGS.theme == "da") {
+        const END_GAME_BTN = END_GAME_BTNS[GAME_SETTINGS.theme];
+        CONFIRM_EXIT_BTN.src = END_GAME_BTN.default;
+        CONFIRM_EXIT_BTN.addEventListener("mouseenter", () => {
+            CONFIRM_EXIT_BTN.src = END_GAME_BTN.hover;
         });
-        confirmExitBtn.addEventListener("mouseleave", () => {
-            confirmExitBtn.src = endGameBtn.default;
+        CONFIRM_EXIT_BTN.addEventListener("mouseleave", () => {
+            CONFIRM_EXIT_BTN.src = END_GAME_BTN.default;
         });
     }
     else {
-        const endGameBtn = endGameButtons[gameSettings.theme];
-        confirmExitBtn.src = endGameBtn;
-        confirmExitBtn.addEventListener("mouseenter", () => {
-            confirmExitBtn.classList.add(`bg-color-${gameSettings.theme}`);
+        const END_GAME_BTN = END_GAME_BTNS[GAME_SETTINGS.theme];
+        CONFIRM_EXIT_BTN.src = END_GAME_BTN;
+        CONFIRM_EXIT_BTN.addEventListener("mouseenter", () => {
+            CONFIRM_EXIT_BTN.classList.add(`bg-color-${GAME_SETTINGS.theme}`);
         });
-        confirmExitBtn.addEventListener("mouseleave", () => {
-            confirmExitBtn.classList.remove(`bg-color-${gameSettings.theme}`);
+        CONFIRM_EXIT_BTN.addEventListener("mouseleave", () => {
+            CONFIRM_EXIT_BTN.classList.remove(`bg-color-${GAME_SETTINGS.theme}`);
         });
     }
 }
-exitGameBtn?.addEventListener("click", () => {
-    if (!exitDialog)
+EXIT_GAME_BTN?.addEventListener("click", () => {
+    if (!EXIT_DIALOG)
         return;
-    exitDialog.showModal();
+    EXIT_DIALOG.showModal();
 });
-confirmExitBtn?.addEventListener("click", () => {
-    if (!exitDialog)
+CONFIRM_EXIT_BTN?.addEventListener("click", () => {
+    if (!EXIT_DIALOG)
         return;
-    exitDialog.close();
+    EXIT_DIALOG.close();
     endGame();
 });
-cancelExitBtn?.addEventListener("click", () => {
-    if (!exitDialog)
+CANCEL_EXIT_BTN?.addEventListener("click", () => {
+    if (!EXIT_DIALOG)
         return;
-    exitDialog.close();
+    EXIT_DIALOG.close();
 });
 function endGame() {
     window.location.href = "./settings.html";
 }
 function determineWinner() {
-    if (playerPairs.blue > playerPairs.orange) {
-        loadEndscreen("blue", playerPairs.blue, playerPairs.orange);
+    if (PLAYER_PAIRS.blue > PLAYER_PAIRS.orange) {
+        loadEndscreen("blue", PLAYER_PAIRS.blue, PLAYER_PAIRS.orange);
     }
-    else if (playerPairs.blue < playerPairs.orange) {
-        loadEndscreen("orange", playerPairs.blue, playerPairs.orange);
+    else if (PLAYER_PAIRS.blue < PLAYER_PAIRS.orange) {
+        loadEndscreen("orange", PLAYER_PAIRS.blue, PLAYER_PAIRS.orange);
     }
     else {
-        loadEndscreen("draw", playerPairs.blue, playerPairs.orange);
+        loadEndscreen("draw", PLAYER_PAIRS.blue, PLAYER_PAIRS.orange);
     }
 }
 function saveGameWinner(gameWinner, scoreB, scoreO) {
     sessionStorage.setItem("winning player:", JSON.stringify(gameWinner));
     sessionStorage.setItem("blue score:", JSON.stringify(scoreB));
     sessionStorage.setItem("orange score:", JSON.stringify(scoreO));
-    sessionStorage.setItem("theme:", JSON.stringify(gameSettings.theme));
-    sessionStorage.setItem("playerIconBlue:", JSON.stringify(playerIcons[gameSettings.theme].blue));
-    sessionStorage.setItem("playerIconOrange:", JSON.stringify(playerIcons[gameSettings.theme].orange));
+    sessionStorage.setItem("theme:", JSON.stringify(GAME_SETTINGS.theme));
+    sessionStorage.setItem("playerIconBlue:", JSON.stringify(PLAYER_ICONS[GAME_SETTINGS.theme].blue));
+    sessionStorage.setItem("playerIconOrange:", JSON.stringify(PLAYER_ICONS[GAME_SETTINGS.theme].orange));
 }
 function loadEndscreen(winner, scoreB, scoreO) {
     saveGameWinner(winner, scoreB, scoreO);
@@ -349,4 +350,3 @@ function init() {
     determinePlayer();
 }
 init();
-export {};
