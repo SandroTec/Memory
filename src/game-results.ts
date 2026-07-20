@@ -163,7 +163,6 @@ homeButton?.addEventListener("click", () => {
 })
 
 function endGame() {
-    //function to end the game and go back to settings.
     window.location.href = "./settings.html";
 }
 

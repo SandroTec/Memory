@@ -69,6 +69,55 @@ p {
   color: #FD5B4F;
 }
 
+header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-content: space-evenly !important;
+  width: 90%;
+}
+
+.theme-code {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start !important;
+}
+.theme-code header {
+  background: transparent;
+  color: white;
+}
+
+.theme-gaming {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start !important;
+}
+.theme-gaming header {
+  background: #545D75;
+  color: white;
+}
+
+.theme-da {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start !important;
+}
+.theme-da header {
+  background: #F0F3F4;
+}
+.theme-da header div {
+  color: rgb(30, 117, 148);
+}
+
 .card {
   width: 120px;
   height: 120px;
@@ -365,13 +414,6 @@ h2 {
     width: 60px;
   }
 }
-header {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  justify-content: space-evenly !important;
-}
-
 .bg-color-code {
   background: rgba(43, 177, 255, 0.05);
 }
@@ -382,10 +424,6 @@ header {
 
 .bg-color-da {
   background: rgb(48, 49, 49);
-}
-
-#currentPlayerDisplay {
-  color: white;
 }
 
 @keyframes wiggle {

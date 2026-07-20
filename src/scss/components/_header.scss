@@ -1,0 +1,39 @@
+@use '../abstract/mixins' as mx;
+
+header {
+    @include mx.flex-center;
+    justify-content: space-evenly !important;
+    width: 90%;
+}
+
+.theme-code {
+    @include mx.flex-center;
+    @include mx.fd-column;
+    justify-content: flex-start !important;
+    header {
+        background: transparent;
+        color: white;
+    }
+}
+
+.theme-gaming {
+    @include mx.flex-center;
+    @include mx.fd-column;
+    justify-content: flex-start !important;
+    header {
+        background: #545D75;
+        color: white;
+    }
+}
+
+.theme-da {
+    @include mx.flex-center;
+    @include mx.fd-column;
+    justify-content: flex-start !important;
+    header {
+        background: #F0F3F4;
+        div {
+            color: rgb(30, 117, 148);
+        }
+    }
+}

@@ -1,10 +1,5 @@
 @use '../abstract/mixins' as mx;
 
-header {
-    @include mx.flex-center;
-    justify-content: space-evenly !important;
-}
-
 .bg-color-code {
   background: rgb(43, 177, 255, 0.05);
 }
@@ -15,11 +10,6 @@ header {
 
 .bg-color-da {
   background: rgb(48, 49, 49);
-}
-
-
-#currentPlayerDisplay {
-  color: white;
 }
 
 @keyframes wiggle {
