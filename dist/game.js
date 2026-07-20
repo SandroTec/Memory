@@ -1,4 +1,4 @@
-import { codeImages, gamingImages, daImages, codeCardBack, gamingCardBack, daCardBack, codePlayerIcons, gamingPlayerIcons, daPlayerIcons, codeExitBtns, gamingExitBtns, daExitBtns, codeBackToGameBtns, gamingBackToGameBtns, daBackToGameBtns, codeEndGame, gamingEndGame, daEndGameBtns } from "./loadImages.js";
+import { codeImages, gamingImages, daImages, codeCardBack, gamingCardBack, daCardBack, codePlayerIcons, gamingPlayerIcons, daPlayerIcons, codeExitBtns, gamingExitBtns, daExitBtns, codeBackToGameBtns, gamingBackToGameBtns, daBackToGameBtns, codeEndGame, gamingEndGame, daEndGameBtns } from "./load-images.js";
 function loadGameSettings() {
     const storedSettings = sessionStorage.getItem("gameSettings");
     if (storedSettings) {

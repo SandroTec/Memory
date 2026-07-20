@@ -22,7 +22,7 @@ import {
     codeEndGame,
     gamingEndGame,
     daEndGameBtns
-} from "./loadImages.js";
+} from "./load-images.js";
 
 type Theme = "code" | "gaming" | "da";
 

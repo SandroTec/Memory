@@ -38,7 +38,7 @@ p {
 }
 
 .theme-gaming {
-  background: rgb(48, 49, 49);
+  background: rgb(41, 70, 96);
   font-family: Orbitron;
   font-weight: 700;
   font-size: 28px;
@@ -54,7 +54,6 @@ p {
 }
 
 .theme-da {
-  background: rgb(48, 49, 49);
   font-family: Figtree;
   font-weight: 700;
   font-size: 28px;
@@ -381,6 +380,14 @@ header {
   background: rgba(172, 15, 15, 0.05);
 }
 
+.bg-color-da {
+  background: rgb(48, 49, 49);
+}
+
+#currentPlayerDisplay {
+  color: white;
+}
+
 @keyframes wiggle {
   0%, 100% {
     transform: rotate(0deg);
@@ -420,6 +427,10 @@ header {
 }
 .endscreen-show-result:not(.d-none) {
   animation: slide-in 0.85s ease-out forwards;
+}
+
+.da-bg-endscreen {
+  background: rgb(30, 117, 148);
 }
 
 body {

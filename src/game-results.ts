@@ -167,8 +167,14 @@ function endGame() {
     window.location.href = "./settings.html";
 }
 
+function initaliseBgColor() {
+    if(theme != "da") return
+    endscreenBody?.classList.add("da-bg-endscreen")
+}
+
 async function init() {
     const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+    initaliseBgColor();
     initaliseHeadline();
     initaliseScoreBoard();
     initaliseScores();

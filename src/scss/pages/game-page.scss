@@ -13,6 +13,14 @@ header {
   background: rgb(172, 15, 15, 0.05);
 }
 
+.bg-color-da {
+  background: rgb(48, 49, 49);
+}
+
+
+#currentPlayerDisplay {
+  color: white;
+}
 
 @keyframes wiggle {
   0%, 100% { 
