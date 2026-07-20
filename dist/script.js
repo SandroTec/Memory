@@ -1,158 +1,158 @@
-const startButton = document.querySelector("#startButton");
-const controllerImage = document.querySelector("#controllerImage");
-const blackArrow = document.querySelector("#blackArrow");
-startButton?.addEventListener("click", () => {
+const START_BUTTON = document.querySelector("#startButton");
+const CONTROLLER_IMG = document.querySelector("#controllerImage");
+const BLACK_ARROW = document.querySelector("#blackArrow");
+START_BUTTON?.addEventListener("click", () => {
     window.location.href = "./html/settings.html";
 });
-startButton?.addEventListener("mouseenter", () => {
-    if (!controllerImage || !blackArrow || !startButton)
+START_BUTTON?.addEventListener("mouseenter", () => {
+    if (!CONTROLLER_IMG || !BLACK_ARROW || !START_BUTTON)
         return;
-    controllerImage.style.rotate = "-16deg";
-    blackArrow.style.height = "30px";
-    startButton.style.transform = "scale(1.2, 1.2)";
+    CONTROLLER_IMG.style.rotate = "-16deg";
+    BLACK_ARROW.style.height = "30px";
+    START_BUTTON.style.transform = "scale(1.2, 1.2)";
 });
-startButton?.addEventListener("mouseleave", () => {
-    if (!controllerImage || !blackArrow || !startButton)
+START_BUTTON?.addEventListener("mouseleave", () => {
+    if (!CONTROLLER_IMG || !BLACK_ARROW || !START_BUTTON)
         return;
-    controllerImage.style.rotate = "0deg";
-    blackArrow.style.height = "20px";
-    startButton.style.transform = "scale(1, 1)";
+    CONTROLLER_IMG.style.rotate = "0deg";
+    BLACK_ARROW.style.height = "20px";
+    START_BUTTON.style.transform = "scale(1, 1)";
 });
-const gameSettings = {
+const GAME_SETTINGS = {
     theme: "code",
     player: "blue",
     cards: "16"
 };
-const themeContainer = document.querySelector("._themes-c");
-const themeOptions = document.querySelectorAll("[data-theme]");
-const playerContainer = document.querySelector("._player-c");
-const playerOptions = document.querySelectorAll("[data-player]");
-const cardContainer = document.querySelector("._board-size-c");
-const cardOptions = document.querySelectorAll("[data-cards]");
-const themeImg = document.querySelector("#themeImage");
-const themeD = document.querySelector("#themeDisplay");
-const playerD = document.querySelector("#playerDisplay");
-const boardD = document.querySelector("#boardDisplay");
-themeOptions.forEach((themeOption) => {
+const THEME_CONTAINER = document.querySelector("._themes-c");
+const THEME_OPTIONS = document.querySelectorAll("[data-theme]");
+const PLAYER_CONTAINER = document.querySelector("._player-c");
+const PLAYER_OPTIONS = document.querySelectorAll("[data-player]");
+const CARD_CONTAINER = document.querySelector("._board-size-c");
+const CARD_OPTIONS = document.querySelectorAll("[data-cards]");
+const THEME_IMG = document.querySelector("#themeImage");
+const THEME_D = document.querySelector("#themeDisplay");
+const PLAYER_D = document.querySelector("#playerDisplay");
+const BOARD_D = document.querySelector("#boardDisplay");
+THEME_OPTIONS.forEach((themeOption) => {
     themeOption.addEventListener("click", () => {
-        const selectedTheme = themeOption.dataset.theme;
-        if (!selectedTheme || !themeContainer)
+        const SELECTED_THEME = themeOption.dataset.theme;
+        if (!SELECTED_THEME || !THEME_CONTAINER)
             return;
-        if (!themeD)
+        if (!THEME_D)
             return;
-        themeD.textContent = selectedTheme;
-        themeD.textContent = themeD.textContent.toUpperCase();
-        gameSettings.theme = selectedTheme;
-        updateThemeImage(selectedTheme);
-        const chosenIndicator = themeOption.querySelector(".choose-indicator");
-        const listIndicator = themeOption.querySelector(".circle-indicator");
-        if (chosenIndicator && listIndicator) {
-            updateIndicator(chosenIndicator, themeContainer);
-            updateSecondIndicator(listIndicator, themeContainer);
+        THEME_D.textContent = SELECTED_THEME;
+        THEME_D.textContent = THEME_D.textContent.toUpperCase();
+        GAME_SETTINGS.theme = SELECTED_THEME;
+        updateThemeImage(SELECTED_THEME);
+        const CHOSEN_INDICATOR = themeOption.querySelector(".choose-indicator");
+        const LIST_INDICATOR = themeOption.querySelector(".circle-indicator");
+        if (CHOSEN_INDICATOR && LIST_INDICATOR) {
+            updateIndicator(CHOSEN_INDICATOR, THEME_CONTAINER);
+            updateSecondIndicator(LIST_INDICATOR, THEME_CONTAINER);
         }
     });
 });
-themeOptions.forEach((themeOption) => {
+THEME_OPTIONS.forEach((themeOption) => {
     themeOption.addEventListener("mouseenter", () => {
-        const selectedTheme = themeOption.dataset.theme;
-        if (!selectedTheme || !themeContainer)
+        const SELECTED_THEME = themeOption.dataset.theme;
+        if (!SELECTED_THEME || !THEME_CONTAINER)
             return;
         ;
-        updateThemeImage(selectedTheme);
+        updateThemeImage(SELECTED_THEME);
     });
 });
-themeOptions.forEach((themeOption) => {
+THEME_OPTIONS.forEach((themeOption) => {
     themeOption.addEventListener("mouseleave", () => {
-        const selectedTheme = gameSettings.theme;
-        if (!selectedTheme || !themeContainer)
+        const SELECTED_THEME = GAME_SETTINGS.theme;
+        if (!SELECTED_THEME || !THEME_CONTAINER)
             return;
         ;
-        updateThemeImage(selectedTheme);
+        updateThemeImage(SELECTED_THEME);
     });
 });
-playerOptions.forEach((playerOption) => {
+PLAYER_OPTIONS.forEach((playerOption) => {
     playerOption.addEventListener("click", () => {
-        const selectedPlayer = playerOption.dataset.player;
-        if (!selectedPlayer || !playerContainer)
+        const SELECTED_PLAYER = playerOption.dataset.player;
+        if (!SELECTED_PLAYER || !PLAYER_CONTAINER)
             return;
-        if (!playerD)
+        if (!PLAYER_D)
             return;
-        playerD.textContent = selectedPlayer;
-        playerD.textContent = playerD.textContent.toLocaleUpperCase();
-        gameSettings.player = selectedPlayer;
-        const chosenIndicator = playerOption.querySelector(".choose-indicator");
-        const listIndicator = playerOption.querySelector(".circle-indicator");
-        if (chosenIndicator && listIndicator) {
-            updateIndicator(chosenIndicator, playerContainer);
-            updateSecondIndicator(listIndicator, playerContainer);
+        PLAYER_D.textContent = SELECTED_PLAYER;
+        PLAYER_D.textContent = PLAYER_D.textContent.toLocaleUpperCase();
+        GAME_SETTINGS.player = SELECTED_PLAYER;
+        const CHOSEN_INDICATOR = playerOption.querySelector(".choose-indicator");
+        const LIST_INDICATOR = playerOption.querySelector(".circle-indicator");
+        if (CHOSEN_INDICATOR && LIST_INDICATOR) {
+            updateIndicator(CHOSEN_INDICATOR, PLAYER_CONTAINER);
+            updateSecondIndicator(LIST_INDICATOR, PLAYER_CONTAINER);
         }
     });
 });
-cardOptions.forEach((cardOption) => {
+CARD_OPTIONS.forEach((cardOption) => {
     cardOption.addEventListener("click", () => {
-        const selectedCards = cardOption.dataset.cards;
-        if (!selectedCards || !cardContainer)
+        const SELECTED_CARDS = cardOption.dataset.cards;
+        if (!SELECTED_CARDS || !CARD_CONTAINER)
             return;
-        if (!boardD)
+        if (!BOARD_D)
             return;
-        boardD.textContent = selectedCards + " " + "CARDS";
-        gameSettings.cards = selectedCards;
-        const chosenIndicator = cardOption.querySelector(".choose-indicator");
-        const listIndicator = cardOption.querySelector(".circle-indicator");
-        if (chosenIndicator && listIndicator) {
-            updateIndicator(chosenIndicator, cardContainer);
-            updateSecondIndicator(listIndicator, cardContainer);
+        BOARD_D.textContent = SELECTED_CARDS + " " + "CARDS";
+        GAME_SETTINGS.cards = SELECTED_CARDS;
+        const CHOSEN_INDICATOR = cardOption.querySelector(".choose-indicator");
+        const LIST_INDICATOR = cardOption.querySelector(".circle-indicator");
+        if (CHOSEN_INDICATOR && LIST_INDICATOR) {
+            updateIndicator(CHOSEN_INDICATOR, CARD_CONTAINER);
+            updateSecondIndicator(LIST_INDICATOR, CARD_CONTAINER);
         }
     });
 });
 function updateIndicator(chosenIndicator, container) {
-    const indicators = container.querySelectorAll(".choose-indicator");
-    indicators.forEach((indicator) => {
+    const INDICATORS = container.querySelectorAll(".choose-indicator");
+    INDICATORS.forEach((indicator) => {
         indicator.classList.add("d-none");
     });
     chosenIndicator.classList.remove("d-none");
 }
 function updateSecondIndicator(listIndicator, themeContainer) {
-    const indicators = themeContainer.querySelectorAll(".circle-indicator");
-    indicators.forEach((indicator) => {
+    const INDICATORS = themeContainer.querySelectorAll(".circle-indicator");
+    INDICATORS.forEach((indicator) => {
         indicator.src = "../../src/assets/img/settings_page/indicator_for_list.png";
     });
     listIndicator.src = "../../src/assets/img/settings_page/indicator_circle.png";
 }
 function updateThemeImage(selectedTheme) {
-    if (!themeImg)
+    if (!THEME_IMG)
         return;
     switch (selectedTheme) {
         case "gaming":
-            themeImg.src = "../../src/assets/img/settings_page/Theme Visual_Gaming.png";
+            THEME_IMG.src = "../../src/assets/img/settings_page/Theme Visual_Gaming.png";
             break;
         case "da":
-            themeImg.src = "../../src/assets/img/settings_page/Theme Visual_DA.png";
+            THEME_IMG.src = "../../src/assets/img/settings_page/Theme Visual_DA.png";
             break;
         case "code":
-            themeImg.src = "../../src/assets/img/settings_page/Theme Visual_Code.png";
+            THEME_IMG.src = "../../src/assets/img/settings_page/Theme Visual_Code.png";
             break;
         default:
-            themeImg.src = "../../src/assets/img/settings_page/Theme Visual_Code.png";
+            THEME_IMG.src = "../../src/assets/img/settings_page/Theme Visual_Code.png";
             break;
     }
 }
 function saveGameSettings() {
-    sessionStorage.setItem("gameSettings", JSON.stringify(gameSettings));
+    sessionStorage.setItem("gameSettings", JSON.stringify(GAME_SETTINGS));
 }
-const gameStartButton = document.querySelector("#startGame");
-gameStartButton?.addEventListener("click", () => {
+const GAME_START_BUTTON = document.querySelector("#startGame");
+GAME_START_BUTTON?.addEventListener("click", () => {
     saveGameSettings();
     window.location.href = "./game.html";
 });
-gameStartButton?.addEventListener("mouseenter", () => {
-    if (!gameStartButton)
+GAME_START_BUTTON?.addEventListener("mouseenter", () => {
+    if (!GAME_START_BUTTON)
         return;
-    gameStartButton.style.transform = "scale(1.2, 1.2)";
+    GAME_START_BUTTON.style.transform = "scale(1.2, 1.2)";
 });
-gameStartButton?.addEventListener("mouseleave", () => {
-    if (!gameStartButton)
+GAME_START_BUTTON?.addEventListener("mouseleave", () => {
+    if (!GAME_START_BUTTON)
         return;
-    gameStartButton.style.transform = "scale(1, 1)";
+    GAME_START_BUTTON.style.transform = "scale(1, 1)";
 });
 export {};

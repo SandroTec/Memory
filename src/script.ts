@@ -1,132 +1,118 @@
-const startButton = document.querySelector<HTMLButtonElement>("#startButton");
+const START_BUTTON = document.querySelector<HTMLButtonElement>("#startButton");
 
-const controllerImage = document.querySelector<HTMLImageElement>("#controllerImage");
-const blackArrow = document.querySelector<HTMLImageElement>("#blackArrow");
+const CONTROLLER_IMG = document.querySelector<HTMLImageElement>("#controllerImage");
+const BLACK_ARROW = document.querySelector<HTMLImageElement>("#blackArrow");
 
-startButton?.addEventListener("click", () => {
+START_BUTTON?.addEventListener("click", () => {
     window.location.href = "./html/settings.html";
 });
 
-startButton?.addEventListener("mouseenter", () => {
-    if (!controllerImage || !blackArrow || !startButton) return;
-    controllerImage.style.rotate = "-16deg";
-    blackArrow.style.height = "30px";
-    startButton.style.transform  =  "scale(1.2, 1.2)";
+START_BUTTON?.addEventListener("mouseenter", () => {
+    if (!CONTROLLER_IMG || !BLACK_ARROW || !START_BUTTON) return;
+    CONTROLLER_IMG.style.rotate = "-16deg";
+    BLACK_ARROW.style.height = "30px";
+    START_BUTTON.style.transform  =  "scale(1.2, 1.2)";
 })
-startButton?.addEventListener("mouseleave", () => {
-    if (!controllerImage || !blackArrow || !startButton) return;
-    controllerImage.style.rotate = "0deg";
-    blackArrow.style.height = "20px"
-    startButton.style.transform  =  "scale(1, 1)";
+START_BUTTON?.addEventListener("mouseleave", () => {
+    if (!CONTROLLER_IMG || !BLACK_ARROW || !START_BUTTON) return;
+    CONTROLLER_IMG.style.rotate = "0deg";
+    BLACK_ARROW.style.height = "20px"
+    START_BUTTON.style.transform  =  "scale(1, 1)";
 })
 
-const gameSettings = {
+const GAME_SETTINGS = {
     theme: "code",
     player: "blue",
     cards: "16"
 };
 
 
-const themeContainer = document.querySelector<HTMLDivElement>("._themes-c");
-const themeOptions = document.querySelectorAll<HTMLLIElement>("[data-theme]");
+const THEME_CONTAINER = document.querySelector<HTMLDivElement>("._themes-c");
+const THEME_OPTIONS = document.querySelectorAll<HTMLLIElement>("[data-theme]");
 
-const playerContainer = document.querySelector<HTMLDivElement>("._player-c");
-const playerOptions = document.querySelectorAll<HTMLLIElement>("[data-player]");
+const PLAYER_CONTAINER = document.querySelector<HTMLDivElement>("._player-c");
+const PLAYER_OPTIONS = document.querySelectorAll<HTMLLIElement>("[data-player]");
 
-const cardContainer = document.querySelector<HTMLDivElement>("._board-size-c");
-const cardOptions = document.querySelectorAll<HTMLLIElement>("[data-cards]");
+const CARD_CONTAINER = document.querySelector<HTMLDivElement>("._board-size-c");
+const CARD_OPTIONS = document.querySelectorAll<HTMLLIElement>("[data-cards]");
 
-const themeImg = document.querySelector<HTMLImageElement>("#themeImage");
-const themeD = document.querySelector<HTMLParagraphElement>("#themeDisplay");
+const THEME_IMG = document.querySelector<HTMLImageElement>("#themeImage");
+const THEME_D = document.querySelector<HTMLParagraphElement>("#themeDisplay");
 
-const playerD = document.querySelector("#playerDisplay");
-const boardD = document.querySelector("#boardDisplay");
+const PLAYER_D = document.querySelector("#playerDisplay");
+const BOARD_D = document.querySelector("#boardDisplay");
 
-themeOptions.forEach((themeOption) => {
+THEME_OPTIONS.forEach((themeOption) => {
     themeOption.addEventListener("click", () => {
-        const selectedTheme = themeOption.dataset.theme;
-
-        if (!selectedTheme || !themeContainer) return;
-        if (!themeD) return
-        themeD.textContent = selectedTheme;
-        themeD.textContent = themeD.textContent.toUpperCase()
-        gameSettings.theme = selectedTheme;
-        updateThemeImage(selectedTheme)
-        const chosenIndicator =
-            themeOption.querySelector<HTMLImageElement>(".choose-indicator");
-        const listIndicator =
-            themeOption.querySelector<HTMLImageElement>(".circle-indicator");
-        
-        if (chosenIndicator && listIndicator) {
-            updateIndicator(chosenIndicator, themeContainer);
-            updateSecondIndicator(listIndicator, themeContainer);
+        const SELECTED_THEME = themeOption.dataset.theme;
+        if (!SELECTED_THEME || !THEME_CONTAINER) return;
+        if (!THEME_D) return
+        THEME_D.textContent = SELECTED_THEME;
+        THEME_D.textContent = THEME_D.textContent.toUpperCase()
+        GAME_SETTINGS.theme = SELECTED_THEME;
+        updateThemeImage(SELECTED_THEME)
+        const CHOSEN_INDICATOR = themeOption.querySelector<HTMLImageElement>(".choose-indicator");
+        const LIST_INDICATOR = themeOption.querySelector<HTMLImageElement>(".circle-indicator");
+        if (CHOSEN_INDICATOR && LIST_INDICATOR) {
+            updateIndicator(CHOSEN_INDICATOR, THEME_CONTAINER);
+            updateSecondIndicator(LIST_INDICATOR, THEME_CONTAINER);
         }
     });
 });
 
-themeOptions.forEach((themeOption) => {
+THEME_OPTIONS.forEach((themeOption) => {
     themeOption.addEventListener("mouseenter", () => {
-        const selectedTheme = themeOption.dataset.theme;
+        const SELECTED_THEME = themeOption.dataset.theme;
 
-        if (!selectedTheme || !themeContainer) return;;
-        updateThemeImage(selectedTheme)
+        if (!SELECTED_THEME || !THEME_CONTAINER) return;;
+        updateThemeImage(SELECTED_THEME)
 
     });
 });
 
-themeOptions.forEach((themeOption) => {
+THEME_OPTIONS.forEach((themeOption) => {
     themeOption.addEventListener("mouseleave", () => {
-        const selectedTheme = gameSettings.theme;
+        const SELECTED_THEME = GAME_SETTINGS.theme;
 
-        if (!selectedTheme || !themeContainer) return;;
-        updateThemeImage(selectedTheme)
+        if (!SELECTED_THEME || !THEME_CONTAINER) return;;
+        updateThemeImage(SELECTED_THEME)
 
     });
 });
 
-playerOptions.forEach((playerOption) => {
+PLAYER_OPTIONS.forEach((playerOption) => {
 
     playerOption.addEventListener("click", () => {
-        const selectedPlayer = playerOption.dataset.player;
+        const SELECTED_PLAYER = playerOption.dataset.player;
 
-        if (!selectedPlayer || !playerContainer) return;
-        if (!playerD) return
-        playerD.textContent = selectedPlayer;
-        playerD.textContent = playerD.textContent.toLocaleUpperCase();
-        gameSettings.player = selectedPlayer;
-
-        const chosenIndicator =
-            playerOption.querySelector<HTMLImageElement>(".choose-indicator");
-        const listIndicator =
-            playerOption.querySelector<HTMLImageElement>(".circle-indicator");
-        
-        if (chosenIndicator && listIndicator) {
-            updateIndicator(chosenIndicator, playerContainer);
-            updateSecondIndicator(listIndicator, playerContainer);
+        if (!SELECTED_PLAYER || !PLAYER_CONTAINER) return;
+        if (!PLAYER_D) return
+        PLAYER_D.textContent = SELECTED_PLAYER;
+        PLAYER_D.textContent = PLAYER_D.textContent.toLocaleUpperCase();
+        GAME_SETTINGS.player = SELECTED_PLAYER;
+        const CHOSEN_INDICATOR = playerOption.querySelector<HTMLImageElement>(".choose-indicator");
+        const LIST_INDICATOR = playerOption.querySelector<HTMLImageElement>(".circle-indicator");
+        if (CHOSEN_INDICATOR && LIST_INDICATOR) {
+            updateIndicator(CHOSEN_INDICATOR, PLAYER_CONTAINER);
+            updateSecondIndicator(LIST_INDICATOR, PLAYER_CONTAINER);
         }
     });
 });
 
-cardOptions.forEach((cardOption) => {
-
+CARD_OPTIONS.forEach((cardOption) => {
     cardOption.addEventListener("click", () => {
-        const selectedCards = cardOption.dataset.cards;
-
-        if (!selectedCards || !cardContainer) return;
-        if (!boardD) return
-        boardD.textContent = selectedCards+ " " + "CARDS";
-        gameSettings.cards = selectedCards;
-
-        const chosenIndicator =
-            cardOption.querySelector<HTMLImageElement>(".choose-indicator");
-        const listIndicator =
-            cardOption.querySelector<HTMLImageElement>(".circle-indicator");
-        if (chosenIndicator && listIndicator) {
-            updateIndicator(chosenIndicator, cardContainer);
-            updateSecondIndicator(listIndicator, cardContainer);
+        const SELECTED_CARDS = cardOption.dataset.cards;
+        if (!SELECTED_CARDS || !CARD_CONTAINER) return;
+        if (!BOARD_D) return
+        BOARD_D.textContent = SELECTED_CARDS+ " " + "CARDS";
+        GAME_SETTINGS.cards = SELECTED_CARDS;
+        const CHOSEN_INDICATOR = cardOption.querySelector<HTMLImageElement>(".choose-indicator");
+        const LIST_INDICATOR = cardOption.querySelector<HTMLImageElement>(".circle-indicator");
+        if (CHOSEN_INDICATOR && LIST_INDICATOR) {
+            updateIndicator(CHOSEN_INDICATOR, CARD_CONTAINER);
+            updateSecondIndicator(LIST_INDICATOR, CARD_CONTAINER);
         }
     });
-
 });
 
 function updateIndicator(
@@ -134,10 +120,10 @@ function updateIndicator(
     container: HTMLDivElement
 ) {
 
-    const indicators =
+    const INDICATORS =
         container.querySelectorAll<HTMLImageElement>(".choose-indicator");
 
-    indicators.forEach((indicator) => {
+    INDICATORS.forEach((indicator) => {
         indicator.classList.add("d-none");
     });
 
@@ -148,33 +134,30 @@ function updateSecondIndicator(
     listIndicator:HTMLImageElement, 
     themeContainer: HTMLDivElement
 ) {
-    const indicators =
-        themeContainer.querySelectorAll<HTMLImageElement>(".circle-indicator");
-
-    indicators.forEach((indicator) => {
+    const INDICATORS = themeContainer.querySelectorAll<HTMLImageElement>(".circle-indicator");
+    INDICATORS.forEach((indicator) => {
         indicator.src = "../../src/assets/img/settings_page/indicator_for_list.png";
     });
-
     listIndicator.src = "../../src/assets/img/settings_page/indicator_circle.png";
 }
 
 function updateThemeImage(selectedTheme:string) {
-    if (!themeImg) return;
+    if (!THEME_IMG) return;
     switch (selectedTheme) {
             case "gaming":
-                themeImg.src = "../../src/assets/img/settings_page/Theme Visual_Gaming.png";
+                THEME_IMG.src = "../../src/assets/img/settings_page/Theme Visual_Gaming.png";
                 break;
 
             case "da":
-                themeImg.src = "../../src/assets/img/settings_page/Theme Visual_DA.png";
+                THEME_IMG.src = "../../src/assets/img/settings_page/Theme Visual_DA.png";
                 break
 
             case "code":
-                themeImg.src = "../../src/assets/img/settings_page/Theme Visual_Code.png";
+                THEME_IMG.src = "../../src/assets/img/settings_page/Theme Visual_Code.png";
                 break
 
             default:
-                themeImg.src = "../../src/assets/img/settings_page/Theme Visual_Code.png";
+                THEME_IMG.src = "../../src/assets/img/settings_page/Theme Visual_Code.png";
                 break;
         }
 }
@@ -182,25 +165,26 @@ function updateThemeImage(selectedTheme:string) {
 function saveGameSettings() {
     sessionStorage.setItem(
         "gameSettings",
-        JSON.stringify(gameSettings)
+        JSON.stringify(GAME_SETTINGS)
     );
 }
 
-const gameStartButton = document.querySelector<HTMLButtonElement>("#startGame");
+const GAME_START_BUTTON = document.querySelector<HTMLButtonElement>("#startGame");
 
 
-gameStartButton?.addEventListener("click", () => {
+GAME_START_BUTTON?.addEventListener("click", () => {
     saveGameSettings();
     window.location.href = "./game.html";
 });
 
-gameStartButton?.addEventListener("mouseenter", () => {
-    if (!gameStartButton) return
-    gameStartButton.style.transform =  "scale(1.2, 1.2)"
+GAME_START_BUTTON?.addEventListener("mouseenter", () => {
+    if (!GAME_START_BUTTON) return
+    GAME_START_BUTTON.style.transform =  "scale(1.2, 1.2)"
 });
-gameStartButton?.addEventListener("mouseleave", () => {
-    if (!gameStartButton) return
-    gameStartButton.style.transform =  "scale(1, 1)"
+
+GAME_START_BUTTON?.addEventListener("mouseleave", () => {
+    if (!GAME_START_BUTTON) return
+    GAME_START_BUTTON.style.transform =  "scale(1, 1)"
 });
 
 export {};
