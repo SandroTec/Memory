@@ -1,34 +1,34 @@
 //code-theme images:
-const codeCardBack = "../../src/assets/img/game_page/code-theme/main/card/basic_card_back.png";
+const CODE_CARD_BACK = "../../src/assets/img/game_page/code-theme/main/card/basic_card_back.png";
 
-const codePlayerIconB = "../../src/assets/img/game_page/code-theme/header/player_label_blue.png";
-const codePlayerIconO = "../../src/assets/img/game_page/code-theme/header/player_label_orange.png";
+const CODE_PLAYER_ICON_B = "../../src/assets/img/game_page/code-theme/header/player_label_blue.png";
+const CODE_PLAYER_ICON_O = "../../src/assets/img/game_page/code-theme/header/player_label_orange.png";
 
-const codePlayerIcons = {
-    blue: codePlayerIconB,
-    orange: codePlayerIconO
+const CODE_PLAYER_ICONS = {
+    blue: CODE_PLAYER_ICON_B,
+    orange: CODE_PLAYER_ICON_O
 }
 
-const codeExitDefaultBtn = "../../src/assets/img/game_page/code-theme/header/exit_game_default.png";
-const codeExitHoverBtn = "../../src/assets/img/game_page/code-theme/header/exit_game_hover.png";
+const CODE_EXIT_DEFAULT_BTN = "../../src/assets/img/game_page/code-theme/header/exit_game_default.png";
+const CODE_EXIT_HOVER_BTN = "../../src/assets/img/game_page/code-theme/header/exit_game_hover.png";
 
-const codeBackToGameDefault = "../../src/assets/img/game_page/code-theme/header/back_to_game.png";
-const codeBackToGameHover = "../../src/assets/img/game_page/code-theme/header/back_to_game_hover.png";
+const CODE_BACK_TO_GAME_DEFAULT = "../../src/assets/img/game_page/code-theme/header/back_to_game.png";
+const CODE_BACK_TO_GAME_HOVER = "../../src/assets/img/game_page/code-theme/header/back_to_game_hover.png";
 
-const codeEndGame = "../../src/assets/img/game_page/code-theme/header/end_game_button.png";
+const CODE_END_GAME = "../../src/assets/img/game_page/code-theme/header/end_game_button.png";
 
-const codeExitBtns = {
-    default: codeExitDefaultBtn,
-    hover: codeExitHoverBtn
+const CODE_EXIT_BTNS = {
+    default: CODE_EXIT_DEFAULT_BTN,
+    hover: CODE_EXIT_HOVER_BTN
 }
 
-const codeBackToGameBtns = {
-    default: codeBackToGameDefault,
-    hover: codeBackToGameHover
+const CODE_BACK_TO_GAME_BTNS = {
+    default: CODE_BACK_TO_GAME_DEFAULT,
+    hover: CODE_BACK_TO_GAME_HOVER
 }
 
 
-const codeImages = [
+const CODE_IMAGES = [
     "../../src/assets/img/game_page/code-theme/main/card/html_card.png",
     "../../src/assets/img/game_page/code-theme/main/card/css_card.png",
     "../../src/assets/img/game_page/code-theme/main/card/typescript_card.png",
@@ -51,36 +51,36 @@ const codeImages = [
 
 //gaming-theme images:
 
-const gamingCardBack = "../../src/assets/img/game_page/gaming-theme/main/card/basic_card_back.png";
+const GAMING_CARD_BACK = "../../src/assets/img/game_page/gaming-theme/main/card/basic_card_back.png";
 
-const gamingPlayerIconB = "../../src/assets/img/game_page/gaming-theme/header/chess_pawn_blue.png";
-const gamingPlayerIconO = "../../src/assets/img/game_page/gaming-theme/header/chess_pawn_orange.png";
+const GAMING_PLAYER_ICON_B = "../../src/assets/img/game_page/gaming-theme/header/chess_pawn_blue.png";
+const GAMING_PLAYER_ICON_O = "../../src/assets/img/game_page/gaming-theme/header/chess_pawn_orange.png";
 
-const gamingPlayerIcons = {
-    blue: gamingPlayerIconB,
-    orange: gamingPlayerIconO
+const GAMING_PLAYER_ICONS = {
+    blue: GAMING_PLAYER_ICON_B,
+    orange: GAMING_PLAYER_ICON_O
 }
 
-const gamingExitDefaultBtn = "../../src/assets/img/game_page/gaming-theme/header/exit_game_default.png";
-const gamingExitHoverBtn = "../../src/assets/img/game_page/gaming-theme/header/exit_game_hover.png";
+const GAMING_EXIT_DEFAULT_BTN = "../../src/assets/img/game_page/gaming-theme/header/exit_game_default.png";
+const GAMING_EXIT_HOVER_BTN = "../../src/assets/img/game_page/gaming-theme/header/exit_game_hover.png";
 
-const gamingBackToGameDefault = "../../src/assets/img/game_page/gaming-theme/header/back_to_game.png";
-const gamingBackToGameHover = "../../src/assets/img/game_page/gaming-theme/header/back_to_game_hover.png";
+const GAMING_BACK_TO_GAME_DEFAULT = "../../src/assets/img/game_page/gaming-theme/header/back_to_game.png";
+const GAMING_BACK_TO_GAME_HOVER = "../../src/assets/img/game_page/gaming-theme/header/back_to_game_hover.png";
 
-const gamingEndGame = "../../src/assets/img/game_page/gaming-theme/header/end_game_button.png";
+const GAMING_END_GAME = "../../src/assets/img/game_page/gaming-theme/header/end_game_button.png";
 
 
-const gamingExitBtns = {
-    default: gamingExitDefaultBtn,
-    hover: gamingExitHoverBtn
+const GAMING_EXIT_BTNS = {
+    default: GAMING_EXIT_DEFAULT_BTN,
+    hover: GAMING_EXIT_HOVER_BTN
 }
 
-const gamingBackToGameBtns = {
-    default: gamingBackToGameDefault,
-    hover: gamingBackToGameHover
+const GAMING_BACK_TO_GAME_BTNS = {
+    default: GAMING_BACK_TO_GAME_DEFAULT,
+    hover: GAMING_BACK_TO_GAME_HOVER
 }
 
-const gamingImages = [
+const GAMING_IMAGES = [
     "../../src/assets/img/game_page/gaming-theme/main/card/ass_card.png",
     "../../src/assets/img/game_page/gaming-theme/main/card/banana_card.png",
     "../../src/assets/img/game_page/gaming-theme/main/card/controller_card.png",
@@ -103,44 +103,44 @@ const gamingImages = [
 
 //DA-theme images:
 
-const daCardBack = "../../src/assets/img/game_page/da-theme/main/card/basic_card_back.png";
+const DA_CARD_BACK = "../../src/assets/img/game_page/da-theme/main/card/basic_card_back.png";
 
 
-const daPlayerIconB = "../../src/assets/img/game_page/da-theme/header/chess_pawn_blue.png";
-const daPlayerIconO = "../../src/assets/img/game_page/da-theme/header/chess_pawn_orange.png";
+const DA_PLAYER_ICON_B = "../../src/assets/img/game_page/da-theme/header/chess_pawn_blue.png";
+const DA_PLAYER_ICON_O = "../../src/assets/img/game_page/da-theme/header/chess_pawn_orange.png";
 
-const daPlayerIcons = {
-    blue: daPlayerIconB,
-    orange: daPlayerIconO
+const DA_PLAYER_ICONS = {
+    blue: DA_PLAYER_ICON_B,
+    orange: DA_PLAYER_ICON_O
 }
 
-const daExitDefaultBtn = "../../src/assets/img/game_page/da-theme/header/exit_game_default.png";
-const daExitHoverBtn = "../../src/assets/img/game_page/da-theme/header/exit_game_hover.png";
+const DA_EXIT_DEFAULT_BTN = "../../src/assets/img/game_page/da-theme/header/exit_game_default.png";
+const DA_EXIT_HOVER_BTN = "../../src/assets/img/game_page/da-theme/header/exit_game_hover.png";
 
-const daBackToGameDefault = "../../src/assets/img/game_page/da-theme/header/back_to_game.png";
-const daBackToGameHover = "../../src/assets/img/game_page/da-theme/header/back_to_game_hover.png";
+const DA_BACK_TO_GAME_DEFAULT = "../../src/assets/img/game_page/da-theme/header/back_to_game.png";
+const DA_BACK_TO_GAME_HOVER = "../../src/assets/img/game_page/da-theme/header/back_to_game_hover.png";
 
-const daEndGame = "../../src/assets/img/game_page/da-theme/header/end_game_button.png";
-const daEndGameHover = "../../src/assets/img/game_page/da-theme/header/end_game_button_hover.png";
+const DA_END_GAME = "../../src/assets/img/game_page/da-theme/header/end_game_button.png";
+const DA_END_GAME_HOVER = "../../src/assets/img/game_page/da-theme/header/end_game_button_hover.png";
 
 
 
-const daExitBtns = {
-    default: daExitDefaultBtn,
-    hover: daExitHoverBtn
+const DA_EXIT_BTNS = {
+    default: DA_EXIT_DEFAULT_BTN,
+    hover: DA_EXIT_HOVER_BTN
 }
 
-const daBackToGameBtns = {
-    default: daBackToGameDefault,
-    hover: daBackToGameHover
+const DA_BACK_TO_GAME_BTNS = {
+    default: DA_BACK_TO_GAME_DEFAULT,
+    hover: DA_BACK_TO_GAME_HOVER
 }
 
-const daEndGameBtns = {
-    default: daEndGame,
-    hover: daEndGameHover
+const DA_END_GAME_BTNS = {
+    default: DA_END_GAME,
+    hover: DA_END_GAME_HOVER
 }
 
-const daImages = [
+const DA_IMAGES = [
     "../../src/assets/img/game_page/da-theme/main/card/basket_card.png",
     "../../src/assets/img/game_page/da-theme/main/card/chef_card.png",
     "../../src/assets/img/game_page/da-theme/main/card/code_a_cuisine_card.png",
@@ -162,28 +162,27 @@ const daImages = [
 ]
 
 export {
-    codeImages,
-    gamingImages,
-    daImages,
+    CODE_IMAGES,
+    GAMING_IMAGES,
+    DA_IMAGES,
 
-    codeCardBack,
-    gamingCardBack,
-    daCardBack,
+    CODE_CARD_BACK,
+    GAMING_CARD_BACK,
+    DA_CARD_BACK,
 
-    codePlayerIcons,
-    gamingPlayerIcons,
-    daPlayerIcons,
+    CODE_PLAYER_ICONS,
+    GAMING_PLAYER_ICONS,
+    DA_PLAYER_ICONS,
 
-    codeExitBtns,
-    gamingExitBtns,
-    daExitBtns,
+    CODE_EXIT_BTNS,
+    GAMING_EXIT_BTNS,
+    DA_EXIT_BTNS,
 
-    codeBackToGameBtns,
-    gamingBackToGameBtns,
-    daBackToGameBtns,
+    CODE_BACK_TO_GAME_BTNS,
+    GAMING_BACK_TO_GAME_BTNS,
+    DA_BACK_TO_GAME_BTNS,
 
-    codeEndGame,
-    gamingEndGame,
-    daEndGameBtns
+    CODE_END_GAME,
+    GAMING_END_GAME,
+    DA_END_GAME_BTNS
 };
-

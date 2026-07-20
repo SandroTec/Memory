@@ -1,27 +1,27 @@
 import {
-    codeImages,
-    gamingImages,
-    daImages,
+    CODE_IMAGES,
+    GAMING_IMAGES,
+    DA_IMAGES,
 
-    codeCardBack,
-    gamingCardBack,
-    daCardBack,
+    CODE_CARD_BACK,
+    GAMING_CARD_BACK,
+    DA_CARD_BACK,
 
-    codePlayerIcons,
-    gamingPlayerIcons,
-    daPlayerIcons,
+    CODE_PLAYER_ICONS,
+    GAMING_PLAYER_ICONS,
+    DA_PLAYER_ICONS,
 
-    codeExitBtns,
-    gamingExitBtns,
-    daExitBtns,
+    CODE_EXIT_BTNS,
+    GAMING_EXIT_BTNS,
+    DA_EXIT_BTNS,
 
-    codeBackToGameBtns,
-    gamingBackToGameBtns,
-    daBackToGameBtns,
+    CODE_BACK_TO_GAME_BTNS,
+    GAMING_BACK_TO_GAME_BTNS,
+    DA_BACK_TO_GAME_BTNS,
 
-    codeEndGame,
-    gamingEndGame,
-    daEndGameBtns
+    CODE_END_GAME,
+    GAMING_END_GAME,
+    DA_END_GAME_BTNS
 } from "./load-images.js";
 
 type Theme = "code" | "gaming" | "da";
