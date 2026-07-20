@@ -56,6 +56,7 @@ const GAMING_CARD_BACK = "../../src/assets/img/game_page/gaming-theme/main/card/
 const GAMING_PLAYER_ICON_B = "../../src/assets/img/game_page/gaming-theme/header/chess_pawn_blue.png";
 const GAMING_PLAYER_ICON_O = "../../src/assets/img/game_page/gaming-theme/header/chess_pawn_orange.png";
 
+
 const GAMING_PLAYER_ICONS = {
     blue: GAMING_PLAYER_ICON_B,
     orange: GAMING_PLAYER_ICON_O
@@ -161,6 +162,8 @@ const DA_IMAGES = [
     "../../src/assets/img/game_page/da-theme/main/card/violet_symbol_card.png",
 ]
 
+const CURRENT_PLAYER_ICON = "../../src/assets/img/game_page/gaming-theme/header/chess_pawn.png";
+
 export {
     CODE_IMAGES,
     GAMING_IMAGES,
@@ -184,5 +187,7 @@ export {
 
     CODE_END_GAME,
     GAMING_END_GAME,
-    DA_END_GAME_BTNS
+    DA_END_GAME_BTNS,
+
+    CURRENT_PLAYER_ICON
 };

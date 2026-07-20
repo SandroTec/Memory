@@ -1,4 +1,4 @@
-import { CODE_IMAGES, GAMING_IMAGES, DA_IMAGES, CODE_CARD_BACK, GAMING_CARD_BACK, DA_CARD_BACK, CODE_PLAYER_ICONS, GAMING_PLAYER_ICONS, DA_PLAYER_ICONS, CODE_EXIT_BTNS, GAMING_EXIT_BTNS, DA_EXIT_BTNS, CODE_BACK_TO_GAME_BTNS, GAMING_BACK_TO_GAME_BTNS, DA_BACK_TO_GAME_BTNS, CODE_END_GAME, GAMING_END_GAME, DA_END_GAME_BTNS } from "./load-images.js";
+import { CODE_IMAGES, GAMING_IMAGES, DA_IMAGES, CODE_CARD_BACK, GAMING_CARD_BACK, DA_CARD_BACK, CODE_PLAYER_ICONS, GAMING_PLAYER_ICONS, DA_PLAYER_ICONS, CODE_EXIT_BTNS, GAMING_EXIT_BTNS, DA_EXIT_BTNS, CODE_BACK_TO_GAME_BTNS, GAMING_BACK_TO_GAME_BTNS, DA_BACK_TO_GAME_BTNS, CODE_END_GAME, GAMING_END_GAME, DA_END_GAME_BTNS, CURRENT_PLAYER_ICON } from "./load-images.js";
 function loadGameSettings() {
     const STORED_SETTINGS = sessionStorage.getItem("gameSettings");
     if (STORED_SETTINGS) {
@@ -32,6 +32,7 @@ const PLAYER_ICONS = {
     da: DA_PLAYER_ICONS
 };
 let currentPlayer;
+let CURRENT_PLAYER_ICONS = CURRENT_PLAYER_ICON;
 const EXIT_BTNS = {
     code: CODE_EXIT_BTNS,
     gaming: GAMING_EXIT_BTNS,
@@ -136,8 +137,20 @@ function determinePlayer() {
 }
 function updateCurrentPlayerDisplay() {
     const ICON = PLAYER_ICONS[GAME_SETTINGS.theme][currentPlayer];
-    CURENT_PLAYER_DISPLAY.innerHTML = `Current Player:    
-       <img src="${ICON}" alt="player icon">`;
+    if (GAME_SETTINGS.theme == "code") {
+        CURENT_PLAYER_DISPLAY.innerHTML = `
+            Current Player:    
+                <img src="${ICON}" alt="player icon">
+        `;
+    }
+    else {
+        CURENT_PLAYER_DISPLAY.innerHTML = `
+            Current Player:    
+            <div class="icon-container ${currentPlayer}-bg">
+                <img src="${CURRENT_PLAYER_ICONS}" alt="player icon">
+            </div>
+        `;
+    }
 }
 let firstSelectedCard = null;
 let cardsSelected = false;

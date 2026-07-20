@@ -292,6 +292,24 @@ li {
   }
 }
 
+.icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  width: 32px;
+  padding: 6px;
+  border-radius: 8px;
+}
+
+.orange-bg {
+  background-color: orange;
+}
+
+.blue-bg {
+  background-color: rgb(43, 177, 255);
+}
+
 #controllerImage {
   transition: rotate 0.45s ease;
 }

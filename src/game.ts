@@ -21,7 +21,9 @@ import {
 
     CODE_END_GAME,
     GAMING_END_GAME,
-    DA_END_GAME_BTNS
+    DA_END_GAME_BTNS,
+
+    CURRENT_PLAYER_ICON
 } from "./load-images.js";
 
 type Theme = "code" | "gaming" | "da";
@@ -85,6 +87,8 @@ const PLAYER_ICONS = {
 };
 
 let currentPlayer: Player;
+
+let CURRENT_PLAYER_ICONS = CURRENT_PLAYER_ICON
 
 const EXIT_BTNS = {
     code: CODE_EXIT_BTNS,
@@ -208,8 +212,19 @@ function determinePlayer() {
 
 function updateCurrentPlayerDisplay() {
     const ICON = PLAYER_ICONS[GAME_SETTINGS.theme][currentPlayer];
-       CURENT_PLAYER_DISPLAY.innerHTML = `Current Player:    
-       <img src="${ICON}" alt="player icon">`;
+    if (GAME_SETTINGS.theme == "code") {
+        CURENT_PLAYER_DISPLAY.innerHTML = `
+            Current Player:    
+                <img src="${ICON}" alt="player icon">
+        `
+    } else {
+        CURENT_PLAYER_DISPLAY.innerHTML = `
+            Current Player:    
+            <div class="icon-container ${currentPlayer}-bg">
+                <img src="${CURRENT_PLAYER_ICONS}" alt="player icon">
+            </div>
+        `
+    }
 }
 
 let firstSelectedCard:Card | null = null;
