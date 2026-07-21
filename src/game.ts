@@ -26,6 +26,11 @@ import {
     CURRENT_PLAYER_ICON
 } from "./load-images.js";
 
+import {
+    createCard,
+    updateCurrentPlayerDisplay,
+} from "./template.js";
+
 type Theme = "code" | "gaming" | "da";
 
 type Player = "blue" | "orange";
@@ -175,21 +180,8 @@ function placeCards() {
     initCardEventListeners();
 }
 
-function createCard(card: Card): string {
-    const CARD_JSON = JSON.stringify(card);
-    return `
-        <div class="card" data-card-id="${card.id}" data-card-object='${CARD_JSON}'>
-            <div class="card_inner">
-                <img class="card_img card_front" src="${card.imgSrc}" alt="game card">
-                <img class="card_img card_back" src="${CURRENT_CARD_BACK}" alt="game card">
-            </div>
-        </div>
-    `;
-}
-
 function initCardEventListeners() {
     const CARD_ELEMENTS = document.querySelectorAll<HTMLDivElement>("[data-card-id]");
-    
     CARD_ELEMENTS.forEach(cardElement => {
         cardElement.addEventListener("click", () => {
             
@@ -200,31 +192,6 @@ function initCardEventListeners() {
             }
         });
     });
-}
-
-const CURENT_PLAYER_DISPLAY = document.querySelector("#currentPlayerDisplay")!;
-
-function determinePlayer() {
-    //inital first player by using GameSettings player
-    currentPlayer = GAME_SETTINGS.player;
-    updateCurrentPlayerDisplay();
-}
-
-function updateCurrentPlayerDisplay() {
-    const ICON = PLAYER_ICONS[GAME_SETTINGS.theme][currentPlayer];
-    if (GAME_SETTINGS.theme == "code") {
-        CURENT_PLAYER_DISPLAY.innerHTML = `
-            Current Player:    
-                <img src="${ICON}" alt="player icon">
-        `
-    } else {
-        CURENT_PLAYER_DISPLAY.innerHTML = `
-            Current Player:    
-            <div class="icon-container ${currentPlayer}-bg">
-                <img src="${CURRENT_PLAYER_ICONS}" alt="player icon">
-            </div>
-        `
-    }
 }
 
 let firstSelectedCard:Card | null = null;
@@ -366,7 +333,6 @@ function initaliseEndGameButton() {
     if (!CONFIRM_EXIT_BTN) return;
     if (GAME_SETTINGS.theme == "da") {
         const END_GAME_BTN = END_GAME_BTNS[GAME_SETTINGS.theme];
-
         CONFIRM_EXIT_BTN.src = END_GAME_BTN.default;
         CONFIRM_EXIT_BTN.addEventListener("mouseenter", () => {
             CONFIRM_EXIT_BTN.src = END_GAME_BTN.hover;
@@ -439,7 +405,7 @@ function initaliseHeader() {
 function init() {
     initaliseHeader();
     placeCards();
-    determinePlayer();
+    updateCurrentPlayerDisplay();
 }
 
 init();

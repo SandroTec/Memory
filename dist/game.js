@@ -1,4 +1,5 @@
 import { CODE_IMAGES, GAMING_IMAGES, DA_IMAGES, CODE_CARD_BACK, GAMING_CARD_BACK, DA_CARD_BACK, CODE_PLAYER_ICONS, GAMING_PLAYER_ICONS, DA_PLAYER_ICONS, CODE_EXIT_BTNS, GAMING_EXIT_BTNS, DA_EXIT_BTNS, CODE_BACK_TO_GAME_BTNS, GAMING_BACK_TO_GAME_BTNS, DA_BACK_TO_GAME_BTNS, CODE_END_GAME, GAMING_END_GAME, DA_END_GAME_BTNS, CURRENT_PLAYER_ICON } from "./load-images.js";
+import { createCard, updateCurrentPlayerDisplay, } from "./template.js";
 function loadGameSettings() {
     const STORED_SETTINGS = sessionStorage.getItem("gameSettings");
     if (STORED_SETTINGS) {
@@ -107,17 +108,6 @@ function placeCards() {
     }
     initCardEventListeners();
 }
-function createCard(card) {
-    const CARD_JSON = JSON.stringify(card);
-    return `
-        <div class="card" data-card-id="${card.id}" data-card-object='${CARD_JSON}'>
-            <div class="card_inner">
-                <img class="card_img card_front" src="${card.imgSrc}" alt="game card">
-                <img class="card_img card_back" src="${CURRENT_CARD_BACK}" alt="game card">
-            </div>
-        </div>
-    `;
-}
 function initCardEventListeners() {
     const CARD_ELEMENTS = document.querySelectorAll("[data-card-id]");
     CARD_ELEMENTS.forEach(cardElement => {
@@ -129,28 +119,6 @@ function initCardEventListeners() {
             }
         });
     });
-}
-const CURENT_PLAYER_DISPLAY = document.querySelector("#currentPlayerDisplay");
-function determinePlayer() {
-    currentPlayer = GAME_SETTINGS.player;
-    updateCurrentPlayerDisplay();
-}
-function updateCurrentPlayerDisplay() {
-    const ICON = PLAYER_ICONS[GAME_SETTINGS.theme][currentPlayer];
-    if (GAME_SETTINGS.theme == "code") {
-        CURENT_PLAYER_DISPLAY.innerHTML = `
-            Current Player:    
-                <img src="${ICON}" alt="player icon">
-        `;
-    }
-    else {
-        CURENT_PLAYER_DISPLAY.innerHTML = `
-            Current Player:    
-            <div class="icon-container ${currentPlayer}-bg">
-                <img src="${CURRENT_PLAYER_ICONS}" alt="player icon">
-            </div>
-        `;
-    }
 }
 let firstSelectedCard = null;
 let cardsSelected = false;
@@ -360,6 +328,6 @@ function initaliseHeader() {
 function init() {
     initaliseHeader();
     placeCards();
-    determinePlayer();
+    updateCurrentPlayerDisplay();
 }
 init();
