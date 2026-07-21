@@ -10,8 +10,6 @@ import {
     CURRENT_PLAYER_ICON
 } from "./load-images.js";
 
-
-
 type Theme = "code" | "gaming" | "da";
 
 type Player = "blue" | "orange";

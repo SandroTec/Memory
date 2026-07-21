@@ -93,8 +93,6 @@ const PLAYER_ICONS = {
 
 let currentPlayer: Player;
 
-let CURRENT_PLAYER_ICONS = CURRENT_PLAYER_ICON
-
 const EXIT_BTNS = {
     code: CODE_EXIT_BTNS,
     gaming: GAMING_EXIT_BTNS,
@@ -114,7 +112,6 @@ const END_GAME_BTNS = {
 }
 
 const CURRENT_THEME_IMGS = THEME_IMGS[GAME_SETTINGS.theme];
-const CURRENT_CARD_BACK = CARD_BACKS[GAME_SETTINGS.theme];
 
 function getImages(): string[] {
     const PAIR_AMOUNT = Number(GAME_SETTINGS.cards)/2;
@@ -138,9 +135,7 @@ function createPairs():Card[] {
             isFlipped: false,
             isFound: false
         }
-
         PAIRED_CARDS.push(FIRST_CARD);
-        
         const SECOND_CARD:Card = {
             id: id++,
             pairId: pairId++,
@@ -148,7 +143,6 @@ function createPairs():Card[] {
             isFlipped: false,
             isFound: false
         }
-
         PAIRED_CARDS.push(SECOND_CARD);
     });
     return PAIRED_CARDS;
@@ -167,8 +161,7 @@ function shuffleCards():Card[] {
 
 function placeCards() {
     const CARDS = shuffleCards();
-    let htmlBuffer = "";
-
+    let htmlBuffer = "";  
     CARDS.forEach((card) => {
         htmlBuffer += createCard(card);
     });
@@ -176,7 +169,6 @@ function placeCards() {
     if(GAME_SETTINGS.cards == "36") {
         PLAY_GROUND.classList.add("grid6x");
     } else {PLAY_GROUND.classList.add("grid4x");}
-
     initCardEventListeners();
 }
 
@@ -198,7 +190,6 @@ let firstSelectedCard:Card | null = null;
 let cardsSelected:boolean = false;
 
 async function handleCardClick(card:Card) {
-
     if (card.isFlipped || card.isFound) return;
     if (cardsSelected) return;
     turnCard(card);

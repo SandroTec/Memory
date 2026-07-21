@@ -1,3 +1,5 @@
+// file to help initalise all images needed for game ts
+
 //code-theme images:
 const CODE_CARD_BACK = "../../src/assets/img/game_page/code-theme/main/card/basic_card_back.png";
 
@@ -27,7 +29,6 @@ const CODE_BACK_TO_GAME_BTNS = {
     hover: CODE_BACK_TO_GAME_HOVER
 }
 
-
 const CODE_IMAGES = [
     "../../src/assets/img/game_page/code-theme/main/card/html_card.png",
     "../../src/assets/img/game_page/code-theme/main/card/css_card.png",
@@ -50,12 +51,10 @@ const CODE_IMAGES = [
 ];
 
 //gaming-theme images:
-
 const GAMING_CARD_BACK = "../../src/assets/img/game_page/gaming-theme/main/card/basic_card_back.png";
 
 const GAMING_PLAYER_ICON_B = "../../src/assets/img/game_page/gaming-theme/header/chess_pawn_blue.png";
 const GAMING_PLAYER_ICON_O = "../../src/assets/img/game_page/gaming-theme/header/chess_pawn_orange.png";
-
 
 const GAMING_PLAYER_ICONS = {
     blue: GAMING_PLAYER_ICON_B,
@@ -69,7 +68,6 @@ const GAMING_BACK_TO_GAME_DEFAULT = "../../src/assets/img/game_page/gaming-theme
 const GAMING_BACK_TO_GAME_HOVER = "../../src/assets/img/game_page/gaming-theme/header/back_to_game_hover.png";
 
 const GAMING_END_GAME = "../../src/assets/img/game_page/gaming-theme/header/end_game_button.png";
-
 
 const GAMING_EXIT_BTNS = {
     default: GAMING_EXIT_DEFAULT_BTN,
@@ -103,9 +101,7 @@ const GAMING_IMAGES = [
 ]
 
 //DA-theme images:
-
 const DA_CARD_BACK = "../../src/assets/img/game_page/da-theme/main/card/basic_card_back.png";
-
 
 const DA_PLAYER_ICON_B = "../../src/assets/img/game_page/da-theme/header/chess_pawn_blue.png";
 const DA_PLAYER_ICON_O = "../../src/assets/img/game_page/da-theme/header/chess_pawn_orange.png";
@@ -123,8 +119,6 @@ const DA_BACK_TO_GAME_HOVER = "../../src/assets/img/game_page/da-theme/header/ba
 
 const DA_END_GAME = "../../src/assets/img/game_page/da-theme/header/end_game_button.png";
 const DA_END_GAME_HOVER = "../../src/assets/img/game_page/da-theme/header/end_game_button_hover.png";
-
-
 
 const DA_EXIT_BTNS = {
     default: DA_EXIT_DEFAULT_BTN,
