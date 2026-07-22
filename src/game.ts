@@ -111,6 +111,7 @@ const END_GAME_BTNS = {
 
 const CURRENT_THEME_IMGS = THEME_IMGS[GAME_SETTINGS.theme];
 
+//select images from img array
 function getImages(): string[] {
     const PAIR_AMOUNT = Number(GAME_SETTINGS.cards)/2;
     const SELECTED_IMGS:string[] = [];
@@ -120,30 +121,37 @@ function getImages(): string[] {
     return SELECTED_IMGS;
 }
 
-function createPairs():Card[] {
-    const SELECTED_IMGS = getImages();
-    const PAIRED_CARDS:Card[] = [];
+function initaliseCard(id: number, pairId: number, imgSrc: string): Card {
+    return {
+        id,
+        pairId,
+        imgSrc,
+        isFlipped: false,
+        isFound: false
+    };
+}
+
+function createCardPair(image: string, id: number, pairId: number): Card[] {
+    return [
+        initaliseCard(id, pairId, image),
+        initaliseCard(id + 1, pairId, image)
+    ];
+}
+
+function createPairs(): Card[] {
+    const selectedImages = getImages();
+    const pairedCards: Card[] = [];
+
     let id = 0;
     let pairId = 0;
-    SELECTED_IMGS.forEach(image => {
-        const FIRST_CARD:Card = {
-            id: id++,
-            pairId: pairId,
-            imgSrc: image,
-            isFlipped: false,
-            isFound: false
-        }
-        PAIRED_CARDS.push(FIRST_CARD);
-        const SECOND_CARD:Card = {
-            id: id++,
-            pairId: pairId++,
-            imgSrc: image,
-            isFlipped: false,
-            isFound: false
-        }
-        PAIRED_CARDS.push(SECOND_CARD);
+
+    selectedImages.forEach(image => {
+        pairedCards.push(...createCardPair(image, id, pairId));
+        id += 2;
+        pairId++;
     });
-    return PAIRED_CARDS;
+
+    return pairedCards;
 }
 
 function shuffleCards():Card[] {

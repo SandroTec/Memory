@@ -57,30 +57,32 @@ function getImages() {
     }
     return SELECTED_IMGS;
 }
+function initaliseCard(id, pairId, imgSrc) {
+    return {
+        id,
+        pairId,
+        imgSrc,
+        isFlipped: false,
+        isFound: false
+    };
+}
+function createCardPair(image, id, pairId) {
+    return [
+        initaliseCard(id, pairId, image),
+        initaliseCard(id + 1, pairId, image)
+    ];
+}
 function createPairs() {
-    const SELECTED_IMGS = getImages();
-    const PAIRED_CARDS = [];
+    const selectedImages = getImages();
+    const pairedCards = [];
     let id = 0;
     let pairId = 0;
-    SELECTED_IMGS.forEach(image => {
-        const FIRST_CARD = {
-            id: id++,
-            pairId: pairId,
-            imgSrc: image,
-            isFlipped: false,
-            isFound: false
-        };
-        PAIRED_CARDS.push(FIRST_CARD);
-        const SECOND_CARD = {
-            id: id++,
-            pairId: pairId++,
-            imgSrc: image,
-            isFlipped: false,
-            isFound: false
-        };
-        PAIRED_CARDS.push(SECOND_CARD);
+    selectedImages.forEach(image => {
+        pairedCards.push(...createCardPair(image, id, pairId));
+        id += 2;
+        pairId++;
     });
-    return PAIRED_CARDS;
+    return pairedCards;
 }
 function shuffleCards() {
     const GAME_PAIRS = createPairs();
