@@ -188,6 +188,11 @@ header {
   height: 74px;
 }
 
+.dialog-buttons button {
+  padding-inline: 0;
+  padding-block: 0;
+}
+
 li {
   cursor: pointer;
   display: flex;
