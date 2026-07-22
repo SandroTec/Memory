@@ -57,6 +57,11 @@ const SCORE_DISPLAY_CONTAINER = document.querySelector("#scoreDisplayContainer")
 if (SCORE_DISPLAY_CONTAINER) {
     SCORE_DISPLAY_CONTAINER.classList.add(`score-container-${THEME}`);
 }
+function initaliseBgColor() {
+    if (THEME != "da")
+        return;
+    ENDSCREEN_BODY?.classList.add("da-bg-endscreen");
+}
 function initaliseHeadline() {
     const HEADLINE_IMG = document.querySelector("#headlineImage");
     const HEADLINE = document.querySelector("h1");
@@ -138,11 +143,6 @@ HOME_BUTTON?.addEventListener("click", () => {
 });
 function endGame() {
     window.location.href = "./settings.html";
-}
-function initaliseBgColor() {
-    if (THEME != "da")
-        return;
-    ENDSCREEN_BODY?.classList.add("da-bg-endscreen");
 }
 async function init() {
     const DELAY = (ms) => new Promise(resolve => setTimeout(resolve, ms));

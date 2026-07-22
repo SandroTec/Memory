@@ -12,6 +12,10 @@
   background: rgb(48, 49, 49);
 }
 
+.gap-10 {
+  gap: 10px;
+}
+
 @keyframes wiggle {
   0%, 100% { 
     transform: rotate(0deg); 

@@ -1,4 +1,4 @@
-import { CODE_IMAGES, GAMING_IMAGES, DA_IMAGES, CODE_CARD_BACK, GAMING_CARD_BACK, DA_CARD_BACK, CODE_PLAYER_ICONS, GAMING_PLAYER_ICONS, DA_PLAYER_ICONS, CODE_EXIT_BTNS, GAMING_EXIT_BTNS, DA_EXIT_BTNS, CODE_BACK_TO_GAME_BTNS, GAMING_BACK_TO_GAME_BTNS, DA_BACK_TO_GAME_BTNS, CODE_END_GAME, GAMING_END_GAME, DA_END_GAME_BTNS, CURRENT_PLAYER_ICON } from "./load-images.js";
+import { CODE_IMAGES, GAMING_IMAGES, DA_IMAGES, CODE_CARD_BACK, GAMING_CARD_BACK, DA_CARD_BACK, CODE_PLAYER_ICONS, GAMING_PLAYER_ICONS, DA_PLAYER_ICONS, CODE_EXIT_BTNS, GAMING_EXIT_BTNS, DA_EXIT_BTNS, CODE_BACK_TO_GAME_BTNS, GAMING_BACK_TO_GAME_BTNS, DA_BACK_TO_GAME_BTNS, CODE_END_GAME, GAMING_END_GAME, DA_END_GAME_BTNS, } from "./load-images.js";
 import { createCard, updateCurrentPlayerDisplay, } from "./template.js";
 function loadGameSettings() {
     const STORED_SETTINGS = sessionStorage.getItem("gameSettings");
@@ -33,7 +33,6 @@ const PLAYER_ICONS = {
     da: DA_PLAYER_ICONS
 };
 let currentPlayer;
-let CURRENT_PLAYER_ICONS = CURRENT_PLAYER_ICON;
 const EXIT_BTNS = {
     code: CODE_EXIT_BTNS,
     gaming: GAMING_EXIT_BTNS,
@@ -50,7 +49,6 @@ const END_GAME_BTNS = {
     da: DA_END_GAME_BTNS
 };
 const CURRENT_THEME_IMGS = THEME_IMGS[GAME_SETTINGS.theme];
-const CURRENT_CARD_BACK = CARD_BACKS[GAME_SETTINGS.theme];
 function getImages() {
     const PAIR_AMOUNT = Number(GAME_SETTINGS.cards) / 2;
     const SELECTED_IMGS = [];
@@ -123,9 +121,7 @@ function initCardEventListeners() {
 let firstSelectedCard = null;
 let cardsSelected = false;
 async function handleCardClick(card) {
-    if (card.isFlipped || card.isFound)
-        return;
-    if (cardsSelected)
+    if (card.isFlipped || card.isFound || cardsSelected)
         return;
     turnCard(card);
     if (firstSelectedCard == null) {
@@ -191,6 +187,10 @@ function handlePair(card, firstSelectedCard) {
     scoreDisplayO.textContent = `${PLAYER_PAIRS.orange}`;
     if (!CARD_ELEMENT || !FIRST_CARD_ELEMENT)
         return;
+    changeCard(CARD_ELEMENT, FIRST_CARD_ELEMENT, card);
+    return;
+}
+function changeCard(CARD_ELEMENT, FIRST_CARD_ELEMENT, card) {
     CARD_ELEMENT.setAttribute("data-card-object", JSON.stringify(card));
     CARD_ELEMENT.style.cursor = "not-allowed";
     FIRST_CARD_ELEMENT.setAttribute("data-card-object", JSON.stringify(firstSelectedCard));
@@ -253,7 +253,7 @@ function initaliseBackToGameButton() {
         CANCEL_EXIT_BTN.src = BACK_TO_GAME_BTN.default;
     });
 }
-function initaliseEndGameButton() {
+function initaliseEndGameButtonDa() {
     if (!CONFIRM_EXIT_BTN)
         return;
     if (GAME_SETTINGS.theme == "da") {
@@ -266,7 +266,11 @@ function initaliseEndGameButton() {
             CONFIRM_EXIT_BTN.src = END_GAME_BTN.default;
         });
     }
-    else {
+}
+function initaliseEndGameButton() {
+    if (!CONFIRM_EXIT_BTN)
+        return;
+    if (GAME_SETTINGS.theme != "da") {
         const END_GAME_BTN = END_GAME_BTNS[GAME_SETTINGS.theme];
         CONFIRM_EXIT_BTN.src = END_GAME_BTN;
         CONFIRM_EXIT_BTN.addEventListener("mouseenter", () => {
@@ -323,6 +327,7 @@ function initaliseHeader() {
     initaliseScoreBoard();
     initaliseExitButton();
     initaliseBackToGameButton();
+    initaliseEndGameButtonDa();
     initaliseEndGameButton();
 }
 function init() {

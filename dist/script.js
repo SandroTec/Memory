@@ -36,9 +36,7 @@ const BOARD_D = document.querySelector("#boardDisplay");
 THEME_OPTIONS.forEach((themeOption) => {
     themeOption.addEventListener("click", () => {
         const SELECTED_THEME = themeOption.dataset.theme;
-        if (!SELECTED_THEME || !THEME_CONTAINER)
-            return;
-        if (!THEME_D)
+        if (!SELECTED_THEME || !THEME_CONTAINER || !THEME_D)
             return;
         THEME_D.textContent = SELECTED_THEME;
         THEME_D.textContent = THEME_D.textContent.toUpperCase();
@@ -57,7 +55,6 @@ THEME_OPTIONS.forEach((themeOption) => {
         const SELECTED_THEME = themeOption.dataset.theme;
         if (!SELECTED_THEME || !THEME_CONTAINER)
             return;
-        ;
         updateThemeImage(SELECTED_THEME);
     });
 });
@@ -73,9 +70,7 @@ THEME_OPTIONS.forEach((themeOption) => {
 PLAYER_OPTIONS.forEach((playerOption) => {
     playerOption.addEventListener("click", () => {
         const SELECTED_PLAYER = playerOption.dataset.player;
-        if (!SELECTED_PLAYER || !PLAYER_CONTAINER)
-            return;
-        if (!PLAYER_D)
+        if (!SELECTED_PLAYER || !PLAYER_CONTAINER || !PLAYER_D)
             return;
         PLAYER_D.textContent = SELECTED_PLAYER;
         PLAYER_D.textContent = PLAYER_D.textContent.toLocaleUpperCase();
@@ -91,11 +86,9 @@ PLAYER_OPTIONS.forEach((playerOption) => {
 CARD_OPTIONS.forEach((cardOption) => {
     cardOption.addEventListener("click", () => {
         const SELECTED_CARDS = cardOption.dataset.cards;
-        if (!SELECTED_CARDS || !CARD_CONTAINER)
+        if (!SELECTED_CARDS || !CARD_CONTAINER || !BOARD_D)
             return;
-        if (!BOARD_D)
-            return;
-        BOARD_D.textContent = SELECTED_CARDS + " " + "CARDS";
+        BOARD_D.textContent = SELECTED_CARDS + "CARDS";
         GAME_SETTINGS.cards = SELECTED_CARDS;
         const CHOSEN_INDICATOR = cardOption.querySelector(".choose-indicator");
         const LIST_INDICATOR = cardOption.querySelector(".circle-indicator");
@@ -103,6 +96,7 @@ CARD_OPTIONS.forEach((cardOption) => {
             updateIndicator(CHOSEN_INDICATOR, CARD_CONTAINER);
             updateSecondIndicator(LIST_INDICATOR, CARD_CONTAINER);
         }
+        ;
     });
 });
 function updateIndicator(chosenIndicator, container) {
@@ -136,6 +130,7 @@ function updateThemeImage(selectedTheme) {
             THEME_IMG.src = "../../src/assets/img/settings_page/Theme Visual_Code.png";
             break;
     }
+    ;
 }
 function saveGameSettings() {
     sessionStorage.setItem("gameSettings", JSON.stringify(GAME_SETTINGS));

@@ -22,8 +22,6 @@ import {
     CODE_END_GAME,
     GAMING_END_GAME,
     DA_END_GAME_BTNS,
-
-    CURRENT_PLAYER_ICON
 } from "./load-images.js";
 
 import {
@@ -175,8 +173,7 @@ function placeCards() {
 function initCardEventListeners() {
     const CARD_ELEMENTS = document.querySelectorAll<HTMLDivElement>("[data-card-id]");
     CARD_ELEMENTS.forEach(cardElement => {
-        cardElement.addEventListener("click", () => {
-            
+        cardElement.addEventListener("click", () => {      
             const CARD_JSON = cardElement.getAttribute("data-card-object");
             if (CARD_JSON) {
                 const CARD_BY_ID = JSON.parse(CARD_JSON) as Card;
@@ -190,8 +187,7 @@ let firstSelectedCard:Card | null = null;
 let cardsSelected:boolean = false;
 
 async function handleCardClick(card:Card) {
-    if (card.isFlipped || card.isFound) return;
-    if (cardsSelected) return;
+    if (card.isFlipped || card.isFound || cardsSelected) return;
     turnCard(card);
     if (firstSelectedCard == null) {
         firstSelectedCard = card;
@@ -257,11 +253,16 @@ function handlePair(card:Card, firstSelectedCard:Card) {
     scoreDisplayB.textContent = `${PLAYER_PAIRS.blue}`;
     scoreDisplayO.textContent = `${PLAYER_PAIRS.orange}`;
     if (!CARD_ELEMENT || !FIRST_CARD_ELEMENT) return
+    changeCard(CARD_ELEMENT, FIRST_CARD_ELEMENT, card);
+    return;
+}
+
+function changeCard(CARD_ELEMENT:HTMLDivElement, FIRST_CARD_ELEMENT:HTMLDivElement, card:Card) {
     CARD_ELEMENT.setAttribute("data-card-object", JSON.stringify(card));
     CARD_ELEMENT.style.cursor = "not-allowed";
     FIRST_CARD_ELEMENT.setAttribute("data-card-object", JSON.stringify(firstSelectedCard));
     FIRST_CARD_ELEMENT.style.cursor = "not-allowed";
-    return;
+    return
 }
 
 function changePlayer() {
@@ -297,7 +298,6 @@ const CANCEL_EXIT_BTN = document.querySelector<HTMLImageElement>("#cancelExitBtn
 
 function initaliseExitButton() {
     const EXIT_BTN = EXIT_BTNS[GAME_SETTINGS.theme];
-    
     if (!EXIT_GAME_BTN_IMG || !EXIT_GAME_BTN) return;
     EXIT_GAME_BTN_IMG.src = EXIT_BTN.default;
     EXIT_GAME_BTN.addEventListener("mouseenter", () => {
@@ -320,7 +320,7 @@ function initaliseBackToGameButton() {
     })
 }
 
-function initaliseEndGameButton() {
+function initaliseEndGameButtonDa() {
     if (!CONFIRM_EXIT_BTN) return;
     if (GAME_SETTINGS.theme == "da") {
         const END_GAME_BTN = END_GAME_BTNS[GAME_SETTINGS.theme];
@@ -331,7 +331,12 @@ function initaliseEndGameButton() {
         CONFIRM_EXIT_BTN.addEventListener("mouseleave", () => {
             CONFIRM_EXIT_BTN.src = END_GAME_BTN.default;
         })
-    }else {
+    }
+}
+
+function initaliseEndGameButton() {
+    if (!CONFIRM_EXIT_BTN) return;
+    if (GAME_SETTINGS.theme != "da") {
     const END_GAME_BTN = END_GAME_BTNS[GAME_SETTINGS.theme];
     CONFIRM_EXIT_BTN.src = END_GAME_BTN;
     CONFIRM_EXIT_BTN.addEventListener("mouseenter", () => {
@@ -390,7 +395,9 @@ function initaliseHeader() {
     initaliseScoreBoard();
     initaliseExitButton();
     initaliseBackToGameButton();
+    initaliseEndGameButtonDa();
     initaliseEndGameButton();
+    
 }
 
 function init() {
