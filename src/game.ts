@@ -49,13 +49,12 @@ type GameSettings = {
     cards: string;
 };
 
+// get game settings from session storage
 function loadGameSettings(): GameSettings {
     const STORED_SETTINGS = sessionStorage.getItem("gameSettings");
-
     if (STORED_SETTINGS) {
         return JSON.parse(STORED_SETTINGS);
     }
-
     return {
         theme: "code",
         player: "blue",
@@ -75,12 +74,6 @@ const THEME_IMGS: Record<Theme, string[]> = {
     code: CODE_IMAGES,
     gaming: GAMING_IMAGES,
     da: DA_IMAGES
-};
-
-const CARD_BACKS: Record<Theme, string> = {
-    code: CODE_CARD_BACK,
-    gaming: GAMING_CARD_BACK,
-    da: DA_CARD_BACK
 };
 
 const PLAYER_ICONS = {
@@ -154,17 +147,18 @@ function createPairs(): Card[] {
     return pairedCards;
 }
 
+// Shuffle cards using Fischer-Yates Shuffle
 function shuffleCards():Card[] {
     const GAME_PAIRS:Card[] = createPairs();
     for (let i = GAME_PAIRS.length-1; i > 0; i--) {
         const RANDOME_INDEX = Math.floor(Math.random() * (i+1));
-        //Fischer-Yates Shuffle
         [GAME_PAIRS[i], GAME_PAIRS[RANDOME_INDEX]] = 
         [GAME_PAIRS[RANDOME_INDEX], GAME_PAIRS[i]];
     }
     return GAME_PAIRS;
 }
 
+// places the cards on the board
 function placeCards() {
     const CARDS = shuffleCards();
     let htmlBuffer = "";  
@@ -194,6 +188,7 @@ function initCardEventListeners() {
 let firstSelectedCard:Card | null = null;
 let cardsSelected:boolean = false;
 
+// master function to handle card click
 async function handleCardClick(card:Card) {
     if (card.isFlipped || card.isFound || cardsSelected) return;
     turnCard(card);
@@ -405,7 +400,6 @@ function initaliseHeader() {
     initaliseBackToGameButton();
     initaliseEndGameButtonDa();
     initaliseEndGameButton();
-    
 }
 
 function init() {
