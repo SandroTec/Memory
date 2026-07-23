@@ -99,7 +99,7 @@ CARD_OPTIONS.forEach((cardOption) => {
     cardOption.addEventListener("click", () => {
         const SELECTED_CARDS = cardOption.dataset.cards;
         if (!SELECTED_CARDS || !CARD_CONTAINER || !BOARD_D) return;
-        BOARD_D.textContent = SELECTED_CARDS + "CARDS";
+        BOARD_D.textContent = SELECTED_CARDS + " CARDS";
         GAME_SETTINGS.cards = SELECTED_CARDS;
         const CHOSEN_INDICATOR = cardOption.querySelector<HTMLImageElement>(".choose-indicator");
         const LIST_INDICATOR = cardOption.querySelector<HTMLImageElement>(".circle-indicator");

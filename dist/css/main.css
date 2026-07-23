@@ -69,6 +69,10 @@ p {
   color: #FD5B4F;
 }
 
+#settingsBody, .start-page {
+  font-family: Almarai;
+}
+
 header {
   display: flex;
   align-items: center;
@@ -387,11 +391,11 @@ dialog form {
 }
 
 .phrase {
-  font-size: 48px;
+  font-size: 48px !important;
 }
 
 .headline {
-  font-size: 140px;
+  font-size: 140px !important;
 }
 
 .design-img {
