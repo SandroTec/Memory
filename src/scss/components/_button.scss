@@ -63,12 +63,24 @@
     #cancelExitBtn {
         background: #66cfbc;
         color: white;
+        border: 3px solid #66cfbc;
+        width: 182px;
     }
 
     #confirmExitBtn {
         background: #eefcf9;
         border: 1px solid rgb(77, 213, 188);
         color: rgb(77, 213, 188);
+        width: 148px;
+    }
+
+    #cancelExitBtn:hover {
+        background: #66cfbcaf;   
+    }
+
+    #confirmExitBtn:hover {
+        background: #66cfbc56; 
+        border: 3px solid rgba(77, 213, 188);
     }
 }
 
@@ -97,14 +109,27 @@
     #cancelExitBtn {
         background: rgb(231, 28, 79);
         color: white;
+        border: 3px solid rgb(231, 28, 79);
         border-radius: 10px;
+        width: 201px;
     }
 
     #confirmExitBtn {
-        background: rgb(231, 28, 79, 0.1);
+        background: rgb(231, 28, 79, 0.075);
         border: 1px solid rgb(231, 28, 79);
         color: rgb(231, 28, 79);
         border-radius: 10px;
+        width: 176px;
+    }
+
+    #cancelExitBtn:hover {
+        background: white;
+        color: rgb(231, 28, 79);
+    }
+
+    #confirmExitBtn:hover {
+        background: rgba(231, 28, 79, 0.2);
+        border: 3px solid rgb(231, 28, 79);
     }
 
 }
@@ -135,11 +160,22 @@
         background: rgb(191,229,242);
         color: #1E7594;
         border-radius: 10px;
+        width: 140px;
     }
 
     #confirmExitBtn {
         background: rgb(253,138,129);
         color: white;
         border-radius: 10px;
+        width: 114px;
+    }
+
+    #cancelExitBtn:hover {
+        background: #16586E;
+        color: white; 
+    }
+
+    #confirmExitBtn:hover {
+        background: rgb(248, 102, 92);
     }
 }
