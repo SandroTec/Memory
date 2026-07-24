@@ -272,10 +272,53 @@ const CONFIRM_EXIT_BTN = document.querySelector<HTMLButtonElement>("#confirmExit
 const CANCEL_EXIT_BTN = document.querySelector<HTMLButtonElement>("#cancelExitBtn");
 
 
+const EXIT_ICON_DEFAULT = "../assets/img/game_page/exit-icon.png";
+const EXIT_ICON_RED = "../assets/img/game_page/gaming-theme/header/exit-icon-red.png";
+const EXIT_ICON_BLUE = "../assets/img/game_page/da-theme/header/exit-icon-blue.png";
+
+const EXIT_ICON = document.querySelector<HTMLImageElement>("#exitIcon")
+
+
+function initaliseExitIcon() {
+    if(!EXIT_ICON) return;
+    switch (GAME_SETTINGS.theme) {
+        case "gaming":
+            EXIT_ICON.src = EXIT_ICON_RED
+            break;
+    
+        case "da":
+            EXIT_ICON.src = EXIT_ICON_BLUE
+            break;
+    
+        default:
+            EXIT_ICON.src = EXIT_ICON_DEFAULT
+            break;
+    }
+}
 
 EXIT_GAME_BTN?.addEventListener("click", () => {
     if(!EXIT_DIALOG) return;
     EXIT_DIALOG.showModal();
+})
+
+EXIT_GAME_BTN?.addEventListener("mouseenter", () => {
+    if(!EXIT_ICON_RED || !EXIT_ICON) return;
+    if (GAME_SETTINGS.theme == "gaming") {
+        EXIT_ICON.src = EXIT_ICON_RED;
+    }
+    if (GAME_SETTINGS.theme == "da") {
+        EXIT_ICON.src = EXIT_ICON_DEFAULT;
+    }
+})
+
+EXIT_GAME_BTN?.addEventListener("mouseleave", () => {
+    if(!EXIT_ICON_RED || !EXIT_ICON) return;
+    if (GAME_SETTINGS.theme == "gaming") {
+        EXIT_ICON.src = EXIT_ICON_DEFAULT;
+    }
+    if (GAME_SETTINGS.theme == "da") {
+        EXIT_ICON.src = EXIT_ICON_BLUE;
+    }
 })
 
 CONFIRM_EXIT_BTN?.addEventListener("click", () => {
@@ -319,6 +362,7 @@ function loadEndscreen(winner:string, scoreB:number, scoreO:number) {
 
 function initaliseHeader() {
     initaliseScoreBoard();
+    initaliseExitIcon();
 }
 
 function init() {
