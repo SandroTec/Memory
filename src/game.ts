@@ -3,15 +3,9 @@ import {
     GAMING_IMAGES,
     DA_IMAGES,
 
-    CODE_CARD_BACK,
-    GAMING_CARD_BACK,
-    DA_CARD_BACK,
-
     CODE_PLAYER_ICONS,
     GAMING_PLAYER_ICONS,
     DA_PLAYER_ICONS,
-
-
 } from "./load-images.js";
 
 import {
@@ -39,7 +33,7 @@ type GameSettings = {
     cards: string;
 };
 
-// get game settings from session storage
+// get game settings from session storage Returns default settings if no saved configuration exists.
 function loadGameSettings(): GameSettings {
     const STORED_SETTINGS = sessionStorage.getItem("gameSettings");
     if (STORED_SETTINGS) {
@@ -77,7 +71,7 @@ let currentPlayer: Player;
 
 const CURRENT_THEME_IMGS = THEME_IMGS[GAME_SETTINGS.theme];
 
-//select images from img array
+//Returns the images required for the selected game size.
 function getImages(): string[] {
     const PAIR_AMOUNT = Number(GAME_SETTINGS.cards)/2;
     const SELECTED_IMGS:string[] = [];
@@ -87,6 +81,13 @@ function getImages(): string[] {
     return SELECTED_IMGS;
 }
 
+/**
+ * Creates and initializes a single memory card.
+ * @param id Unique card identifier.
+ * @param pairId Identifier shared with its matching card.
+ * @param imgSrc Image displayed on the card.
+ * @returns A new card object.
+ */
 function initaliseCard(id: number, pairId: number, imgSrc: string): Card {
     return {
         id,
@@ -97,6 +98,13 @@ function initaliseCard(id: number, pairId: number, imgSrc: string): Card {
     };
 }
 
+/**
+ * Creates both cards of a matching pair.
+ * @param image Image used for both cards.
+ * @param id Starting card id.
+ * @param pairId Shared pair identifier.
+ * @returns The created card pair.
+ */
 function createCardPair(image: string, id: number, pairId: number): Card[] {
     return [
         initaliseCard(id, pairId, image),
@@ -104,23 +112,21 @@ function createCardPair(image: string, id: number, pairId: number): Card[] {
     ];
 }
 
+// Creates all card pairs for the current game. @returns An array containing every card.
 function createPairs(): Card[] {
     const selectedImages = getImages();
     const pairedCards: Card[] = [];
-
     let id = 0;
     let pairId = 0;
-
     selectedImages.forEach(image => {
         pairedCards.push(...createCardPair(image, id, pairId));
         id += 2;
         pairId++;
     });
-
     return pairedCards;
 }
 
-// Shuffle cards using Fischer-Yates Shuffle
+// Randomizes the card order using the Fisher-Yates shuffle algorithm. @returns The shuffled card deck.
 function shuffleCards():Card[] {
     const GAME_PAIRS:Card[] = createPairs();
     for (let i = GAME_PAIRS.length-1; i > 0; i--) {
@@ -131,7 +137,8 @@ function shuffleCards():Card[] {
     return GAME_PAIRS;
 }
 
-// places the cards on the board
+// Renders all cards on the game board and
+// initializes their event listeners.
 function placeCards() {
     const CARDS = shuffleCards();
     let htmlBuffer = "";  
@@ -145,6 +152,7 @@ function placeCards() {
     initCardEventListeners();
 }
 
+// Registers the click event for every card element.
 function initCardEventListeners() {
     const CARD_ELEMENTS = document.querySelectorAll<HTMLDivElement>("[data-card-id]");
     CARD_ELEMENTS.forEach(cardElement => {
@@ -157,43 +165,81 @@ function initCardEventListeners() {
         });
     });
 }
-
 let firstSelectedCard:Card | null = null;
 let cardsSelected:boolean = false;
 
-// master function to handle card click
-async function handleCardClick(card:Card) {
+/**
+ * Handles a player's card selection.
+ * Controls the complete turn workflow from card selection
+ * to match evaluation and game over detection.
+ * @param card The selected card.
+ */
+async function handleCardClick(card: Card) {
     if (card.isFlipped || card.isFound || cardsSelected) return;
+
     turnCard(card);
-    if (firstSelectedCard == null) {
-        firstSelectedCard = card;
-        const FIRST_FLIPPED_CARD = document.querySelector<HTMLDivElement>(`[data-card-id="${card.id}"]`)!;
-        FIRST_FLIPPED_CARD.style.cursor = "not-allowed";
-        return;
-    } 
-    if (firstSelectedCard.id == card.id) return;
+
+    if (selectFirstCard(card)) return;
+
+    await processSecondCard(card);
+
+    if (checkGameOver()) {
+        determineWinner();
+    }
+
+    firstSelectedCard = null;
+}
+
+/**
+ * Stores the first selected card of the current turn.
+ * @param card The selected card.
+ * @returns True if this is the first selected card.
+ */
+function selectFirstCard(card: Card): boolean {
+    if (firstSelectedCard !== null) return false;
+    firstSelectedCard = card;
+    const FIRST_FLIPPED_CARD = document.querySelector<HTMLDivElement>(
+        `[data-card-id="${card.id}"]`
+    );
+    FIRST_FLIPPED_CARD!.style.cursor = "not-allowed";
+    return true;
+}
+
+/**
+ * Processes the second selected card.
+ * Compares both cards and handles either
+ * a successful match or a player switch.
+ * @param card The second selected card.
+ */
+async function processSecondCard(card: Card) {
+    if (!firstSelectedCard || firstSelectedCard.id === card.id) return;
+
     const IS_MATCH = await compareCards(card, firstSelectedCard);
+
     if (IS_MATCH) {
-        handlePair(card, firstSelectedCard)
+        handlePair(card, firstSelectedCard);
     } else {
         hideCards(card, firstSelectedCard);
         changePlayer();
     }
-    if (checkGameOver()) {
-        determineWinner();
-    }
-    firstSelectedCard = null;    
 }
 
+// Flips the selected card visually and updates its state.
+// @param card The card to flip.
 function turnCard(card: Card) {
     card.isFlipped = true;
     const CARD_ELEMENT = document.querySelector(`[data-card-id="${card.id}"]`);
     CARD_ELEMENT?.classList.add("is-flipped");
 }
 
+/**
+ * Compares two selected cards.
+ * @param card The second selected card.
+ * @param cardToCompare The first selected card.
+ * @returns True if both cards belong to the same pair.
+ */
 async function compareCards(card:Card, cardToCompare:Card):Promise<boolean> {
     const DELAY = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
-    //compares first safed card  id to the second card pairId
     cardsSelected = true;
     if (card.pairId == cardToCompare.pairId) {
         return true;
@@ -203,6 +249,11 @@ async function compareCards(card:Card, cardToCompare:Card):Promise<boolean> {
     }
 }
 
+/**
+ * Flips two non-matching cards back over.
+ * @param card The second selected card.
+ * @param firstSelectedCard The first selected card.
+ */
 function hideCards(card: Card, firstSelectedCard: Card) {
     document.querySelector(`[data-card-id="${card.id}"]`)?.classList.remove("is-flipped");
     document.querySelector(`[data-card-id="${firstSelectedCard.id}"]`)?.classList.remove("is-flipped");
@@ -218,6 +269,12 @@ const PLAYER_PAIRS:Record<Player, number> = {
 let scoreDisplayB = document.querySelector("#scoreDisplayB");
 let scoreDisplayO = document.querySelector("#scoreDisplayO");
 
+/**
+ * Processes a successfully matched pair.
+ * Updates the score, card states and disables both cards.
+ * @param card The second selected card.
+ * @param firstSelectedCard The first selected card.
+ */
 function handlePair(card:Card, firstSelectedCard:Card) {
     const CARD_ELEMENT = document.querySelector<HTMLDivElement>(`[data-card-id="${card.id}"]`);
     const FIRST_CARD_ELEMENT = document.querySelector<HTMLDivElement>(`[data-card-id="${firstSelectedCard.id}"]`);
@@ -233,6 +290,12 @@ function handlePair(card:Card, firstSelectedCard:Card) {
     return;
 }
 
+/**
+ * Updates the DOM representation of a matched card pair.
+ * @param CARD_ELEMENT The second card element.
+ * @param FIRST_CARD_ELEMENT The first card element.
+ * @param card Updated card object.
+ */
 function changeCard(CARD_ELEMENT:HTMLDivElement, FIRST_CARD_ELEMENT:HTMLDivElement, card:Card) {
     CARD_ELEMENT.setAttribute("data-card-object", JSON.stringify(card));
     CARD_ELEMENT.style.cursor = "not-allowed";
@@ -241,6 +304,7 @@ function changeCard(CARD_ELEMENT:HTMLDivElement, FIRST_CARD_ELEMENT:HTMLDivEleme
     return
 }
 
+// Switches the active player and updates the UI.
 function changePlayer() {
     cardsSelected = false;
     if (currentPlayer == "orange") {
@@ -249,6 +313,8 @@ function changePlayer() {
     updateCurrentPlayerDisplay();
 }
 
+// Checks whether all card pairs have been found.
+// @returns True if the game is finished.
 function checkGameOver() {
     const POSSIBLE_PAIRS = Number(GAME_SETTINGS.cards)/2;
     const PAIRS_LEFT = POSSIBLE_PAIRS - (PLAYER_PAIRS.blue + PLAYER_PAIRS.orange)
@@ -259,6 +325,7 @@ function checkGameOver() {
 const SCORE_ICON_O = document.querySelector<HTMLImageElement>("#scorePlayerIconO");
 const SCORE_ICON_B = document.querySelector<HTMLImageElement>("#scorePlayerIconB");
 
+// Initializes the player icons displayed in the scoreboard.
 function initaliseScoreBoard() {
     const SCORE_ICONS = PLAYER_ICONS[GAME_SETTINGS.theme]
     if(!SCORE_ICON_B || !SCORE_ICON_O) return;
@@ -280,6 +347,7 @@ const EXIT_ICON = document.querySelector<HTMLImageElement>("#exitIcon");
 let cancelBtnText = document.querySelector<HTMLParagraphElement>(".btn_txt_cancel");
 let confirmBtnText = document.querySelector<HTMLParagraphElement>(".btn_txt_confirm");
 
+//Initializes the exit button appearance based on the selected theme.
 function initaliseExitIcon() {
     if(!EXIT_ICON || !cancelBtnText || !confirmBtnText) return;
     switch (GAME_SETTINGS.theme) {
@@ -334,10 +402,12 @@ CANCEL_EXIT_BTN?.addEventListener("click", () => {
     EXIT_DIALOG.close();
 })
 
+// Returns the player to the settings page.
 function endGame() {
     window.location.href = "./settings.html";
 }
 
+// Determines the game winner and opens the endscreen.
 function determineWinner() {
     if (PLAYER_PAIRS.blue > PLAYER_PAIRS.orange) {
         loadEndscreen("blue", PLAYER_PAIRS.blue, PLAYER_PAIRS.orange);
@@ -348,6 +418,13 @@ function determineWinner() {
     }
 }
 
+/**
+ * Stores the game result in session storage
+ * for the endscreen.
+ * @param gameWinner Winning player or draw.
+ * @param scoreB Blue player's score.
+ * @param scoreO Orange player's score.
+ */
 function saveGameWinner(gameWinner:string, scoreB:number, scoreO:number) {
     sessionStorage.setItem("winning player:", JSON.stringify(gameWinner));
     sessionStorage.setItem("blue score:" , JSON.stringify(scoreB));
@@ -357,16 +434,24 @@ function saveGameWinner(gameWinner:string, scoreB:number, scoreO:number) {
     sessionStorage.setItem("playerIconOrange:", JSON.stringify(PLAYER_ICONS[GAME_SETTINGS.theme].orange));
 }
 
+/**
+ * Saves the game result and navigates to the endscreen.
+ * @param winner Winning player or draw.
+ * @param scoreB Blue player's score.
+ * @param scoreO Orange player's score.
+ */
 function loadEndscreen(winner:string, scoreB:number, scoreO:number) {
     saveGameWinner(winner, scoreB, scoreO);
     window.location.href = "./endscreen.html";
 }
 
+//Initializes the game header.
 function initaliseHeader() {
     initaliseScoreBoard();
     initaliseExitIcon();
 }
 
+// Initializes the game. Sets up the header, game board and current player.
 function init() {
     initaliseHeader();
     placeCards();

@@ -84,11 +84,19 @@ if (SCORE_DISPLAY_CONTAINER) {
     SCORE_DISPLAY_CONTAINER.classList.add(`score-container-${THEME}`);
 }
 
+/**
+ * Applies the background color for the Developer Akademie theme.
+ * Only the "da" theme requires a custom background.
+ */
 function initaliseBgColor() {
     if(THEME != "da") return
     ENDSCREEN_BODY?.classList.add("da-bg-endscreen")
 }
 
+/**
+ * Initializes the endscreen headline.
+ * Displays either a text headline or a themed image depending on the selected theme.
+ */
 function initaliseHeadline() {
     const HEADLINE_IMG = document.querySelector<HTMLImageElement>("#headlineImage");
     const HEADLINE = document.querySelector("h1");
@@ -101,21 +109,32 @@ function initaliseHeadline() {
     }
 }
 
+/**
+ * Sets the player icons in the scoreboard based on the selected theme
+ * and the icons stored in session storage.
+ */               
 function initaliseScoreBoard() {
     if(!SCORE_ICON_B || !SCORE_ICON_O) return;
     SCORE_ICON_B.src = PLAYER_ICON_BLUE;
     SCORE_ICON_O.src = PLAYER_ICON;
 }
 
+/**
+ * Displays the final scores for both players.
+ * Applies the corresponding player colors.
+ */
 function initaliseScores() {
     if( !endScoreDisplayB || !endScoreDisplayO) return;
     endScoreDisplayB.textContent = `${SCORE_B}`;
     endScoreDisplayB.classList.add("blue");
     endScoreDisplayO.textContent = `${SCORE_O}`;
     endScoreDisplayO.classList.add("orange");
-
 }
 
+/**
+ * Displays the winner of the game.
+ * Updates the helper text and applies the appropriate player color.
+ */
 function initaliseWinner() {
     if(!winnerDisplay || !WINNER) return;
     if(!helpMsg) return;
@@ -132,17 +151,23 @@ function initaliseWinner() {
     winnerDisplay.textContent =  `${WINNER}`;
 }
 
+/**
+ * Displays the winner image for the selected theme.
+ * Shows the confetti header when using the code theme and there is no draw.
+ */
 function initaliseWinnerImage() {
     if(!winnerImageDisplay) return;
     winnerImageDisplay.src = CURENNT_WINNER_THEME_IMG[WINNER]
     if(THEME == "code" && WINNER != "draw") {CODE_HEADER_IMG?.classList.remove("d-none")}
 }
 
+//Hides the score container after the winner animation starts.
 function hideScore() {
     if (!SCORE_CONTAINER) return;
     SCORE_CONTAINER.classList.add("d-none");
 }
 
+//Initializes the home button image according to the selected theme.
 function initaliseHomeBtn() {
     if (!buttonImage) return;
     switch (THEME) {
@@ -165,10 +190,24 @@ HOME_BUTTON?.addEventListener("click", () => {
     endGame();
 })
 
+//Redirects the user back to the settings page.
 function endGame() {
     window.location.href = "./settings.html";
 }
 
+/**
+ * Initializes the endscreen.
+ *
+ * Execution order:
+ * 1. Apply theme styling.
+ * 2. Initialize headline.
+ * 3. Display player icons.
+ * 4. Display final scores.
+ * 5. Wait for 2 seconds.
+ * 6. Reveal the winner.
+ * 7. Initialize the home button.
+ * 8. Hide the scoreboard.
+ */
 async function init() {
     const DELAY = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
     initaliseBgColor();
