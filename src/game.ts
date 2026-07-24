@@ -11,17 +11,7 @@ import {
     GAMING_PLAYER_ICONS,
     DA_PLAYER_ICONS,
 
-    CODE_EXIT_BTNS,
-    GAMING_EXIT_BTNS,
-    DA_EXIT_BTNS,
 
-    CODE_BACK_TO_GAME_BTNS,
-    GAMING_BACK_TO_GAME_BTNS,
-    DA_BACK_TO_GAME_BTNS,
-
-    CODE_END_GAME,
-    GAMING_END_GAME,
-    DA_END_GAME_BTNS,
 } from "./load-images.js";
 
 import {
@@ -84,23 +74,6 @@ const PLAYER_ICONS = {
 
 let currentPlayer: Player;
 
-const EXIT_BTNS = {
-    code: CODE_EXIT_BTNS,
-    gaming: GAMING_EXIT_BTNS,
-    da: DA_EXIT_BTNS
-};
-
-const BACK_TO_GAME_BTNS = {
-    code: CODE_BACK_TO_GAME_BTNS,
-    gaming: GAMING_BACK_TO_GAME_BTNS,
-    da: DA_BACK_TO_GAME_BTNS
-}
-
-const END_GAME_BTNS = {
-    code: CODE_END_GAME,
-    gaming: GAMING_END_GAME,
-    da: DA_END_GAME_BTNS
-}
 
 const CURRENT_THEME_IMGS = THEME_IMGS[GAME_SETTINGS.theme];
 
@@ -293,62 +266,12 @@ function initaliseScoreBoard() {
     SCORE_ICON_O.src = SCORE_ICONS.orange;
 }
 
-const EXIT_GAME_BTN_IMG = document.querySelector<HTMLImageElement>("#exitBtnImage");
 const EXIT_GAME_BTN = document.querySelector<HTMLButtonElement>("#exitBtn");
 const EXIT_DIALOG = document.querySelector<HTMLDialogElement>("#exitDialog");
-const CONFIRM_EXIT_BTN = document.querySelector<HTMLImageElement>("#confirmExitBtn");
-const CANCEL_EXIT_BTN = document.querySelector<HTMLImageElement>("#cancelExitBtn");
+const CONFIRM_EXIT_BTN = document.querySelector<HTMLButtonElement>("#confirmExitBtn");
+const CANCEL_EXIT_BTN = document.querySelector<HTMLButtonElement>("#cancelExitBtn");
 
-function initaliseExitButton() {
-    const EXIT_BTN = EXIT_BTNS[GAME_SETTINGS.theme];
-    if (!EXIT_GAME_BTN_IMG || !EXIT_GAME_BTN) return;
-    EXIT_GAME_BTN_IMG.src = EXIT_BTN.default;
-    EXIT_GAME_BTN.addEventListener("mouseenter", () => {
-        EXIT_GAME_BTN_IMG.src = EXIT_BTN.hover;
-    })
-    EXIT_GAME_BTN.addEventListener("mouseleave", () => {
-        EXIT_GAME_BTN_IMG.src = EXIT_BTN.default;
-    })
-}
 
-function initaliseBackToGameButton() {
-    const BACK_TO_GAME_BTN = BACK_TO_GAME_BTNS[GAME_SETTINGS.theme];
-    if (!CANCEL_EXIT_BTN) return;
-    CANCEL_EXIT_BTN.src = BACK_TO_GAME_BTN.default;
-    CANCEL_EXIT_BTN.addEventListener("mouseenter", () => {
-        CANCEL_EXIT_BTN.src = BACK_TO_GAME_BTN.hover;
-    })
-    CANCEL_EXIT_BTN.addEventListener("mouseleave", () => {
-        CANCEL_EXIT_BTN.src = BACK_TO_GAME_BTN.default;
-    })
-}
-
-function initaliseEndGameButtonDa() {
-    if (!CONFIRM_EXIT_BTN) return;
-    if (GAME_SETTINGS.theme == "da") {
-        const END_GAME_BTN = END_GAME_BTNS[GAME_SETTINGS.theme];
-        CONFIRM_EXIT_BTN.src = END_GAME_BTN.default;
-        CONFIRM_EXIT_BTN.addEventListener("mouseenter", () => {
-            CONFIRM_EXIT_BTN.src = END_GAME_BTN.hover;
-        })
-        CONFIRM_EXIT_BTN.addEventListener("mouseleave", () => {
-            CONFIRM_EXIT_BTN.src = END_GAME_BTN.default;
-        })
-    }
-}
-
-function initaliseEndGameButton() {
-    if (!CONFIRM_EXIT_BTN) return;
-    if (GAME_SETTINGS.theme != "da") {
-    const END_GAME_BTN = END_GAME_BTNS[GAME_SETTINGS.theme];
-    CONFIRM_EXIT_BTN.src = END_GAME_BTN;
-    CONFIRM_EXIT_BTN.addEventListener("mouseenter", () => {
-        CONFIRM_EXIT_BTN.classList.add(`bg-color-${GAME_SETTINGS.theme}`);
-    })
-    CONFIRM_EXIT_BTN.addEventListener("mouseleave", () => {
-        CONFIRM_EXIT_BTN.classList.remove(`bg-color-${GAME_SETTINGS.theme}`);
-    })}
-}
 
 EXIT_GAME_BTN?.addEventListener("click", () => {
     if(!EXIT_DIALOG) return;
@@ -396,10 +319,6 @@ function loadEndscreen(winner:string, scoreB:number, scoreO:number) {
 
 function initaliseHeader() {
     initaliseScoreBoard();
-    initaliseExitButton();
-    initaliseBackToGameButton();
-    initaliseEndGameButtonDa();
-    initaliseEndGameButton();
 }
 
 function init() {

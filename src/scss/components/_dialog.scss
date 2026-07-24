@@ -3,53 +3,30 @@
 dialog {
     width: 40%;
     left: 30%;
-    height: 300px;
+    height: 25%;
+    top: 25%;
+    border: none;
 
     &[open] {
         @include mx.flex-center;
-    }
-
-    button {
-        cursor: pointer;
-        width: 180px;
-        height: 60px;
-        border: none;
-    }
-
-    img {
-        width: 100%;
-        height: 100%;
     }
 
     form {
         @include mx.flex-center;
         @include mx.fd-column;
     }
+
+    
 }
 
 .dialog-buttons {
     @include mx.flex-center;
     gap: 20px;
-}
-
-
-.theme-code {
-    dialog {
-        border: none;
+    
+    button {
+        height: 57px;
+        padding: 0 20px;
     }
-
 }
 
-.theme-gaming {
-    dialog {
-        border-radius: 8px;
-    }
 
-}
-
-.theme-da {
-    dialog {
-        border: none;
-    }
-
-}

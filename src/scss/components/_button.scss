@@ -28,20 +28,118 @@
         transition: transform 0.45s ease;
     }
 
-    &_transparent {
-        background: transparent;
-    }
-
     &_exit {
-        width: 200px;
-        height: 74px;
+        width: 207px;
+        height: 62px;
+        gap: 10px;
+        opacity: 1;
+        padding-top: 12px;
+        padding-right: 20px;
+        padding-bottom: 12px;
+        padding-left: 20px;
     }
-    
 }
 
-.dialog-buttons {
-    button {
-        padding-inline: 0;
-        padding-block: 0;
+
+.theme-code {
+    
+    .btn_exit {
+        background: rgb(65, 86, 82);
+        border: 1px solid rgb(77, 213, 188);
+        font-family: Red Rose;
+        font-weight: 700;
+        font-style: Bold;
+        font-size: 24px;
+        line-height: 100%;
+        letter-spacing: 0%;
+        color: white;
+        box-sizing: border-box;
+    }
+
+    .btn_exit:hover {
+        border-width: 3px;
+    }
+
+    #cancelExitBtn {
+        background: #66cfbc;
+        color: white;
+    }
+
+    #confirmExitBtn {
+        background: #eefcf9;
+        border: 1px solid rgb(77, 213, 188);
+        color: rgb(77, 213, 188);
+    }
+}
+
+.theme-gaming {
+    dialog {
+        border-radius: 8px;
+    }
+
+    .btn_exit {
+        background: transparent;
+        border: 1px solid rgb(231, 28, 79);
+        font-family: Orbitron;
+        font-weight: 700;
+        font-style: Bold;
+        font-size: 20px;
+        line-height: 100%;
+        letter-spacing: 4%;
+        border-radius: 10px;
+        color: white;
+    }
+
+    .btn_exit:hover {
+        border-width: 3px;
+    }
+
+    #cancelExitBtn {
+        background: rgb(231, 28, 79);
+        color: white;
+        border-radius: 10px;
+    }
+
+    #confirmExitBtn {
+        background: rgb(231, 28, 79, 0.1);
+        border: 1px solid rgb(231, 28, 79);
+        color: rgb(231, 28, 79);
+        border-radius: 10px;
+    }
+
+}
+
+.theme-da {
+    dialog {
+        border-radius: 8px;
+    }
+
+    .btn_exit {
+        background: #BFE5F2;
+        font-family: Figtree;
+        font-weight: 700;
+        font-style: Bold;
+        font-size: 20px;
+        line-height: 100%;
+        letter-spacing: 0%;
+        border-radius: 10px;
+        color: #1E7594;
+    }
+
+    .btn_exit:hover {
+        background: #16586E;
+        color: white;
+    }
+
+    #cancelExitBtn {
+        background: rgb(191,229,242);
+        color: #1E7594;
+        border-radius: 10px;
+    }
+
+    #confirmExitBtn {
+        background: rgb(253,138,129);
+        color: white;
+        border-radius: 10px;
     }
 }

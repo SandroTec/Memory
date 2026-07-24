@@ -11,24 +11,6 @@ const CODE_PLAYER_ICONS = {
     orange: CODE_PLAYER_ICON_O
 }
 
-const CODE_EXIT_DEFAULT_BTN = "../../src/assets/img/game_page/code-theme/header/exit_game_default.png";
-const CODE_EXIT_HOVER_BTN = "../../src/assets/img/game_page/code-theme/header/exit_game_hover.png";
-
-const CODE_BACK_TO_GAME_DEFAULT = "../../src/assets/img/game_page/code-theme/header/back_to_game.png";
-const CODE_BACK_TO_GAME_HOVER = "../../src/assets/img/game_page/code-theme/header/back_to_game_hover.png";
-
-const CODE_END_GAME = "../../src/assets/img/game_page/code-theme/header/end_game_button.png";
-
-const CODE_EXIT_BTNS = {
-    default: CODE_EXIT_DEFAULT_BTN,
-    hover: CODE_EXIT_HOVER_BTN
-}
-
-const CODE_BACK_TO_GAME_BTNS = {
-    default: CODE_BACK_TO_GAME_DEFAULT,
-    hover: CODE_BACK_TO_GAME_HOVER
-}
-
 const CODE_IMAGES = [
     "../../src/assets/img/game_page/code-theme/main/card/html_card.png",
     "../../src/assets/img/game_page/code-theme/main/card/css_card.png",
@@ -59,24 +41,6 @@ const GAMING_PLAYER_ICON_O = "../../src/assets/img/game_page/gaming-theme/header
 const GAMING_PLAYER_ICONS = {
     blue: GAMING_PLAYER_ICON_B,
     orange: GAMING_PLAYER_ICON_O
-}
-
-const GAMING_EXIT_DEFAULT_BTN = "../../src/assets/img/game_page/gaming-theme/header/exit_game_default.png";
-const GAMING_EXIT_HOVER_BTN = "../../src/assets/img/game_page/gaming-theme/header/exit_game_hover.png";
-
-const GAMING_BACK_TO_GAME_DEFAULT = "../../src/assets/img/game_page/gaming-theme/header/back_to_game.png";
-const GAMING_BACK_TO_GAME_HOVER = "../../src/assets/img/game_page/gaming-theme/header/back_to_game_hover.png";
-
-const GAMING_END_GAME = "../../src/assets/img/game_page/gaming-theme/header/end_game_button.png";
-
-const GAMING_EXIT_BTNS = {
-    default: GAMING_EXIT_DEFAULT_BTN,
-    hover: GAMING_EXIT_HOVER_BTN
-}
-
-const GAMING_BACK_TO_GAME_BTNS = {
-    default: GAMING_BACK_TO_GAME_DEFAULT,
-    hover: GAMING_BACK_TO_GAME_HOVER
 }
 
 const GAMING_IMAGES = [
@@ -111,29 +75,6 @@ const DA_PLAYER_ICONS = {
     orange: DA_PLAYER_ICON_O
 }
 
-const DA_EXIT_DEFAULT_BTN = "../../src/assets/img/game_page/da-theme/header/exit_game_default.png";
-const DA_EXIT_HOVER_BTN = "../../src/assets/img/game_page/da-theme/header/exit_game_hover.png";
-
-const DA_BACK_TO_GAME_DEFAULT = "../../src/assets/img/game_page/da-theme/header/back_to_game.png";
-const DA_BACK_TO_GAME_HOVER = "../../src/assets/img/game_page/da-theme/header/back_to_game_hover.png";
-
-const DA_END_GAME = "../../src/assets/img/game_page/da-theme/header/end_game_button.png";
-const DA_END_GAME_HOVER = "../../src/assets/img/game_page/da-theme/header/end_game_button_hover.png";
-
-const DA_EXIT_BTNS = {
-    default: DA_EXIT_DEFAULT_BTN,
-    hover: DA_EXIT_HOVER_BTN
-}
-
-const DA_BACK_TO_GAME_BTNS = {
-    default: DA_BACK_TO_GAME_DEFAULT,
-    hover: DA_BACK_TO_GAME_HOVER
-}
-
-const DA_END_GAME_BTNS = {
-    default: DA_END_GAME,
-    hover: DA_END_GAME_HOVER
-}
 
 const DA_IMAGES = [
     "../../src/assets/img/game_page/da-theme/main/card/basket_card.png",
@@ -170,18 +111,6 @@ export {
     CODE_PLAYER_ICONS,
     GAMING_PLAYER_ICONS,
     DA_PLAYER_ICONS,
-
-    CODE_EXIT_BTNS,
-    GAMING_EXIT_BTNS,
-    DA_EXIT_BTNS,
-
-    CODE_BACK_TO_GAME_BTNS,
-    GAMING_BACK_TO_GAME_BTNS,
-    DA_BACK_TO_GAME_BTNS,
-
-    CODE_END_GAME,
-    GAMING_END_GAME,
-    DA_END_GAME_BTNS,
 
     CURRENT_PLAYER_ICON
 };
