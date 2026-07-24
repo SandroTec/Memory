@@ -276,18 +276,20 @@ const EXIT_ICON_DEFAULT = "../assets/img/game_page/exit-icon.png";
 const EXIT_ICON_RED = "../assets/img/game_page/gaming-theme/header/exit-icon-red.png";
 const EXIT_ICON_BLUE = "../assets/img/game_page/da-theme/header/exit-icon-blue.png";
 
-const EXIT_ICON = document.querySelector<HTMLImageElement>("#exitIcon")
-
+const EXIT_ICON = document.querySelector<HTMLImageElement>("#exitIcon");
+let cancelBtnText = document.querySelector<HTMLParagraphElement>(".btn_txt_cancel");
+let confirmBtnText = document.querySelector<HTMLParagraphElement>(".btn_txt_confirm");
 
 function initaliseExitIcon() {
-    if(!EXIT_ICON) return;
+    if(!EXIT_ICON || !cancelBtnText || !confirmBtnText) return;
     switch (GAME_SETTINGS.theme) {
         case "gaming":
-            EXIT_ICON.src = EXIT_ICON_RED
+            cancelBtnText.innerText = "No, back to game";
+            confirmBtnText.innerText = "Yes, quit game";
             break;
     
         case "da":
-            EXIT_ICON.src = EXIT_ICON_BLUE
+            EXIT_ICON.src = EXIT_ICON_BLUE;
             break;
     
         default:

@@ -1,10 +1,12 @@
 @use '../abstract/mixins' as mx;
 
 dialog {
-    width: 40%;
-    left: 30%;
-    height: 25%;
-    top: 25%;
+    width: 50%;
+    left: 25%;
+    right: auto;
+    height: 30%;
+    top: 35%;
+    bottom: auto;
     border: none;
 
     &[open] {
@@ -14,6 +16,7 @@ dialog {
     form {
         @include mx.flex-center;
         @include mx.fd-column;
+        gap: 40px
     }
 
     

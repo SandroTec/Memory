@@ -40,7 +40,6 @@
     }
 }
 
-
 .theme-code {
     
     .btn_exit {
@@ -64,14 +63,23 @@
         background: #66cfbc;
         color: white;
         border: 3px solid #66cfbc;
-        width: 182px;
+        width: 202px;
+
+        .btn_txt {
+            font-family: Red Rose;
+            font-weight: 700;
+            font-style: Bold;
+            font-size: 20px;
+            line-height: 100%;
+            letter-spacing: 0%;
+        }
     }
 
     #confirmExitBtn {
         background: #eefcf9;
         border: 1px solid rgb(77, 213, 188);
         color: rgb(77, 213, 188);
-        width: 148px;
+        width: 168px;
     }
 
     #cancelExitBtn:hover {
@@ -81,6 +89,15 @@
     #confirmExitBtn:hover {
         background: #66cfbc56; 
         border: 3px solid rgba(77, 213, 188);
+    }
+
+    .btn_txt {
+        font-family: Red Rose;
+        font-weight: 700;
+        font-style: Bold;
+        font-size: 20px;
+        line-height: 100%;
+        letter-spacing: 0%;
     }
 }
 
@@ -111,7 +128,8 @@
         color: white;
         border: 3px solid rgb(231, 28, 79);
         border-radius: 10px;
-        width: 201px;
+        width: 261px;
+        
     }
 
     #confirmExitBtn {
@@ -119,7 +137,7 @@
         border: 1px solid rgb(231, 28, 79);
         color: rgb(231, 28, 79);
         border-radius: 10px;
-        width: 176px;
+        width: 231px;
     }
 
     #cancelExitBtn:hover {
@@ -131,6 +149,15 @@
         background: rgba(231, 28, 79, 0.2);
         border: 3px solid rgb(231, 28, 79);
     }
+
+    .btn_txt {
+        font-family: Orbitron;
+        font-weight: 700;
+        font-style: Bold;
+        font-size: 20px;
+        line-height: 100%;
+        letter-spacing: 4%;
+        }
 
 }
 
@@ -160,14 +187,14 @@
         background: rgb(191,229,242);
         color: #1E7594;
         border-radius: 10px;
-        width: 140px;
+        width: 180px;
     }
 
     #confirmExitBtn {
         background: rgb(253,138,129);
         color: white;
         border-radius: 10px;
-        width: 114px;
+        width: 144px;
     }
 
     #cancelExitBtn:hover {
@@ -178,4 +205,14 @@
     #confirmExitBtn:hover {
         background: rgb(248, 102, 92);
     }
+
+    .btn_txt {
+        font-family: Figtree;
+        font-weight: 700;
+        font-style: Bold;
+        font-size: 20px;
+        line-height: 100%;
+        letter-spacing: 0%;
+
+        }
 }
