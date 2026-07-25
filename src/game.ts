@@ -176,17 +176,12 @@ let cardsSelected:boolean = false;
  */
 async function handleCardClick(card: Card) {
     if (card.isFlipped || card.isFound || cardsSelected) return;
-
     turnCard(card);
-
     if (selectFirstCard(card)) return;
-
     await processSecondCard(card);
-
     if (checkGameOver()) {
         determineWinner();
     }
-
     firstSelectedCard = null;
 }
 
@@ -213,9 +208,7 @@ function selectFirstCard(card: Card): boolean {
  */
 async function processSecondCard(card: Card) {
     if (!firstSelectedCard || firstSelectedCard.id === card.id) return;
-
     const IS_MATCH = await compareCards(card, firstSelectedCard);
-
     if (IS_MATCH) {
         handlePair(card, firstSelectedCard);
     } else {
@@ -227,9 +220,14 @@ async function processSecondCard(card: Card) {
 // Flips the selected card visually and updates its state.
 // @param card The card to flip.
 function turnCard(card: Card) {
+    const CARD_ELEMENT = document.querySelector<HTMLDivElement>(
+        `[data-card-id="${card.id}"]`
+    );
+    if (!CARD_ELEMENT) return;
     card.isFlipped = true;
-    const CARD_ELEMENT = document.querySelector(`[data-card-id="${card.id}"]`);
-    CARD_ELEMENT?.classList.add("is-flipped");
+    requestAnimationFrame(() => {
+        CARD_ELEMENT.classList.add("is-flipped");
+    });
 }
 
 /**

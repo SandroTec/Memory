@@ -17,18 +17,17 @@
 }
 
 @keyframes wiggle {
-  0%, 100% { 
-    transform: rotate(0deg); 
-  }
-  25% { 
-    transform: rotate(-3deg);
-  }
-  75% { 
-    transform: rotate(3deg);  
-  }
+    0%, 100% { 
+        transform: rotate(0deg); 
+    }
+    25% { 
+        transform: rotate(-3deg);
+    }
+    75% { 
+        transform: rotate(3deg);  
+    }
 }
 
-
-.card:hover:not(.is-flipped) .card_inner {
+.card:hover:not(.is-flipped) {
     animation: wiggle 0.45s ease-in-out infinite;
 }
