@@ -26,7 +26,7 @@ let buttonImage = document.querySelector<HTMLImageElement>("#buttonImage");
 const SCORE_CONTAINER = document.querySelector<HTMLDivElement>("#scoreContainer");
 
 //code-theme:
-const CODE_HEADER_IMG = document.querySelector<HTMLImageElement>("#codeKonfettiImage");
+const CODE_HEADER_IMG = document.querySelector<HTMLHeadingElement>("header");
 
 const CODE_WINNER_IMG_B = "../../src/assets/img/game_page/code-theme/endscreen/chess_pawn_blue.png";
 const CODE_DRAW_IMG = "../../src/assets/img/game_page/code-theme/endscreen/draw_icon.png";
