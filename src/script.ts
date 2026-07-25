@@ -21,11 +21,26 @@ START_BUTTON?.addEventListener("mouseleave", () => {
     START_BUTTON.style.transform  =  "scale(1, 1)";
 })
 
-const GAME_SETTINGS = {
-    theme: "code",
-    player: "blue",
-    cards: "16"
+
+type GameSettings = {
+    theme: string;
+    player: string;
+    cards: string;
 };
+
+function loadGameSettings(): GameSettings {
+    const STORED_SETTINGS = sessionStorage.getItem("gameSettings");
+    if (STORED_SETTINGS) {
+        return JSON.parse(STORED_SETTINGS);
+    }
+    return {
+        theme: "code",
+        player: "blue",
+        cards: "16"
+    };
+}
+
+const GAME_SETTINGS = loadGameSettings();
 
 const THEME_CONTAINER = document.querySelector<HTMLDivElement>("._themes-c");
 const THEME_OPTIONS = document.querySelectorAll<HTMLLIElement>("[data-theme]");
@@ -42,21 +57,40 @@ const THEME_D = document.querySelector<HTMLParagraphElement>("#themeDisplay");
 const PLAYER_D = document.querySelector("#playerDisplay");
 const BOARD_D = document.querySelector("#boardDisplay");
 
-// select a theme
+
+// Initaliseing game settings.
+function initialiseSettings() {
+    selectTheme(GAME_SETTINGS.theme);
+    selectPlayer(GAME_SETTINGS.player);
+    selectBoardSize(GAME_SETTINGS.cards);
+}
+
+/**
+ * Applies the selected theme to the game settings and updates the UI.
+ * @param selectedTheme The selected game theme.
+ */
+function selectTheme(selectedTheme: string) {
+    if (!THEME_CONTAINER || !THEME_D) return;
+    THEME_D.textContent = selectedTheme.toUpperCase();
+    GAME_SETTINGS.theme = selectedTheme;
+    updateThemeImage(selectedTheme);
+    const SELECTED_OPTION = document.querySelector<HTMLLIElement>(`[data-theme="${selectedTheme}"]`);
+    if (!SELECTED_OPTION) return;
+    const CHOSEN_INDICATOR =
+        SELECTED_OPTION.querySelector<HTMLImageElement>(".choose-indicator");
+    const LIST_INDICATOR =
+        SELECTED_OPTION.querySelector<HTMLImageElement>(".circle-indicator");
+    if (CHOSEN_INDICATOR && LIST_INDICATOR) {
+        updateIndicator(CHOSEN_INDICATOR, THEME_CONTAINER);
+        updateSecondIndicator(LIST_INDICATOR, THEME_CONTAINER);
+    }
+}
+
 THEME_OPTIONS.forEach((themeOption) => {
     themeOption.addEventListener("click", () => {
         const SELECTED_THEME = themeOption.dataset.theme;
-        if (!SELECTED_THEME || !THEME_CONTAINER || !THEME_D) return;
-        THEME_D.textContent = SELECTED_THEME;
-        THEME_D.textContent = THEME_D.textContent.toUpperCase()
-        GAME_SETTINGS.theme = SELECTED_THEME;
-        updateThemeImage(SELECTED_THEME)
-        const CHOSEN_INDICATOR = themeOption.querySelector<HTMLImageElement>(".choose-indicator");
-        const LIST_INDICATOR = themeOption.querySelector<HTMLImageElement>(".circle-indicator");
-        if (CHOSEN_INDICATOR && LIST_INDICATOR) {
-            updateIndicator(CHOSEN_INDICATOR, THEME_CONTAINER);
-            updateSecondIndicator(LIST_INDICATOR, THEME_CONTAINER);
-        }
+        if (!SELECTED_THEME) return;
+        selectTheme(SELECTED_THEME);
     });
 });
 
@@ -77,36 +111,70 @@ THEME_OPTIONS.forEach((themeOption) => {
     });
 });
 
-// select a player
+/**
+ * Applies the selected starting player and updates the UI.
+ *
+ * @param selectedPlayer The selected starting player.
+ */
+function selectPlayer(selectedPlayer: string) {
+    if (!PLAYER_CONTAINER || !PLAYER_D) return;
+
+    PLAYER_D.textContent = selectedPlayer.toUpperCase();
+    GAME_SETTINGS.player = selectedPlayer;
+
+    const SELECTED_OPTION = document.querySelector<HTMLLIElement>(
+        `[data-player="${selectedPlayer}"]`
+    );
+
+    if (!SELECTED_OPTION) return;
+
+    const CHOSEN_INDICATOR =
+        SELECTED_OPTION.querySelector<HTMLImageElement>(".choose-indicator");
+
+    const LIST_INDICATOR =
+        SELECTED_OPTION.querySelector<HTMLImageElement>(".circle-indicator");
+
+    if (CHOSEN_INDICATOR && LIST_INDICATOR) {
+        updateIndicator(CHOSEN_INDICATOR, PLAYER_CONTAINER);
+        updateSecondIndicator(LIST_INDICATOR, PLAYER_CONTAINER);
+    }
+}
+
 PLAYER_OPTIONS.forEach((playerOption) => {
     playerOption.addEventListener("click", () => {
         const SELECTED_PLAYER = playerOption.dataset.player;
-        if (!SELECTED_PLAYER || !PLAYER_CONTAINER || !PLAYER_D) return;
-        PLAYER_D.textContent = SELECTED_PLAYER;
-        PLAYER_D.textContent = PLAYER_D.textContent.toLocaleUpperCase();
-        GAME_SETTINGS.player = SELECTED_PLAYER;
-        const CHOSEN_INDICATOR = playerOption.querySelector<HTMLImageElement>(".choose-indicator");
-        const LIST_INDICATOR = playerOption.querySelector<HTMLImageElement>(".circle-indicator");
-        if (CHOSEN_INDICATOR && LIST_INDICATOR) {
-            updateIndicator(CHOSEN_INDICATOR, PLAYER_CONTAINER);
-            updateSecondIndicator(LIST_INDICATOR, PLAYER_CONTAINER);
-        }
+        if (!SELECTED_PLAYER) return;
+
+        selectPlayer(SELECTED_PLAYER);
     });
 });
 
-// selected a board size
+/**
+ * Applies the selected board size and updates the UI.
+ * @param selectedCards The selected number of cards.
+ */
+function selectBoardSize(selectedCards: string) {
+    if (!CARD_CONTAINER || !BOARD_D) return;
+    BOARD_D.textContent = `${selectedCards} CARDS`;
+    GAME_SETTINGS.cards = selectedCards;
+    const SELECTED_OPTION = document.querySelector<HTMLLIElement>(`[data-cards="${selectedCards}"]`);
+    if (!SELECTED_OPTION) return;
+    const CHOSEN_INDICATOR =
+        SELECTED_OPTION.querySelector<HTMLImageElement>(".choose-indicator");
+    const LIST_INDICATOR =
+        SELECTED_OPTION.querySelector<HTMLImageElement>(".circle-indicator");
+    if (CHOSEN_INDICATOR && LIST_INDICATOR) {
+        updateIndicator(CHOSEN_INDICATOR, CARD_CONTAINER);
+        updateSecondIndicator(LIST_INDICATOR, CARD_CONTAINER);
+    }
+}
+
 CARD_OPTIONS.forEach((cardOption) => {
     cardOption.addEventListener("click", () => {
         const SELECTED_CARDS = cardOption.dataset.cards;
-        if (!SELECTED_CARDS || !CARD_CONTAINER || !BOARD_D) return;
-        BOARD_D.textContent = SELECTED_CARDS + " CARDS";
-        GAME_SETTINGS.cards = SELECTED_CARDS;
-        const CHOSEN_INDICATOR = cardOption.querySelector<HTMLImageElement>(".choose-indicator");
-        const LIST_INDICATOR = cardOption.querySelector<HTMLImageElement>(".circle-indicator");
-        if (CHOSEN_INDICATOR && LIST_INDICATOR) {
-            updateIndicator(CHOSEN_INDICATOR, CARD_CONTAINER);
-            updateSecondIndicator(LIST_INDICATOR, CARD_CONTAINER);
-        };
+        if (!SELECTED_CARDS) return;
+
+        selectBoardSize(SELECTED_CARDS);
     });
 });
 
@@ -176,5 +244,7 @@ GAME_START_BUTTON?.addEventListener("mouseleave", () => {
     if (!GAME_START_BUTTON) return;
     GAME_START_BUTTON.style.transform =  "scale(1, 1)";
 });
+
+initialiseSettings();
 
 export {};
