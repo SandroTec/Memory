@@ -58,7 +58,6 @@ const PLAYER_ICONS = {
     da: DA_PLAYER_ICONS
 };
 
-let currentPlayer: Player;
 let currentPlayerIcons = CURRENT_PLAYER_ICON
 const CURRENT_CARD_BACK = CARD_BACKS[GAME_SETTINGS.theme];
 
@@ -76,8 +75,8 @@ function createCard(card: Card): string {
 
 const CURENT_PLAYER_DISPLAY = document.querySelector("#currentPlayerDisplay")!;
 
-function updateCurrentPlayerDisplay() {
-    currentPlayer = GAME_SETTINGS.player;
+function updateCurrentPlayerDisplay(currentPlayer:Player) {
+     
     const ICON = PLAYER_ICONS[GAME_SETTINGS.theme][currentPlayer];
     if (GAME_SETTINGS.theme == "code") {
         CURENT_PLAYER_DISPLAY.innerHTML = `
@@ -97,5 +96,4 @@ function updateCurrentPlayerDisplay() {
 export {
     createCard,
     updateCurrentPlayerDisplay,
-
 };

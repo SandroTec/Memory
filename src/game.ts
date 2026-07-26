@@ -167,7 +167,7 @@ function initCardEventListeners() {
 }
 let firstSelectedCard:Card | null = null;
 let cardsSelected:boolean = false;
-
+let clickLocked = false;
 /**
  * Handles a player's card selection.
  * Controls the complete turn workflow from card selection
@@ -175,14 +175,19 @@ let cardsSelected:boolean = false;
  * @param card The selected card.
  */
 async function handleCardClick(card: Card) {
-    if (card.isFlipped || card.isFound || cardsSelected) return;
-    turnCard(card);
-    if (selectFirstCard(card)) return;
-    await processSecondCard(card);
-    if (checkGameOver()) {
-        determineWinner();
-    }
-    firstSelectedCard = null;
+    if (clickLocked) return;
+    clickLocked = true;
+    try {
+        if (card.isFlipped || card.isFound || cardsSelected) return;
+        turnCard(card);
+        if (selectFirstCard(card)) return;
+        await processSecondCard(card);
+        if (checkGameOver()) {
+            determineWinner();
+        }
+        firstSelectedCard = null;
+        }
+    finally {clickLocked = false}
 }
 
 /**
@@ -196,7 +201,6 @@ function selectFirstCard(card: Card): boolean {
     const FIRST_FLIPPED_CARD = document.querySelector<HTMLDivElement>(
         `[data-card-id="${card.id}"]`
     );
-    FIRST_FLIPPED_CARD!.style.cursor = "not-allowed";
     return true;
 }
 
@@ -208,11 +212,12 @@ function selectFirstCard(card: Card): boolean {
  */
 async function processSecondCard(card: Card) {
     if (!firstSelectedCard || firstSelectedCard.id === card.id) return;
+    cardsSelected = true;
     const IS_MATCH = await compareCards(card, firstSelectedCard);
     if (IS_MATCH) {
-        handlePair(card, firstSelectedCard);
+        await handlePair(card, firstSelectedCard);
     } else {
-        hideCards(card, firstSelectedCard);
+        await hideCards(card, firstSelectedCard);
         changePlayer();
     }
 }
@@ -238,7 +243,6 @@ function turnCard(card: Card) {
  */
 async function compareCards(card:Card, cardToCompare:Card):Promise<boolean> {
     const DELAY = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
-    cardsSelected = true;
     if (card.pairId == cardToCompare.pairId) {
         return true;
     } else {
@@ -252,7 +256,8 @@ async function compareCards(card:Card, cardToCompare:Card):Promise<boolean> {
  * @param card The second selected card.
  * @param firstSelectedCard The first selected card.
  */
-function hideCards(card: Card, firstSelectedCard: Card) {
+async function hideCards(card: Card, firstSelectedCard: Card) {
+    await new Promise(resolve => setTimeout(resolve, 600));
     document.querySelector(`[data-card-id="${card.id}"]`)?.classList.remove("is-flipped");
     document.querySelector(`[data-card-id="${firstSelectedCard.id}"]`)?.classList.remove("is-flipped");
     card.isFlipped = false;
@@ -273,18 +278,19 @@ let scoreDisplayO = document.querySelector("#scoreDisplayO");
  * @param card The second selected card.
  * @param firstSelectedCard The first selected card.
  */
-function handlePair(card:Card, firstSelectedCard:Card) {
+async function handlePair(card:Card, firstSelectedCard:Card) {
+    await new Promise(resolve => setTimeout(resolve, 200));
     const CARD_ELEMENT = document.querySelector<HTMLDivElement>(`[data-card-id="${card.id}"]`);
     const FIRST_CARD_ELEMENT = document.querySelector<HTMLDivElement>(`[data-card-id="${firstSelectedCard.id}"]`);
     PLAYER_PAIRS[currentPlayer]++;
     card.isFound = true;
     firstSelectedCard.isFound = true;
-    cardsSelected = false;
     if (!scoreDisplayB || !scoreDisplayO) return
     scoreDisplayB.textContent = `${PLAYER_PAIRS.blue}`;
     scoreDisplayO.textContent = `${PLAYER_PAIRS.orange}`;
     if (!CARD_ELEMENT || !FIRST_CARD_ELEMENT) return
     changeCard(CARD_ELEMENT, FIRST_CARD_ELEMENT, card);
+    cardsSelected = false;
     return;
 }
 
@@ -296,19 +302,17 @@ function handlePair(card:Card, firstSelectedCard:Card) {
  */
 function changeCard(CARD_ELEMENT:HTMLDivElement, FIRST_CARD_ELEMENT:HTMLDivElement, card:Card) {
     CARD_ELEMENT.setAttribute("data-card-object", JSON.stringify(card));
-    CARD_ELEMENT.style.cursor = "not-allowed";
     FIRST_CARD_ELEMENT.setAttribute("data-card-object", JSON.stringify(firstSelectedCard));
-    FIRST_CARD_ELEMENT.style.cursor = "not-allowed";
     return
 }
 
 // Switches the active player and updates the UI.
 function changePlayer() {
-    cardsSelected = false;
     if (currentPlayer == "orange") {
         currentPlayer = "blue";
     } else currentPlayer = "orange";
-    updateCurrentPlayerDisplay();
+    updateCurrentPlayerDisplay(currentPlayer);
+    cardsSelected = false;
 }
 
 // Checks whether all card pairs have been found.
@@ -453,7 +457,7 @@ function initaliseHeader() {
 function init() {
     initaliseHeader();
     placeCards();
-    updateCurrentPlayerDisplay();
+    updateCurrentPlayerDisplay(GAME_SETTINGS.player);
 }
 
 init();
