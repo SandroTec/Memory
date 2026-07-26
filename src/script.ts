@@ -6,7 +6,7 @@ const CONTROLLER_IMG = document.querySelector<HTMLImageElement>("#controllerImag
 const BLACK_ARROW = document.querySelector<HTMLImageElement>("#blackArrow");
 
 START_BUTTON?.addEventListener("click", () => {
-    window.location.href = "/src/html/settings.html";
+    window.location.href = "/Memory/settings.html";
 });
 
 START_BUTTON?.addEventListener("mouseenter", () => {
@@ -199,25 +199,25 @@ function updateSecondIndicator(
     ) {
         const INDICATORS = themeContainer.querySelectorAll<HTMLImageElement>(".circle-indicator");
         INDICATORS.forEach((indicator) => {
-            indicator.src = "/assets/img/settings_page/indicator_for_list.png";
+            indicator.src = "assets//img/settings_page/indicator_for_list.png";
         });
-        listIndicator.src = "/assets/img/settings_page/indicator_circle.png";
+        listIndicator.src = "assets//img/settings_page/indicator_circle.png";
 }
 
 function updateThemeImage(selectedTheme:string) {
     if (!THEME_IMG) return;
     switch (selectedTheme) {
             case "gaming":
-                THEME_IMG.src = "/assets/img/settings_page/Theme Visual_Gaming.png";
+                THEME_IMG.src = "assets//img/settings_page/Theme Visual_Gaming.png";
                 break;
             case "da":
-                THEME_IMG.src = "/assets/img/settings_page/Theme Visual_DA.png";
+                THEME_IMG.src = "assets//img/settings_page/Theme Visual_DA.png";
                 break
             case "code":
-                THEME_IMG.src = "/assets/img/settings_page/Theme Visual_Code.png";
+                THEME_IMG.src = "assets//img/settings_page/Theme Visual_Code.png";
                 break
             default:
-                THEME_IMG.src = "/assets/img/settings_page/Theme Visual_Code.png";
+                THEME_IMG.src = "assets//img/settings_page/Theme Visual_Code.png";
                 break;
     };
 }
@@ -234,7 +234,7 @@ const GAME_START_BUTTON = document.querySelector<HTMLButtonElement>("#startGame"
 
 GAME_START_BUTTON?.addEventListener("click", () => {
     saveGameSettings();
-    window.location.href = "./game.html";
+    window.location.href = "/Memory/game.html";
 });
 
 GAME_START_BUTTON?.addEventListener("mouseenter", () => {

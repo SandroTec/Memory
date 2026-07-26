@@ -343,9 +343,9 @@ const CONFIRM_EXIT_BTN = document.querySelector<HTMLButtonElement>("#confirmExit
 const CANCEL_EXIT_BTN = document.querySelector<HTMLButtonElement>("#cancelExitBtn");
 
 
-const EXIT_ICON_DEFAULT = "/assets/img/game_page/exit-icon.png";
-const EXIT_ICON_RED = "/assets/img/game_page/gaming-theme/header/exit-icon-red.png";
-const EXIT_ICON_BLUE = "/assets/img/game_page/da-theme/header/exit-icon-blue.png";
+const EXIT_ICON_DEFAULT = "assets/img/game_page/exit-icon.png";
+const EXIT_ICON_RED = "assets/img/game_page/gaming-theme/header/exit-icon-red.png";
+const EXIT_ICON_BLUE = "assets/img/game_page/da-theme/header/exit-icon-blue.png";
 
 const EXIT_ICON = document.querySelector<HTMLImageElement>("#exitIcon");
 let cancelBtnText = document.querySelector<HTMLParagraphElement>(".btn_txt_cancel");
@@ -408,7 +408,7 @@ CANCEL_EXIT_BTN?.addEventListener("click", () => {
 
 // Returns the player to the settings page.
 function endGame() {
-    window.location.href = "/src/html/settings.html";
+    window.location.href = "/Memory/settings.html";
 }
 
 // Determines the game winner and opens the endscreen.
@@ -446,7 +446,7 @@ function saveGameWinner(gameWinner:string, scoreB:number, scoreO:number) {
  */
 function loadEndscreen(winner:string, scoreB:number, scoreO:number) {
     saveGameWinner(winner, scoreB, scoreO);
-    window.location.href = "./endscreen.html";
+    window.location.href = "/Memory/endscreen.html";
 }
 
 //Initializes the game header.
