@@ -1,3 +1,5 @@
+import "./scss/main.scss";
+
 type Theme = "code" | "gaming" | "da";
 type Winner = "blue" | "orange" | "draw";
 
@@ -28,11 +30,11 @@ const SCORE_CONTAINER = document.querySelector<HTMLDivElement>("#scoreContainer"
 //code-theme:
 const CODE_HEADER_IMG = document.querySelector<HTMLHeadingElement>("#endscreeHeader");
 
-const CODE_WINNER_IMG_B = "../../src/assets/img/game_page/code-theme/endscreen/chess_pawn_blue.png";
-const CODE_DRAW_IMG = "../../src/assets/img/game_page/code-theme/endscreen/draw_icon.png";
-const CODE_WINNER_IMG_O = "../../src/assets/img/game_page/code-theme/endscreen/chess_pawn_orange.png";
+const CODE_WINNER_IMG_B = "/assets/img/game_page/code-theme/endscreen/chess_pawn_blue.png";
+const CODE_DRAW_IMG = "/assets/img/game_page/code-theme/endscreen/draw_icon.png";
+const CODE_WINNER_IMG_O = "/assets/img/game_page/code-theme/endscreen/chess_pawn_orange.png";
 
-const CODE_HOME_BTN_IMG = "../../src/assets/img/game_page/code-theme/endscreen/home_button.png";
+const CODE_HOME_BTN_IMG = "/assets/img/game_page/code-theme/endscreen/home_button.png";
 
 const GAME_RESULT_IMAGES_CODE = {
     blue: CODE_WINNER_IMG_B,
@@ -41,11 +43,11 @@ const GAME_RESULT_IMAGES_CODE = {
 } 
 
 //gaming-theme:
-const GAMING_WINNER_IMG_B = "../../src/assets/img/game_page/gaming-theme/endscreen/winner_icon.png";
-const GAMING_DRAW_IMG = "../../src/assets/img/game_page/gaming-theme/endscreen/draw_icon.png";
-const GAMING_WINNER_IMG_O = "../../src/assets/img/game_page/gaming-theme/endscreen/winner_icon.png";
+const GAMING_WINNER_IMG_B = "/assets/img/game_page/gaming-theme/endscreen/winner_icon.png";
+const GAMING_DRAW_IMG = "/assets/img/game_page/gaming-theme/endscreen/draw_icon.png";
+const GAMING_WINNER_IMG_O = "/assets/img/game_page/gaming-theme/endscreen/winner_icon.png";
 
-const GAMING_HOME_BTN_IMG = "../../src/assets/img/game_page/gaming-theme/endscreen/home_button.png";
+const GAMING_HOME_BTN_IMG = "/assets/img/game_page/gaming-theme/endscreen/home_button.png";
 
 
 const GAME_RESULT_IMAGES_GAMING = {
@@ -55,11 +57,11 @@ const GAME_RESULT_IMAGES_GAMING = {
 } 
 
 //da-theme:
-const DA_WINNER_IMG_B = "../../src/assets/img/game_page/da-theme/endscreen/chess_pawn_blue.png";
-const DA_DRAW_IMG = "../../src/assets/img/game_page/da-theme/endscreen/draw_icon.png";
-const DA_WINNER_IMG_O = "../../src/assets/img/game_page/da-theme/endscreen/chess_pawn_orange.png";
+const DA_WINNER_IMG_B = "/assets/img/game_page/da-theme/endscreen/chess_pawn_blue.png";
+const DA_DRAW_IMG = "/assets/img/game_page/da-theme/endscreen/draw_icon.png";
+const DA_WINNER_IMG_O = "/assets/img/game_page/da-theme/endscreen/chess_pawn_orange.png";
 
-const DA_HOME_BTN_IMG = "../../src/assets/img/game_page/da-theme/endscreen/home_button.png";
+const DA_HOME_BTN_IMG = "/assets/img/game_page/da-theme/endscreen/home_button.png";
 
 const GAME_RESULT_IMAGES_DA = {
     blue: DA_WINNER_IMG_B,
@@ -192,7 +194,7 @@ HOME_BUTTON?.addEventListener("click", () => {
 
 //Redirects the user back to the settings page.
 function endGame() {
-    window.location.href = "./settings.html";
+    window.location.href = "´/src/html/settings.html";
 }
 
 /**

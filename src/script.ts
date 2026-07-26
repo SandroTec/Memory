@@ -1,10 +1,12 @@
+import "./scss/main.scss";
+
 const START_BUTTON = document.querySelector<HTMLButtonElement>("#startButton");
 
 const CONTROLLER_IMG = document.querySelector<HTMLImageElement>("#controllerImage");
 const BLACK_ARROW = document.querySelector<HTMLImageElement>("#blackArrow");
 
 START_BUTTON?.addEventListener("click", () => {
-    window.location.href = "./html/settings.html";
+    window.location.href = "/src/html/settings.html";
 });
 
 START_BUTTON?.addEventListener("mouseenter", () => {
@@ -197,25 +199,25 @@ function updateSecondIndicator(
     ) {
         const INDICATORS = themeContainer.querySelectorAll<HTMLImageElement>(".circle-indicator");
         INDICATORS.forEach((indicator) => {
-            indicator.src = "../../src/assets/img/settings_page/indicator_for_list.png";
+            indicator.src = "/assets/img/settings_page/indicator_for_list.png";
         });
-        listIndicator.src = "../../src/assets/img/settings_page/indicator_circle.png";
+        listIndicator.src = "/assets/img/settings_page/indicator_circle.png";
 }
 
 function updateThemeImage(selectedTheme:string) {
     if (!THEME_IMG) return;
     switch (selectedTheme) {
             case "gaming":
-                THEME_IMG.src = "../../src/assets/img/settings_page/Theme Visual_Gaming.png";
+                THEME_IMG.src = "/assets/img/settings_page/Theme Visual_Gaming.png";
                 break;
             case "da":
-                THEME_IMG.src = "../../src/assets/img/settings_page/Theme Visual_DA.png";
+                THEME_IMG.src = "/assets/img/settings_page/Theme Visual_DA.png";
                 break
             case "code":
-                THEME_IMG.src = "../../src/assets/img/settings_page/Theme Visual_Code.png";
+                THEME_IMG.src = "/assets/img/settings_page/Theme Visual_Code.png";
                 break
             default:
-                THEME_IMG.src = "../../src/assets/img/settings_page/Theme Visual_Code.png";
+                THEME_IMG.src = "/assets/img/settings_page/Theme Visual_Code.png";
                 break;
     };
 }

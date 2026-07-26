@@ -1,3 +1,5 @@
+import "./scss/main.scss";
+
 import {
     CODE_CARD_BACK,
     GAMING_CARD_BACK,
