@@ -194,7 +194,7 @@ HOME_BUTTON?.addEventListener("click", () => {
 
 //Redirects the user back to the settings page.
 function endGame() {
-    window.location.href = "´/Memory/settings.html";
+    window.location.href = "/Memory/settings.html";
 }
 
 /**

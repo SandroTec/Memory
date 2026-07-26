@@ -10,6 +10,7 @@ export default defineConfig({
                 main: resolve(__dirname, "index.html"),
                 settings: resolve(__dirname, "settings.html"),
                 game: resolve(__dirname, "game.html"),
+                endscreen: resolve(__dirname, "endscreen.html"),
             },
         },
     },
